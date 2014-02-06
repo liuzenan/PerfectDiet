@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E43DA99918A4180D005F6F52 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E43DA99818A4180D005F6F52 /* Media.xcassets */; };
 		E4767058180CE020002E261A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767057180CE020002E261A /* Foundation.framework */; };
 		E476705A180CE020002E261A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767059180CE020002E261A /* CoreGraphics.framework */; };
 		E476705C180CE020002E261A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E476705B180CE020002E261A /* UIKit.framework */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E43DA99818A4180D005F6F52 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E4767054180CE020002E261A /* PerfectDiet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectDiet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4767057180CE020002E261A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4767059180CE020002E261A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +83,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E43DA99A18A4270A005F6F52 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E43DA99B18A42728005F6F52 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		E476704B180CE020002E261A = {
 			isa = PBXGroup;
 			children = (
@@ -114,9 +130,12 @@
 		E476705D180CE020002E261A /* PerfectDiet */ = {
 			isa = PBXGroup;
 			children = (
+				E43DA99B18A42728005F6F52 /* Model */,
+				E43DA99A18A4270A005F6F52 /* View */,
 				E4767066180CE021002E261A /* PDAppDelegate.h */,
 				E4767067180CE021002E261A /* PDAppDelegate.m */,
 				E4767069180CE021002E261A /* Main_iPhone.storyboard */,
+				E43DA99818A4180D005F6F52 /* Media.xcassets */,
 				E476706C180CE021002E261A /* Main_iPad.storyboard */,
 				E476706F180CE021002E261A /* PDViewController.h */,
 				E4767070180CE021002E261A /* PDViewController.m */,
@@ -200,7 +219,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PD;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = NUS;
 				TargetAttributes = {
 					E4767077180CE021002E261A = {
@@ -232,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43DA99918A4180D005F6F52 /* Media.xcassets in Resources */,
 				E476706E180CE021002E261A /* Main_iPad.storyboard in Resources */,
 				E4767073180CE021002E261A /* Images.xcassets in Resources */,
 				E476706B180CE021002E261A /* Main_iPhone.storyboard in Resources */,
@@ -318,7 +338,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -358,7 +377,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -393,10 +411,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PerfectDiet/PerfectDiet-Prefix.pch";
 				INFOPLIST_FILE = "PerfectDiet/PerfectDiet-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -406,10 +426,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PerfectDiet/PerfectDiet-Prefix.pch";
 				INFOPLIST_FILE = "PerfectDiet/PerfectDiet-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -417,7 +439,6 @@
 		E476708D180CE021002E261A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PerfectDiet.app/PerfectDiet";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -440,7 +461,6 @@
 		E476708E180CE021002E261A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PerfectDiet.app/PerfectDiet";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -475,6 +495,7 @@
 				E476708B180CE021002E261A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E476708C180CE021002E261A /* Build configuration list for PBXNativeTarget "PerfectDietTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +504,7 @@
 				E476708E180CE021002E261A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
