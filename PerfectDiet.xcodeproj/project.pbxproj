@@ -25,8 +25,8 @@
 		E43DA9CA18A4BB1A005F6F52 /* PDFoodList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9C918A4BB1A005F6F52 /* PDFoodList.plist */; };
 		E43DA9CC18A4BB25005F6F52 /* PDMoodList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9CB18A4BB25005F6F52 /* PDMoodList.plist */; };
 		E43DA9D018A4BD5B005F6F52 /* PDActivityTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9CF18A4BD5B005F6F52 /* PDActivityTypeList.plist */; };
-		E43DA9D218A4BD83005F6F52 /* PDFoodTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9D118A4BD83005F6F52 /* PDFoodTypeList.plist */; };
-		E43DA9D418A4BD8E005F6F52 /* PDMoodTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9D318A4BD8E005F6F52 /* PDMoodTypeList.plist */; };
+		E43DA9D218A4BD83005F6F52 /* PDMoodTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9D118A4BD83005F6F52 /* PDMoodTypeList.plist */; };
+		E43DA9D418A4BD8E005F6F52 /* PDFoodTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9D318A4BD8E005F6F52 /* PDFoodTypeList.plist */; };
 		E43DA9D718A4C1DB005F6F52 /* PDPropertyListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9D618A4C1DB005F6F52 /* PDPropertyListController.m */; };
 		E43DA9DA18A4D3AD005F6F52 /* PDSaveLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9D918A4D3AD005F6F52 /* PDSaveLogViewController.m */; };
 		E43DA9DD18A4D3D8005F6F52 /* PDMoreItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9DC18A4D3D8005F6F52 /* PDMoreItemsViewController.m */; };
@@ -34,11 +34,12 @@
 		E43DA9E818A50DAC005F6F52 /* PDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9E718A50DAC005F6F52 /* PDLoginViewController.m */; };
 		E43DA9EB18A50DB6005F6F52 /* PDSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9EA18A50DB6005F6F52 /* PDSignupViewController.m */; };
 		E43DA9EE18A512C1005F6F52 /* PDSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */; };
-		E43DA9F018A5185E005F6F52 /* LogCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9EF18A5185E005F6F52 /* LogCollectionView.xib */; };
 		E43DA9F218A5186D005F6F52 /* LogMoodWheelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */; };
 		E43DA9F418A51931005F6F52 /* LogCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */; };
 		E46A0DC318A53CD60093CF05 /* PDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A0DC218A53CD60093CF05 /* PDSettingsViewController.m */; };
 		E46A0DC618A53E570093CF05 /* PDAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A0DC518A53E570093CF05 /* PDAddFriendsViewController.m */; };
+		E46A0DC818A546F30093CF05 /* LogCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E46A0DC718A546F30093CF05 /* LogCollectionView.xib */; };
+		E46A0DCB18A54C210093CF05 /* PDMoodWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A0DCA18A54C210093CF05 /* PDMoodWheelView.m */; };
 		E4767058180CE020002E261A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767057180CE020002E261A /* Foundation.framework */; };
 		E476705A180CE020002E261A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767059180CE020002E261A /* CoreGraphics.framework */; };
 		E476705C180CE020002E261A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E476705B180CE020002E261A /* UIKit.framework */; };
@@ -96,8 +97,8 @@
 		E43DA9C918A4BB1A005F6F52 /* PDFoodList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDFoodList.plist; sourceTree = "<group>"; };
 		E43DA9CB18A4BB25005F6F52 /* PDMoodList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDMoodList.plist; sourceTree = "<group>"; };
 		E43DA9CF18A4BD5B005F6F52 /* PDActivityTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDActivityTypeList.plist; sourceTree = "<group>"; };
-		E43DA9D118A4BD83005F6F52 /* PDFoodTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDFoodTypeList.plist; sourceTree = "<group>"; };
-		E43DA9D318A4BD8E005F6F52 /* PDMoodTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDMoodTypeList.plist; sourceTree = "<group>"; };
+		E43DA9D118A4BD83005F6F52 /* PDMoodTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDMoodTypeList.plist; sourceTree = "<group>"; };
+		E43DA9D318A4BD8E005F6F52 /* PDFoodTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDFoodTypeList.plist; sourceTree = "<group>"; };
 		E43DA9D518A4C1DB005F6F52 /* PDPropertyListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDPropertyListController.h; sourceTree = "<group>"; };
 		E43DA9D618A4C1DB005F6F52 /* PDPropertyListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDPropertyListController.m; sourceTree = "<group>"; };
 		E43DA9D818A4D3AD005F6F52 /* PDSaveLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSaveLogViewController.h; sourceTree = "<group>"; };
@@ -112,13 +113,15 @@
 		E43DA9EA18A50DB6005F6F52 /* PDSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSignupViewController.m; sourceTree = "<group>"; };
 		E43DA9EC18A512C1005F6F52 /* PDSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSplashViewController.h; sourceTree = "<group>"; };
 		E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSplashViewController.m; sourceTree = "<group>"; };
-		E43DA9EF18A5185E005F6F52 /* LogCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogCollectionView.xib; sourceTree = "<group>"; };
 		E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogMoodWheelView.xib; sourceTree = "<group>"; };
 		E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogCollectionViewCell.xib; sourceTree = "<group>"; };
 		E46A0DC118A53CD60093CF05 /* PDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSettingsViewController.h; sourceTree = "<group>"; };
 		E46A0DC218A53CD60093CF05 /* PDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSettingsViewController.m; sourceTree = "<group>"; };
 		E46A0DC418A53E570093CF05 /* PDAddFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAddFriendsViewController.h; sourceTree = "<group>"; };
 		E46A0DC518A53E570093CF05 /* PDAddFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAddFriendsViewController.m; sourceTree = "<group>"; };
+		E46A0DC718A546F30093CF05 /* LogCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogCollectionView.xib; sourceTree = "<group>"; };
+		E46A0DC918A54C210093CF05 /* PDMoodWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMoodWheelView.h; sourceTree = "<group>"; };
+		E46A0DCA18A54C210093CF05 /* PDMoodWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMoodWheelView.m; sourceTree = "<group>"; };
 		E4767054180CE020002E261A /* PerfectDiet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectDiet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4767057180CE020002E261A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4767059180CE020002E261A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -171,6 +174,8 @@
 			children = (
 				E43DA9F518A51936005F6F52 /* Nibs */,
 				E43DA9BB18A430F5005F6F52 /* Cells */,
+				E46A0DC918A54C210093CF05 /* PDMoodWheelView.h */,
+				E46A0DCA18A54C210093CF05 /* PDMoodWheelView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -198,13 +203,11 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		E43DA9B718A42DF2005F6F52 /* Controller */ = {
+		E43DA9B718A42DF2005F6F52 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				E43DA9B818A42E4F005F6F52 /* PDLogViewController.h */,
 				E43DA9B918A42E4F005F6F52 /* PDLogViewController.m */,
-				E43DA9D518A4C1DB005F6F52 /* PDPropertyListController.h */,
-				E43DA9D618A4C1DB005F6F52 /* PDPropertyListController.m */,
 				E43DA9D818A4D3AD005F6F52 /* PDSaveLogViewController.h */,
 				E43DA9D918A4D3AD005F6F52 /* PDSaveLogViewController.m */,
 				E43DA9DB18A4D3D8005F6F52 /* PDMoreItemsViewController.h */,
@@ -222,7 +225,7 @@
 				E46A0DC418A53E570093CF05 /* PDAddFriendsViewController.h */,
 				E46A0DC518A53E570093CF05 /* PDAddFriendsViewController.m */,
 			);
-			name = Controller;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E43DA9BB18A430F5005F6F52 /* Cells */ = {
@@ -237,11 +240,20 @@
 		E43DA9F518A51936005F6F52 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				E43DA9EF18A5185E005F6F52 /* LogCollectionView.xib */,
+				E46A0DC718A546F30093CF05 /* LogCollectionView.xib */,
 				E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */,
 				E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */,
 			);
 			name = Nibs;
+			sourceTree = "<group>";
+		};
+		E46A0DCC18A564F90093CF05 /* DataControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E43DA9D518A4C1DB005F6F52 /* PDPropertyListController.h */,
+				E43DA9D618A4C1DB005F6F52 /* PDPropertyListController.m */,
+			);
+			name = DataControllers;
 			sourceTree = "<group>";
 		};
 		E476704B180CE020002E261A = {
@@ -280,7 +292,8 @@
 			children = (
 				E43DA9BF18A43489005F6F52 /* PDConstants.h */,
 				E43DA9C018A43489005F6F52 /* PDConstants.m */,
-				E43DA9B718A42DF2005F6F52 /* Controller */,
+				E46A0DCC18A564F90093CF05 /* DataControllers */,
+				E43DA9B718A42DF2005F6F52 /* ViewControllers */,
 				E43DA99B18A42728005F6F52 /* Model */,
 				E43DA99A18A4270A005F6F52 /* View */,
 				E4767066180CE021002E261A /* PDAppDelegate.h */,
@@ -308,8 +321,8 @@
 				E43DA9C918A4BB1A005F6F52 /* PDFoodList.plist */,
 				E43DA9CB18A4BB25005F6F52 /* PDMoodList.plist */,
 				E43DA9CF18A4BD5B005F6F52 /* PDActivityTypeList.plist */,
-				E43DA9D118A4BD83005F6F52 /* PDFoodTypeList.plist */,
-				E43DA9D318A4BD8E005F6F52 /* PDMoodTypeList.plist */,
+				E43DA9D118A4BD83005F6F52 /* PDMoodTypeList.plist */,
+				E43DA9D318A4BD8E005F6F52 /* PDFoodTypeList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -409,8 +422,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E43DA9D218A4BD83005F6F52 /* PDFoodTypeList.plist in Resources */,
-				E43DA9D418A4BD8E005F6F52 /* PDMoodTypeList.plist in Resources */,
+				E43DA9D218A4BD83005F6F52 /* PDMoodTypeList.plist in Resources */,
+				E43DA9D418A4BD8E005F6F52 /* PDFoodTypeList.plist in Resources */,
 				E43DA99918A4180D005F6F52 /* Media.xcassets in Resources */,
 				E43DA9CC18A4BB25005F6F52 /* PDMoodList.plist in Resources */,
 				E43DA9D018A4BD5B005F6F52 /* PDActivityTypeList.plist in Resources */,
@@ -418,10 +431,10 @@
 				E476706E180CE021002E261A /* Main_iPad.storyboard in Resources */,
 				E4767073180CE021002E261A /* Images.xcassets in Resources */,
 				E476706B180CE021002E261A /* Main_iPhone.storyboard in Resources */,
+				E46A0DC818A546F30093CF05 /* LogCollectionView.xib in Resources */,
 				E4767062180CE020002E261A /* InfoPlist.strings in Resources */,
 				E43DA9CA18A4BB1A005F6F52 /* PDFoodList.plist in Resources */,
 				E43DA9C818A4BB0B005F6F52 /* PDActivityList.plist in Resources */,
-				E43DA9F018A5185E005F6F52 /* LogCollectionView.xib in Resources */,
 				E43DA9F418A51931005F6F52 /* LogCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +457,7 @@
 				E4767068180CE021002E261A /* PDAppDelegate.m in Sources */,
 				E43DA9C118A43489005F6F52 /* PDConstants.m in Sources */,
 				E43DA9A718A42865005F6F52 /* PDFood.m in Sources */,
+				E46A0DCB18A54C210093CF05 /* PDMoodWheelView.m in Sources */,
 				E43DA9B318A42C2A005F6F52 /* PDPhoto.m in Sources */,
 				E43DA9BE18A432A7005F6F52 /* PDLogScreenCell.m in Sources */,
 				E43DA9C418A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld in Sources */,

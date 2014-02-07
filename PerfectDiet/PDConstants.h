@@ -15,6 +15,15 @@ extern NSString* const FOOD_LIST;
 extern NSString* const MOOD_LIST;
 extern NSInteger const ADD_BUTTON_ID;
 extern NSString* const STORYBOARD_NAME;
+extern NSString* const COLLECTION_VIEW_CELL;
+
+
+typedef enum{
+    kActivity = 0,
+    kFood = 1,
+    kMood = 2,
+    kProductivity = 3
+} PDLogType;
 
 @interface PDConstants : NSObject
 

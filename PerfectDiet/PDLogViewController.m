@@ -29,14 +29,33 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-
+    
+    
+    
+    // load collection view
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LogCollectionView" owner:self options:nil];
+    self.collectionView = (UICollectionView*) [nib objectAtIndex:0];
+    [self.collectionView setCenter:CGPointMake(160, 200)];
+    
+    // load mood wheel view
+    
+    nib = [[NSBundle mainBundle] loadNibNamed:@"LogMoodWheelView" owner:self options:nil];
+    self.moodWheel = (PDMoodWheelView*) [nib objectAtIndex:0];
+    CGRect frame = self.moodWheel.frame;
+    frame.origin = CGPointMake(320, 0);
+    [self.moodWheel setFrame:frame];
+    
+    [self.scrollView addSubview:self.collectionView];
+    
     self.logItems = [PDPropertyListController loadActivityList];
     [self setCurrentTypeAndHighlight:kActivity];
     [self setAppearance];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"LogCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:COLLECTION_VIEW_CELL];
+    
+    [super viewDidLoad];
 }
 
 - (void) setCurrentTypeAndHighlight:(PDLogType)currentType
@@ -66,17 +85,19 @@
     self.logItems = [PDPropertyListController loadActivityList];
     [self.collectionView reloadData];
     [self setCurrentTypeAndHighlight:kActivity];
+    [self removeMoodWheelView];
 }
 
 - (IBAction)foodButtonPressed:(id)sender {
     self.logItems = [PDPropertyListController loadFoodList];
     [self.collectionView reloadData];
     [self setCurrentTypeAndHighlight:kFood];
-    
+    [self removeMoodWheelView];
 }
 
 - (IBAction)moodButtonPressed:(id)sender {
     self.logItems = [PDPropertyListController loadMoodList];
+    [self insertMoodWheelView];
     [self.collectionView reloadData];
     [self setCurrentTypeAndHighlight:kMood];
 }
@@ -85,10 +106,9 @@
     [self setCurrentType:kProductivity];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    PDSaveProductivityLogViewController *spl = (PDSaveProductivityLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveProd"];
+    PDSaveProductivityLogViewController *spl = (PDSaveProductivityLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveProductivityLog"];
     [self presentViewController:spl animated:YES completion:nil];
 }
-
 
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -98,15 +118,18 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"LogScreenCell";
     
-    PDLogScreenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    PDLogScreenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:COLLECTION_VIEW_CELL forIndexPath:indexPath];
     cell.delegate = self;
     if (indexPath.row < LOG_BUTTON_NUM - 1) {
+        
         [cell.logItemButton setImage:[UIImage imageNamed:self.logItems[indexPath.row][@"Icon"]] forState:UIControlStateNormal];
         [cell.logItemLabel setText:self.logItems[indexPath.row][@"Name"]];
         [cell.logItemButton setTag:(NSInteger)self.logItems[indexPath.row][@"ID"]];
+        [cell setItemCategory:(NSInteger) self.logItems[indexPath.row][@"Type"]];
+        
     } else {
+        
         [cell.logItemButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
         [cell.logItemLabel setText:@"More"];
         [cell.logItemButton setTag:ADD_BUTTON_ID];
@@ -116,15 +139,22 @@
     
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+- (void) insertMoodWheelView
 {
-    return CGSizeMake(1, -40);
+    [self.scrollView addSubview:self.moodWheel];
+    [self.scrollView setContentSize:CGSizeMake(640, self.scrollView.frame.size.height)];
 }
 
+- (void) removeMoodWheelView
+{
+    [self.moodWheel removeFromSuperview];
+    [self.scrollView setContentSize:CGSizeMake(320, self.scrollView.frame.size.height)];
+}
 
--(void)cellButtonPressed:(id)sender
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+
+-(void)cellButtonPressed:(id)sender itemCategory:(NSInteger)category
 {
     UIButton *button = (UIButton*) sender;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
@@ -135,7 +165,27 @@
         [self presentViewController:mi animated:YES completion:nil];
     } else {
         NSLog(@"will open save view");
-        PDSaveLogViewController *sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveLog"];
+        
+        PDSaveLogViewController *sl;
+        switch (self.currentType) {
+            case kActivity:
+                sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveActivityLog"];
+                break;
+                
+            case kFood:
+                sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveFoodLog"];
+                break;
+                
+            case kMood:
+                sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveMoodLog"];
+                break;
+                
+            default:
+                break;
+        }
+        
+        [sl setItemId:itemId itemCategory:category logType:self.currentType];
+        
         [self presentViewController:sl animated:YES completion:nil];
     }
     
@@ -148,7 +198,6 @@
 {
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationItem setTitle:@"LifeLogger"];
 }
 
 - (void) highlightSelectedTab:(NSInteger) selectedTab

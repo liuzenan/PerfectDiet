@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PDLogScreenCell.h"
+#import "PDMoodWheelView.h"
 
-typedef enum{
-    kActivity = 0,
-    kFood = 1,
-    kMood = 2,
-    kProductivity
-} PDLogType;
+
 
 @interface PDLogViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate>
 
@@ -23,9 +19,11 @@ typedef enum{
 @property (weak, nonatomic) IBOutlet UIButton *foodButton;
 @property (weak, nonatomic) IBOutlet UIButton *moodButton;
 @property (weak, nonatomic) IBOutlet UIButton *productivityButton;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *topTabContainer;
 @property (assign, nonatomic) PDLogType currentType;
+@property (strong, nonatomic) UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) PDMoodWheelView *moodWheel;
 
 - (IBAction)activityButtonPressed:(id)sender;
 - (IBAction)foodButtonPressed:(id)sender;

@@ -11,7 +11,9 @@
 
 @protocol PDLogScreenCellDelegate <NSObject>
 
+@optional
 - (void) cellButtonPressed:(id) sender;
+- (void) cellButtonPressed:(id) sender itemCategory: (NSInteger)category;
 
 @end
 
@@ -19,6 +21,8 @@
 @property (weak, nonatomic) id<PDLogScreenCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *logItemButton;
 @property (weak, nonatomic) IBOutlet UILabel *logItemLabel;
+@property (assign, nonatomic) NSInteger itemCategory;
+
 - (IBAction)logItemButtonPressed:(id)sender;
 
 @end

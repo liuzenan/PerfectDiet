@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,10 +47,38 @@
 }
 */
 
+-(void)setItemId:(NSInteger)itemId itemCategory:(NSInteger)itemCategory logType:(PDLogType)logType
+{
+    self.itemId = itemId;
+    self.itemCategory = itemCategory;
+    self.logType = logType;
+}
+
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
+}
+
+- (IBAction)itemNameButtonPressed:(id)sender {
+}
+
+- (IBAction)itemTimeButtonPressed:(id)sender {
+}
+
+- (IBAction)publicChanged:(id)sender {
+}
+
+- (IBAction)durationButtonPressed:(id)sender {
+}
+
+- (IBAction)addMoodBtnPressed:(id)sender {
+}
+
+- (IBAction)addNoteBtnPressed:(id)sender {
+}
+
+- (IBAction)addPhotoBtnPressed:(id)sender {
 }
 @end

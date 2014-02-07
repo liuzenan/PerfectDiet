@@ -14,6 +14,7 @@ NSString* const FOOD_LIST = @"PDFoodList";
 NSString* const MOOD_LIST = @"PDMoodList";
 NSInteger const ADD_BUTTON_ID = -1;
 NSString* const STORYBOARD_NAME = @"Main_iPhone";
+NSString* const COLLECTION_VIEW_CELL = @"LogScreenCell";
 
 @implementation PDConstants
 

@@ -10,7 +10,7 @@
 		<key>Icon</key>
 		<string>icon_activity_running</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -20,7 +20,7 @@
 		<key>Icon</key>
 		<string>icon_activity_swimming</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -30,7 +30,7 @@
 		<key>Icon</key>
 		<string>icon_activity_tennis</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -40,7 +40,7 @@
 		<key>Icon</key>
 		<string>icon_activity_walking</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -50,7 +50,7 @@
 		<key>Icon</key>
 		<string>icon_activity_yoga</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -60,7 +60,7 @@
 		<key>Icon</key>
 		<string>icon_activity_meditation</string>
 		<key>Type</key>
-		<string></string>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -70,7 +70,7 @@
 		<key>Icon</key>
 		<string>icon_activity_football</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -80,7 +80,7 @@
 		<key>Icon</key>
 		<string>icon_activity_pingpong</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -90,7 +90,7 @@
 		<key>Icon</key>
 		<string>icon_activity_cycling</string>
 		<key>Type</key>
-		<string></string>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -100,7 +100,7 @@
 		<key>Icon</key>
 		<string>icon_activity_working</string>
 		<key>Type</key>
-		<string></string>
+		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>ID</key>
@@ -110,7 +110,7 @@
 		<key>Icon</key>
 		<string>icon_activity_design</string>
 		<key>Type</key>
-		<string></string>
+		<integer>2</integer>
 	</dict>
 </array>
 </plist>

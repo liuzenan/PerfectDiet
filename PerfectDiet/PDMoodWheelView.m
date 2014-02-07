@@ -1,14 +1,14 @@
 //
-//  PDLogScreenCell.m
+//  PDMoodWheelView.m
 //  PerfectDiet
 //
-//  Created by Liu Zenan on 7/2/14.
+//  Created by Liu Zenan on 8/2/14.
 //  Copyright (c) 2014 NUS. All rights reserved.
 //
 
-#import "PDLogScreenCell.h"
+#import "PDMoodWheelView.h"
 
-@implementation PDLogScreenCell
+@implementation PDMoodWheelView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,9 +28,4 @@
 }
 */
 
-- (IBAction)logItemButtonPressed:(id)sender {
-    NSLog(@"log button pressed");
-    [self.delegate cellButtonPressed:sender itemCategory:self.itemCategory];
-    
-}
 @end
