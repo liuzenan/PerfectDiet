@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		E43DA99918A4180D005F6F52 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E43DA99818A4180D005F6F52 /* Media.xcassets */; };
+		E43DA9A118A42843005F6F52 /* PDLogObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9A018A42843005F6F52 /* PDLogObject.m */; };
+		E43DA9A418A42854005F6F52 /* PDActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9A318A42854005F6F52 /* PDActivity.m */; };
+		E43DA9A718A42865005F6F52 /* PDFood.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9A618A42865005F6F52 /* PDFood.m */; };
+		E43DA9AA18A4286D005F6F52 /* PDMood.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9A918A4286D005F6F52 /* PDMood.m */; };
+		E43DA9AD18A42879005F6F52 /* PDProductivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9AC18A42879005F6F52 /* PDProductivity.m */; };
+		E43DA9B018A42C1B005F6F52 /* PDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9AF18A42C1B005F6F52 /* PDNote.m */; };
+		E43DA9B318A42C2A005F6F52 /* PDPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9B218A42C2A005F6F52 /* PDPhoto.m */; };
+		E43DA9B618A42C3F005F6F52 /* PDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9B518A42C3F005F6F52 /* PDUser.m */; };
+		E43DA9BA18A42E4F005F6F52 /* PDLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9B918A42E4F005F6F52 /* PDLogViewController.m */; };
+		E43DA9BE18A432A7005F6F52 /* PDLogScreenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9BD18A432A7005F6F52 /* PDLogScreenCell.m */; };
+		E43DA9C118A43489005F6F52 /* PDConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9C018A43489005F6F52 /* PDConstants.m */; };
+		E43DA9C418A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9C218A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld */; };
+		E43DA9C618A4B4E7005F6F52 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43DA9C518A4B4E7005F6F52 /* CoreData.framework */; };
 		E4767058180CE020002E261A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767057180CE020002E261A /* Foundation.framework */; };
 		E476705A180CE020002E261A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767059180CE020002E261A /* CoreGraphics.framework */; };
 		E476705C180CE020002E261A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E476705B180CE020002E261A /* UIKit.framework */; };
@@ -37,6 +50,30 @@
 
 /* Begin PBXFileReference section */
 		E43DA99818A4180D005F6F52 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		E43DA99F18A42843005F6F52 /* PDLogObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogObject.h; sourceTree = "<group>"; };
+		E43DA9A018A42843005F6F52 /* PDLogObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogObject.m; sourceTree = "<group>"; };
+		E43DA9A218A42854005F6F52 /* PDActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDActivity.h; sourceTree = "<group>"; };
+		E43DA9A318A42854005F6F52 /* PDActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDActivity.m; sourceTree = "<group>"; };
+		E43DA9A518A42865005F6F52 /* PDFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFood.h; sourceTree = "<group>"; };
+		E43DA9A618A42865005F6F52 /* PDFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFood.m; sourceTree = "<group>"; };
+		E43DA9A818A4286D005F6F52 /* PDMood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMood.h; sourceTree = "<group>"; };
+		E43DA9A918A4286D005F6F52 /* PDMood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMood.m; sourceTree = "<group>"; };
+		E43DA9AB18A42879005F6F52 /* PDProductivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDProductivity.h; sourceTree = "<group>"; };
+		E43DA9AC18A42879005F6F52 /* PDProductivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDProductivity.m; sourceTree = "<group>"; };
+		E43DA9AE18A42C1B005F6F52 /* PDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDNote.h; sourceTree = "<group>"; };
+		E43DA9AF18A42C1B005F6F52 /* PDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDNote.m; sourceTree = "<group>"; };
+		E43DA9B118A42C2A005F6F52 /* PDPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDPhoto.h; sourceTree = "<group>"; };
+		E43DA9B218A42C2A005F6F52 /* PDPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDPhoto.m; sourceTree = "<group>"; };
+		E43DA9B418A42C3F005F6F52 /* PDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDUser.h; sourceTree = "<group>"; };
+		E43DA9B518A42C3F005F6F52 /* PDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDUser.m; sourceTree = "<group>"; };
+		E43DA9B818A42E4F005F6F52 /* PDLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogViewController.h; sourceTree = "<group>"; };
+		E43DA9B918A42E4F005F6F52 /* PDLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogViewController.m; sourceTree = "<group>"; };
+		E43DA9BC18A432A7005F6F52 /* PDLogScreenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogScreenCell.h; sourceTree = "<group>"; };
+		E43DA9BD18A432A7005F6F52 /* PDLogScreenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogScreenCell.m; sourceTree = "<group>"; };
+		E43DA9BF18A43489005F6F52 /* PDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDConstants.h; sourceTree = "<group>"; };
+		E43DA9C018A43489005F6F52 /* PDConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDConstants.m; sourceTree = "<group>"; };
+		E43DA9C318A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PDLogObjectModel.xcdatamodel; sourceTree = "<group>"; };
+		E43DA9C518A4B4E7005F6F52 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E4767054180CE020002E261A /* PerfectDiet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectDiet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4767057180CE020002E261A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4767059180CE020002E261A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43DA9C618A4B4E7005F6F52 /* CoreData.framework in Frameworks */,
 				E476705A180CE020002E261A /* CoreGraphics.framework in Frameworks */,
 				E476705C180CE020002E261A /* UIKit.framework in Frameworks */,
 				E4767058180CE020002E261A /* Foundation.framework in Frameworks */,
@@ -86,6 +124,7 @@
 		E43DA99A18A4270A005F6F52 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E43DA9BB18A430F5005F6F52 /* Cells */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -93,8 +132,42 @@
 		E43DA99B18A42728005F6F52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E43DA99F18A42843005F6F52 /* PDLogObject.h */,
+				E43DA9A018A42843005F6F52 /* PDLogObject.m */,
+				E43DA9A218A42854005F6F52 /* PDActivity.h */,
+				E43DA9A318A42854005F6F52 /* PDActivity.m */,
+				E43DA9A518A42865005F6F52 /* PDFood.h */,
+				E43DA9A618A42865005F6F52 /* PDFood.m */,
+				E43DA9A818A4286D005F6F52 /* PDMood.h */,
+				E43DA9A918A4286D005F6F52 /* PDMood.m */,
+				E43DA9AB18A42879005F6F52 /* PDProductivity.h */,
+				E43DA9AC18A42879005F6F52 /* PDProductivity.m */,
+				E43DA9AE18A42C1B005F6F52 /* PDNote.h */,
+				E43DA9AF18A42C1B005F6F52 /* PDNote.m */,
+				E43DA9B118A42C2A005F6F52 /* PDPhoto.h */,
+				E43DA9B218A42C2A005F6F52 /* PDPhoto.m */,
+				E43DA9B418A42C3F005F6F52 /* PDUser.h */,
+				E43DA9B518A42C3F005F6F52 /* PDUser.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E43DA9B718A42DF2005F6F52 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E43DA9B818A42E4F005F6F52 /* PDLogViewController.h */,
+				E43DA9B918A42E4F005F6F52 /* PDLogViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E43DA9BB18A430F5005F6F52 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E43DA9BC18A432A7005F6F52 /* PDLogScreenCell.h */,
+				E43DA9BD18A432A7005F6F52 /* PDLogScreenCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		E476704B180CE020002E261A = {
@@ -119,6 +192,7 @@
 		E4767056180CE020002E261A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E43DA9C518A4B4E7005F6F52 /* CoreData.framework */,
 				E4767057180CE020002E261A /* Foundation.framework */,
 				E4767059180CE020002E261A /* CoreGraphics.framework */,
 				E476705B180CE020002E261A /* UIKit.framework */,
@@ -130,6 +204,9 @@
 		E476705D180CE020002E261A /* PerfectDiet */ = {
 			isa = PBXGroup;
 			children = (
+				E43DA9BF18A43489005F6F52 /* PDConstants.h */,
+				E43DA9C018A43489005F6F52 /* PDConstants.m */,
+				E43DA9B718A42DF2005F6F52 /* Controller */,
 				E43DA99B18A42728005F6F52 /* Model */,
 				E43DA99A18A4270A005F6F52 /* View */,
 				E4767066180CE021002E261A /* PDAppDelegate.h */,
@@ -141,6 +218,7 @@
 				E4767070180CE021002E261A /* PDViewController.m */,
 				E4767072180CE021002E261A /* Images.xcassets */,
 				E476705E180CE020002E261A /* Supporting Files */,
+				E43DA9C218A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld */,
 			);
 			path = PerfectDiet;
 			sourceTree = "<group>";
@@ -275,8 +353,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4767068180CE021002E261A /* PDAppDelegate.m in Sources */,
+				E43DA9C118A43489005F6F52 /* PDConstants.m in Sources */,
+				E43DA9A718A42865005F6F52 /* PDFood.m in Sources */,
+				E43DA9B318A42C2A005F6F52 /* PDPhoto.m in Sources */,
+				E43DA9BE18A432A7005F6F52 /* PDLogScreenCell.m in Sources */,
+				E43DA9C418A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld in Sources */,
+				E43DA9AA18A4286D005F6F52 /* PDMood.m in Sources */,
+				E43DA9A418A42854005F6F52 /* PDActivity.m in Sources */,
+				E43DA9BA18A42E4F005F6F52 /* PDLogViewController.m in Sources */,
+				E43DA9A118A42843005F6F52 /* PDLogObject.m in Sources */,
+				E43DA9AD18A42879005F6F52 /* PDProductivity.m in Sources */,
 				E4767071180CE021002E261A /* PDViewController.m in Sources */,
 				E4767064180CE021002E261A /* main.m in Sources */,
+				E43DA9B018A42C1B005F6F52 /* PDNote.m in Sources */,
+				E43DA9B618A42C3F005F6F52 /* PDUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +597,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E43DA9C218A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E43DA9C318A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodel */,
+			);
+			currentVersion = E43DA9C318A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodel */;
+			path = PDLogObjectModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E476704C180CE020002E261A /* Project object */;
 }
