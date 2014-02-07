@@ -29,5 +29,7 @@
 */
 
 - (IBAction)logItemButtonPressed:(id)sender {
+    NSLog(@"log button pressed");
+    [self.delegate cellButtonPressed:sender];
 }
 @end

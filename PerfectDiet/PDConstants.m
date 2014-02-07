@@ -9,6 +9,11 @@
 #import "PDConstants.h"
 
 NSInteger const LOG_BUTTON_NUM = 12;
+NSString* const ACTIVITY_LIST = @"PDActivityList";
+NSString* const FOOD_LIST = @"PDFoodList";
+NSString* const MOOD_LIST = @"PDMoodList";
+NSInteger const ADD_BUTTON_ID = -1;
+NSString* const STORYBOARD_NAME = @"Main_iPhone";
 
 @implementation PDConstants
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5051" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gqo-Se-FcM">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A2-lh-yTA">
+                        <rect key="frame" x="17" y="0.0" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="J5h-IV-5KX"/>
+                            <constraint firstAttribute="height" constant="40" id="fZN-ab-oKd"/>
+                        </constraints>
+                        <state key="normal" image="icon_activity_running">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElU-m4-xNN">
+                        <rect key="frame" x="0.0" y="44" width="75" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="ElU-m4-xNN" firstAttribute="leading" secondItem="gqo-Se-FcM" secondAttribute="leading" id="TQF-pn-H9C"/>
+                <constraint firstAttribute="bottom" secondItem="ElU-m4-xNN" secondAttribute="bottom" constant="1" id="XrW-AG-T8Y"/>
+                <constraint firstAttribute="trailing" secondItem="ElU-m4-xNN" secondAttribute="trailing" id="bLC-Cq-2R2"/>
+                <constraint firstItem="7A2-lh-yTA" firstAttribute="top" secondItem="gqo-Se-FcM" secondAttribute="top" id="bwQ-od-Ch3"/>
+                <constraint firstAttribute="centerX" secondItem="7A2-lh-yTA" secondAttribute="centerX" id="rBd-3h-boz"/>
+            </constraints>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icon_activity_running" width="40" height="40"/>
+    </resources>
+</document>
