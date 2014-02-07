@@ -21,6 +21,12 @@
 		E43DA9C118A43489005F6F52 /* PDConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9C018A43489005F6F52 /* PDConstants.m */; };
 		E43DA9C418A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9C218A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld */; };
 		E43DA9C618A4B4E7005F6F52 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43DA9C518A4B4E7005F6F52 /* CoreData.framework */; };
+		E43DA9C818A4BB0B005F6F52 /* PDActivityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9C718A4BB0B005F6F52 /* PDActivityList.plist */; };
+		E43DA9CA18A4BB1A005F6F52 /* PDFoodList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9C918A4BB1A005F6F52 /* PDFoodList.plist */; };
+		E43DA9CC18A4BB25005F6F52 /* PDMoodList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9CB18A4BB25005F6F52 /* PDMoodList.plist */; };
+		E43DA9D018A4BD5B005F6F52 /* PDActivityTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9CF18A4BD5B005F6F52 /* PDActivityTypeList.plist */; };
+		E43DA9D218A4BD83005F6F52 /* PDFoodTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9D118A4BD83005F6F52 /* PDFoodTypeList.plist */; };
+		E43DA9D418A4BD8E005F6F52 /* PDMoodTypeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9D318A4BD8E005F6F52 /* PDMoodTypeList.plist */; };
 		E4767058180CE020002E261A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767057180CE020002E261A /* Foundation.framework */; };
 		E476705A180CE020002E261A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4767059180CE020002E261A /* CoreGraphics.framework */; };
 		E476705C180CE020002E261A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E476705B180CE020002E261A /* UIKit.framework */; };
@@ -74,6 +80,12 @@
 		E43DA9C018A43489005F6F52 /* PDConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDConstants.m; sourceTree = "<group>"; };
 		E43DA9C318A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PDLogObjectModel.xcdatamodel; sourceTree = "<group>"; };
 		E43DA9C518A4B4E7005F6F52 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E43DA9C718A4BB0B005F6F52 /* PDActivityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDActivityList.plist; sourceTree = "<group>"; };
+		E43DA9C918A4BB1A005F6F52 /* PDFoodList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDFoodList.plist; sourceTree = "<group>"; };
+		E43DA9CB18A4BB25005F6F52 /* PDMoodList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDMoodList.plist; sourceTree = "<group>"; };
+		E43DA9CF18A4BD5B005F6F52 /* PDActivityTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDActivityTypeList.plist; sourceTree = "<group>"; };
+		E43DA9D118A4BD83005F6F52 /* PDFoodTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDFoodTypeList.plist; sourceTree = "<group>"; };
+		E43DA9D318A4BD8E005F6F52 /* PDMoodTypeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDMoodTypeList.plist; sourceTree = "<group>"; };
 		E4767054180CE020002E261A /* PerfectDiet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectDiet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4767057180CE020002E261A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4767059180CE020002E261A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -230,6 +242,12 @@
 				E4767060180CE020002E261A /* InfoPlist.strings */,
 				E4767063180CE020002E261A /* main.m */,
 				E4767065180CE021002E261A /* PerfectDiet-Prefix.pch */,
+				E43DA9C718A4BB0B005F6F52 /* PDActivityList.plist */,
+				E43DA9C918A4BB1A005F6F52 /* PDFoodList.plist */,
+				E43DA9CB18A4BB25005F6F52 /* PDMoodList.plist */,
+				E43DA9CF18A4BD5B005F6F52 /* PDActivityTypeList.plist */,
+				E43DA9D118A4BD83005F6F52 /* PDFoodTypeList.plist */,
+				E43DA9D318A4BD8E005F6F52 /* PDMoodTypeList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -329,11 +347,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43DA9D218A4BD83005F6F52 /* PDFoodTypeList.plist in Resources */,
+				E43DA9D418A4BD8E005F6F52 /* PDMoodTypeList.plist in Resources */,
 				E43DA99918A4180D005F6F52 /* Media.xcassets in Resources */,
+				E43DA9CC18A4BB25005F6F52 /* PDMoodList.plist in Resources */,
+				E43DA9D018A4BD5B005F6F52 /* PDActivityTypeList.plist in Resources */,
 				E476706E180CE021002E261A /* Main_iPad.storyboard in Resources */,
 				E4767073180CE021002E261A /* Images.xcassets in Resources */,
 				E476706B180CE021002E261A /* Main_iPhone.storyboard in Resources */,
 				E4767062180CE020002E261A /* InfoPlist.strings in Resources */,
+				E43DA9CA18A4BB1A005F6F52 /* PDFoodList.plist in Resources */,
+				E43DA9C818A4BB0B005F6F52 /* PDActivityList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
