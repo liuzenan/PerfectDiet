@@ -29,10 +29,8 @@
 
 - (void)viewDidLoad
 {
-    
+    [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
     
     // load collection view
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LogCollectionView" owner:self options:nil];
@@ -55,13 +53,20 @@
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"LogCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:COLLECTION_VIEW_CELL];
     
-    [super viewDidLoad];
+    self.tabIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"down_arrow"]];
+    CGRect temp = self.tabIndicator.frame;
+    temp.origin.x = 37;
+    temp.origin.y = 142;
+    self.tabIndicator.frame = temp;
+    [self.view addSubview:self.tabIndicator];
+    
 }
 
 - (void) setCurrentTypeAndHighlight:(PDLogType)currentType
 {
     _currentType = currentType;
     [self highlightSelectedTab:currentType];
+    [self positionTabIndicator:currentType];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,24 +87,24 @@
 */
 
 - (IBAction)activityButtonPressed:(id)sender {
+    [self setCurrentTypeAndHighlight:kActivity];
     self.logItems = [PDPropertyListController loadActivityList];
     [self.collectionView reloadData];
-    [self setCurrentTypeAndHighlight:kActivity];
     [self removeMoodWheelView];
 }
 
 - (IBAction)foodButtonPressed:(id)sender {
+    [self setCurrentTypeAndHighlight:kFood];
     self.logItems = [PDPropertyListController loadFoodList];
     [self.collectionView reloadData];
-    [self setCurrentTypeAndHighlight:kFood];
     [self removeMoodWheelView];
 }
 
 - (IBAction)moodButtonPressed:(id)sender {
+    [self setCurrentTypeAndHighlight:kMood];
     self.logItems = [PDPropertyListController loadMoodList];
     [self insertMoodWheelView];
     [self.collectionView reloadData];
-    [self setCurrentTypeAndHighlight:kMood];
 }
 
 - (IBAction)productivityButtonPressed:(id)sender {
@@ -210,6 +215,25 @@
             [view setAlpha:0.5];
         }
     }
+}
+
+- (void) positionTabIndicator:(PDLogType)type
+{
+    if (type == kActivity) {
+        CGRect temp = self.tabIndicator.frame;
+        temp.origin.x = 37;
+        self.tabIndicator.frame = temp;
+    }else if (type == kFood) {
+        CGRect temp = self.tabIndicator.frame;
+        temp.origin.x = 117;
+        self.tabIndicator.frame = temp;
+    }else if (type == kMood) {
+        CGRect temp = self.tabIndicator.frame;
+        temp.origin.x = 197;
+        self.tabIndicator.frame = temp;
+    }
+    
+    NSLog(@"tab indicator: x:%d", (NSInteger)self.tabIndicator.frame.origin.x);
 }
 
     

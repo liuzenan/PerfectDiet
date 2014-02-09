@@ -10,6 +10,19 @@
 
 @implementation PDPropertyListController
 
++(NSArray *)getLogTimeArray
+{
+    NSString *plistCatPath = [[NSBundle mainBundle] pathForResource:@"PDTimeList" ofType:@"plist"];
+    NSArray *dataList = [[NSArray alloc] initWithContentsOfFile:plistCatPath];
+    return dataList;
+}
+
++(NSArray *)getLogDurationArray
+{
+    NSString *plistCatPath = [[NSBundle mainBundle] pathForResource:@"PDDurationList" ofType:@"plist"];
+    NSArray *dataList = [[NSArray alloc] initWithContentsOfFile:plistCatPath];
+    return dataList;
+}
 
 + (NSArray *)loadListForResource: (NSString*)resource
 {

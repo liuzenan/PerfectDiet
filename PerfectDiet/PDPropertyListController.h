@@ -18,4 +18,6 @@
 + (NSArray *)loadCategoryListForLogType: (PDLogType)logType;
 + (NSString *) getItemCategoryNameForItemId:(NSInteger)itemId logType:(PDLogType)logType;
 + (NSString *) getItemNameForItemId:(NSInteger)itemId logType:(PDLogType)logType;
++ (NSArray *) getLogTimeArray;
++ (NSArray *)getLogDurationArray;
 @end

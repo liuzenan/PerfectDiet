@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PDSaveLogViewController : UIViewController
+
+typedef enum{
+    kPDTimePicker = 0,
+    kPDDurationPicker = 1
+} PDPickerType;
+
+@interface PDSaveLogViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *itemNameButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemType;
@@ -18,10 +24,18 @@
 @property (weak, nonatomic) IBOutlet UISwitch *publicSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *durationQuestionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *durationButton;
+@property (strong, nonatomic) UIPickerView *timePicker;
+@property (strong, nonatomic) UIPickerView *durationPicker;
+
+@property (strong, nonatomic) NSArray *timeList;
+@property (strong, nonatomic) NSArray *durationList;
 
 @property (assign, nonatomic) NSInteger itemId;
 @property (assign, nonatomic) NSInteger itemCategory;
 @property (assign, nonatomic) PDLogType logType;
+@property (assign, nonatomic) BOOL isPublic;
+@property (assign, nonatomic) NSDate *itemTime;
+@property (assign, nonatomic) NSInteger itemDuration;
 
 
 - (IBAction)cancelButtonPressed:(id)sender;

@@ -30,4 +30,7 @@ typedef enum{
 
 @interface PDConstants : NSObject
 
++ (CGFloat) getScreenHeight;
++ (CGFloat) getScreenWidth;
+
 @end

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moodButton;
 @property (weak, nonatomic) IBOutlet UIButton *productivityButton;
 @property (weak, nonatomic) IBOutlet UIView *topTabContainer;
+@property (strong, nonatomic) UIImageView *tabIndicator;
 @property (assign, nonatomic) PDLogType currentType;
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

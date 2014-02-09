@@ -97,7 +97,7 @@
         <!--Log View Controller - LifeLogger-->
         <scene sceneID="IjL-NZ-K0O">
             <objects>
-                <viewController title="LifeLogger" id="fw2-HA-WbC" customClass="PDLogViewController" sceneMemberID="viewController">
+                <viewController title="LifeLogger" automaticallyAdjustsScrollViewInsets="NO" id="fw2-HA-WbC" customClass="PDLogViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vaE-W0-ixa"/>
                         <viewControllerLayoutGuide type="bottom" id="PIp-U3-1lF"/>
@@ -229,6 +229,11 @@
                                 <rect key="frame" x="0.0" y="151" width="320" height="417"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSu-0p-xwf">
+                                <rect key="frame" x="0.0" y="142" width="320" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.77647058823529413" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -422,6 +427,91 @@
             </objects>
             <point key="canvasLocation" x="3506" y="-609"/>
         </scene>
+        <!--Add Mood View Controller - Add Mood-->
+        <scene sceneID="EQX-mh-XcD">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="chB-6L-Sfj" customClass="PDAddMoodViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="It2-Do-qjk"/>
+                        <viewControllerLayoutGuide type="bottom" id="OZh-nk-DU2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Uo-FH-8VL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IJ-4z-RNe">
+                                <rect key="frame" x="0.0" y="67" width="320" height="501"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7IJ-4z-RNe" firstAttribute="top" secondItem="6Uo-FH-8VL" secondAttribute="top" constant="67" id="BUn-LV-0OI"/>
+                            <constraint firstAttribute="trailing" secondItem="7IJ-4z-RNe" secondAttribute="trailing" id="BmN-JT-FbV"/>
+                            <constraint firstAttribute="bottom" secondItem="7IJ-4z-RNe" secondAttribute="bottom" id="ai0-c7-Wzn"/>
+                            <constraint firstItem="7IJ-4z-RNe" firstAttribute="leading" secondItem="6Uo-FH-8VL" secondAttribute="leading" id="yK8-5J-8DL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Mood" id="QGP-lX-Go5">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FqV-fT-MmL">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="chB-6L-Sfj" id="GBH-Cr-EuQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RNY-fZ-dyV">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="chB-6L-Sfj" id="CRV-GM-0Mh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scrollView" destination="7IJ-4z-RNe" id="6sr-pO-Pgl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kGy-P6-Ixs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3894" y="107"/>
+        </scene>
+        <!--Add Note View Controller - Add Note-->
+        <scene sceneID="oaB-Xh-PGF">
+            <objects>
+                <viewController id="RgC-4R-lC5" customClass="PDAddNoteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lVC-2j-BnS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z8D-ev-PRf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fzd-lK-TZo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nDK-MA-xa2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Note" id="qsX-iw-mPj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="BKI-cH-FWJ">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="RgC-4R-lC5" id="5YF-cs-eaT"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="vW6-HL-hOL">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="RgC-4R-lC5" id="LPB-me-RwD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DyV-i9-TEb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4666" y="107"/>
+        </scene>
         <!--Save Log View Controller - Log Mood-->
         <scene sceneID="llv-pG-o5x">
             <objects>
@@ -442,7 +532,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="itemNameButtonPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="m0q-yN-yk1"/>
+                                    <action selector="itemNameButtonPressed:" destination="YD1-kJ-UmZ" eventType="touchUpInside" id="0AT-ds-iHt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="POSITIVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4U-SW-5NG">
@@ -464,7 +554,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="itemTimeButtonPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="qbq-Z1-YtL"/>
+                                    <action selector="itemTimeButtonPressed:" destination="YD1-kJ-UmZ" eventType="touchUpInside" id="CeE-kA-jDi"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiO-V4-1SQ">
@@ -483,56 +573,39 @@
                                 <rect key="frame" x="154" y="378" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="publicChanged:" destination="ggI-Jp-qRy" eventType="valueChanged" id="hxF-bp-8Lt"/>
+                                    <action selector="publicChanged:" destination="YD1-kJ-UmZ" eventType="valueChanged" id="RWK-J0-Cai"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAO-c9-9yq">
-                                <rect key="frame" x="130" y="454" width="60" height="60"/>
+                                <rect key="frame" x="65" y="454" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="button_add_note">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addNoteBtnPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="026-tI-ibW"/>
+                                    <action selector="addNoteBtnPressed:" destination="YD1-kJ-UmZ" eventType="touchUpInside" id="8mj-qE-Fts"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAF-hk-wIk">
-                                <rect key="frame" x="228" y="454" width="60" height="60"/>
+                                <rect key="frame" x="191" y="454" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="button_add_photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addPhotoBtnPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="U0I-Dy-r6M"/>
+                                    <action selector="addPhotoBtnPressed:" destination="YD1-kJ-UmZ" eventType="touchUpInside" id="Ftl-52-4HY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADD NOTE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDh-gf-YXC">
-                                <rect key="frame" x="129" y="519" width="62" height="21"/>
+                                <rect key="frame" x="64" y="519" width="62" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADD PHOTO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2B-no-bwL">
-                                <rect key="frame" x="222" y="519" width="72" height="21"/>
+                                <rect key="frame" x="185" y="519" width="72" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX8-Vg-cVw">
-                                <rect key="frame" x="27" y="454" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button_add_mood">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addMoodBtnPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="Kau-vD-rh3"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADD MOOD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="895-Pg-2Tb">
-                                <rect key="frame" x="24" y="519" width="67" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -551,17 +624,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="itemNameButton" destination="gtP-9y-E5G" id="rem-uS-yr5"/>
-                        <outlet property="itemTimeButton" destination="eaN-aQ-IBr" id="oqf-h1-O1a"/>
-                        <outlet property="itemType" destination="P4U-SW-5NG" id="rfs-Nj-a5r"/>
-                        <outlet property="locationLabel" destination="eiO-V4-1SQ" id="hGS-or-4R1"/>
-                        <outlet property="publicSwitch" destination="piF-BH-4jJ" id="Zge-8f-qMJ"/>
+                        <outlet property="itemNameButton" destination="gtP-9y-E5G" id="ddY-2F-Vk8"/>
+                        <outlet property="itemTimeButton" destination="eaN-aQ-IBr" id="eHG-km-CjB"/>
+                        <outlet property="itemType" destination="P4U-SW-5NG" id="AGt-hS-47Z"/>
+                        <outlet property="locationLabel" destination="eiO-V4-1SQ" id="tn7-xI-Lph"/>
+                        <outlet property="publicSwitch" destination="piF-BH-4jJ" id="1v0-zD-izm"/>
                         <outlet property="timeQuestionLabel" destination="SmK-zU-jdR" id="ket-Zs-Tak"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufj-21-V6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5054" y="68"/>
+            <point key="canvasLocation" x="5442" y="107"/>
         </scene>
         <!--Save Log View Controller - Log Food-->
         <scene sceneID="DJ6-zX-F6i">
@@ -583,7 +656,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="itemNameButtonPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="6iM-bo-s2A"/>
+                                    <action selector="itemNameButtonPressed:" destination="W1V-Zg-5AG" eventType="touchUpInside" id="K4L-Xo-guy"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VEGETABLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D16-JM-Dia">
@@ -605,7 +678,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="itemTimeButtonPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="PwT-SN-OaL"/>
+                                    <action selector="itemTimeButtonPressed:" destination="W1V-Zg-5AG" eventType="touchUpInside" id="8ZY-c0-4Wf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1V-wq-opm">
@@ -624,7 +697,7 @@
                                 <rect key="frame" x="154" y="382" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="publicChanged:" destination="ggI-Jp-qRy" eventType="valueChanged" id="mQN-au-nt0"/>
+                                    <action selector="publicChanged:" destination="W1V-Zg-5AG" eventType="valueChanged" id="SC3-LN-C32"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Egy-kg-udA">
@@ -634,7 +707,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addNoteBtnPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="c3n-ve-myT"/>
+                                    <action selector="addNoteBtnPressed:" destination="W1V-Zg-5AG" eventType="touchUpInside" id="sID-Mi-ths"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrD-3g-Si6">
@@ -644,7 +717,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addPhotoBtnPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="8of-kF-6UL"/>
+                                    <action selector="addPhotoBtnPressed:" destination="W1V-Zg-5AG" eventType="touchUpInside" id="FMG-ic-4UX"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADD NOTE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umd-Ar-Ec5">
@@ -666,7 +739,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addMoodBtnPressed:" destination="ggI-Jp-qRy" eventType="touchUpInside" id="Rl6-zA-96p"/>
+                                    <action selector="addMoodBtnPressed:" destination="W1V-Zg-5AG" eventType="touchUpInside" id="HYz-4r-ddM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADD MOOD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgG-Yw-nex">
@@ -692,12 +765,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="itemNameButton" destination="LlN-ce-Wnj" id="NR1-EC-VlU"/>
-                        <outlet property="itemTimeButton" destination="bbI-Zx-6G6" id="b8t-bA-ypO"/>
-                        <outlet property="itemType" destination="D16-JM-Dia" id="ZZg-SC-2zc"/>
-                        <outlet property="locationLabel" destination="D1V-wq-opm" id="aeQ-lD-EFR"/>
-                        <outlet property="publicSwitch" destination="aUQ-1s-juM" id="CQk-aV-6Dm"/>
-                        <outlet property="timeQuestionLabel" destination="Q8d-SI-HYt" id="h2o-Cz-OWe"/>
+                        <outlet property="itemNameButton" destination="LlN-ce-Wnj" id="QZd-qG-ZLb"/>
+                        <outlet property="itemTimeButton" destination="bbI-Zx-6G6" id="AsZ-dg-p01"/>
+                        <outlet property="itemType" destination="D16-JM-Dia" id="zFP-TW-dmp"/>
+                        <outlet property="locationLabel" destination="D1V-wq-opm" id="DfT-lD-8Pb"/>
+                        <outlet property="publicSwitch" destination="aUQ-1s-juM" id="peO-bO-MAM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gmk-jv-6CO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -795,7 +867,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="More Activities" id="KsM-yy-6jl">
+                    <navigationItem key="navigationItem" title="Choose Activity" id="KsM-yy-6jl">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="dP9-bT-s20">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="VOw-cw-5Ab" id="Sqd-eo-03J"/>
@@ -1252,7 +1324,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7i-ch-S7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4666" y="68"/>
+            <point key="canvasLocation" x="5054" y="107"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CHG-N3-KwG">
@@ -1271,6 +1343,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bif-TE-d3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4666" y="-609"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iL9-KI-x0W">
+            <objects>
+                <navigationController storyboardIdentifier="AddMood" automaticallyAdjustsScrollViewInsets="NO" id="09U-xs-iKN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NEv-kZ-VNT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="chB-6L-Sfj" kind="relationship" relationship="rootViewController" id="g7l-j7-Eeb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FJX-Ko-yvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3506" y="107"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4Ir-aW-wwZ">
+            <objects>
+                <navigationController storyboardIdentifier="AddNote" automaticallyAdjustsScrollViewInsets="NO" id="kYg-pH-mTH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wTI-Vk-AoO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RgC-4R-lC5" kind="relationship" relationship="rootViewController" id="FsJ-fN-Zgu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8PS-Y8-ABD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4294" y="107"/>
         </scene>
     </scenes>
     <resources>

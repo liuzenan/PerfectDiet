@@ -21,4 +21,16 @@ NSString* const COLLECTION_VIEW_CELL = @"LogScreenCell";
 
 @implementation PDConstants
 
++(CGFloat)getScreenHeight
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    return screenRect.size.height;
+}
+
++(CGFloat)getScreenWidth
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    return screenRect.size.width;
+}
+
 @end
