@@ -7,6 +7,7 @@
 //
 
 #import "PDSaveLogViewController.h"
+#import "PDPropertyListController.h"
 
 @interface PDSaveLogViewController ()
 
@@ -27,7 +28,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"save log view did load");
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
+    NSLog(@"id:%d, category:%d, type:%d", self.itemId, self.itemCategory, self.logType);
+    NSString *itemName = [PDPropertyListController getItemNameForItemId:self.itemId logType:self.logType];
+    [self.itemNameButton setTitle:itemName forState:UIControlStateNormal];
+    NSString *category = [PDPropertyListController getItemCategoryNameForItemId:self.itemCategory logType:self.logType];
+    [self.itemType setText:category];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +61,7 @@
 
 -(void)setItemId:(NSInteger)itemId itemCategory:(NSInteger)itemCategory logType:(PDLogType)logType
 {
+    NSLog(@"set item id in save log view");
     self.itemId = itemId;
     self.itemCategory = itemCategory;
     self.logType = logType;

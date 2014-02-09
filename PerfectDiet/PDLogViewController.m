@@ -125,14 +125,13 @@
         
         [cell.logItemButton setImage:[UIImage imageNamed:self.logItems[indexPath.row][@"Icon"]] forState:UIControlStateNormal];
         [cell.logItemLabel setText:self.logItems[indexPath.row][@"Name"]];
-        [cell.logItemButton setTag:(NSInteger)self.logItems[indexPath.row][@"ID"]];
-        [cell setItemCategory:(NSInteger) self.logItems[indexPath.row][@"Type"]];
-        
+        [cell setItemId:[self.logItems[indexPath.row][@"ID"] integerValue]];
+        [cell setItemCategory:[self.logItems[indexPath.row][@"Type"] integerValue]];
     } else {
         
         [cell.logItemButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
         [cell.logItemLabel setText:@"More"];
-        [cell.logItemButton setTag:ADD_BUTTON_ID];
+        [cell setItemId:ADD_BUTTON_ID];
     }
 
     return cell;
@@ -154,11 +153,10 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 
--(void)cellButtonPressed:(id)sender itemCategory:(NSInteger)category
+-(void)cellButtonPressedWithItemId:(NSInteger)itemId itemCategory:(NSInteger)category
 {
-    UIButton *button = (UIButton*) sender;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    NSInteger itemId = button.tag;
+    
     if (itemId == -1) {
         NSLog(@"will open more view");
         PDMoreItemsViewController *mi = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
@@ -166,27 +164,29 @@
     } else {
         NSLog(@"will open save view");
         
-        PDSaveLogViewController *sl;
+        UINavigationController *nc;
         switch (self.currentType) {
             case kActivity:
-                sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveActivityLog"];
+                nc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"SaveActivityLog"];
                 break;
                 
             case kFood:
-                sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveFoodLog"];
+                nc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"SaveFoodLog"];
                 break;
                 
             case kMood:
-                sl = (PDSaveLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveMoodLog"];
+                nc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"SaveMoodLog"];
                 break;
                 
             default:
                 break;
         }
         
+        PDSaveLogViewController *sl = (PDSaveLogViewController*)nc.topViewController;
+        
         [sl setItemId:itemId itemCategory:category logType:self.currentType];
         
-        [self presentViewController:sl animated:YES completion:nil];
+        [self presentViewController:nc animated:YES completion:nil];
     }
     
 }

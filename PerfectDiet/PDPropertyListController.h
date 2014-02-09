@@ -13,5 +13,9 @@
 + (NSArray*) loadActivityList;
 + (NSArray*) loadFoodList;
 + (NSArray*) loadMoodList;
-
++ (NSDictionary *)loadItemForItemId:(NSInteger)itemId logType:(PDLogType)logType;
++ (NSArray *)loadListForLogType: (PDLogType)logType;
++ (NSArray *)loadCategoryListForLogType: (PDLogType)logType;
++ (NSString *) getItemCategoryNameForItemId:(NSInteger)itemId logType:(PDLogType)logType;
++ (NSString *) getItemNameForItemId:(NSInteger)itemId logType:(PDLogType)logType;
 @end
