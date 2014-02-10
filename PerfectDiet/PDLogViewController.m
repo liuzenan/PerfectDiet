@@ -233,7 +233,7 @@
         self.tabIndicator.frame = temp;
     }
     
-    NSLog(@"tab indicator: x:%d", (NSInteger)self.tabIndicator.frame.origin.x);
+    NSLog(@"tab indicator: x:%ld", (long)self.tabIndicator.frame.origin.x);
 }
 
     

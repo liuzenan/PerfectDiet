@@ -9,6 +9,7 @@
 #import "PDSaveLogViewController.h"
 #import "PDPropertyListController.h"
 #import "PDMoreItemsViewController.h"
+#import "PDActivity.h"
 
 @interface PDSaveLogViewController ()
 
@@ -33,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"save log view did load");
-    
+        
     NSString *itemName = [PDPropertyListController getItemNameForItemId:self.itemId logType:self.logType];
     [self.itemNameButton setTitle:itemName forState:UIControlStateNormal];
     NSString *category = [PDPropertyListController getItemCategoryNameForItemId:self.itemCategory logType:self.logType];
@@ -50,6 +51,7 @@
     [self.durationPicker setTag:kPDDurationPicker];
     
     [self resetPicker:self.timePicker selection:5];
+    
     [self resetPicker:self.durationPicker selection:3];
     
     self.isPickerDisplay = NO;
@@ -95,6 +97,15 @@
 - (void) resetPicker:(UIPickerView*)picker selection:(NSInteger)row
 {
     [picker selectRow:row inComponent:0 animated:NO];
+    if (picker.tag == kPDTimePicker) {
+        NSNumber *number = [self.timeList objectAtIndex:row];
+        NSInteger time = [number integerValue];
+        self.itemTime = [NSDate dateWithTimeIntervalSinceNow: -(time * 60)];
+    } else if (picker.tag == kPDDurationPicker) {
+        NSNumber *number = [self.durationList objectAtIndex:row];
+        NSInteger duration = [number integerValue];
+        self.itemDuration = duration * 60;
+    }
 }
 
 - (void)setItemId:(NSInteger)itemId itemCategory:(NSInteger)itemCategory logType:(PDLogType)logType
@@ -110,9 +121,17 @@
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
+
+    PDActivity *item = [PDActivity MR_createEntity];
+    item.item_id = [NSNumber numberWithLong:self.itemId];
+    item.item_type = [NSNumber numberWithLong:self.itemCategory];
+    item.is_public = [NSNumber numberWithBool:self.publicSwitch.isOn];
+    item.time = self.itemTime;
+    item.duration = [NSNumber numberWithLong:self.itemDuration];
+    item.logged_time = [NSDate new];
     
-    
-    
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)itemNameButtonPressed:(id)sender {
@@ -182,8 +201,14 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (pickerView.tag == kPDTimePicker) {
+        NSNumber *number = [self.timeList objectAtIndex:row];
+        NSInteger time = [number integerValue];
+        self.itemTime = [NSDate dateWithTimeIntervalSinceNow: -(time * 60)];
         [self.itemTimeButton setTitle:[self titleForRowInTimePickerView:row] forState:UIControlStateNormal];
     } else if (pickerView.tag == kPDDurationPicker) {
+        NSNumber *number = [self.durationList objectAtIndex:row];
+        NSInteger duration = [number integerValue];
+        self.itemDuration = duration * 60;
         [self.durationButton setTitle:[self titleForRowInDurationPickerView:row] forState:UIControlStateNormal];
     }
 }
@@ -197,13 +222,13 @@
     if (time == 0) {
         title = @"Now";
     } else if (time == 1) {
-        title = [NSString stringWithFormat:@"%d minute ago", time];
+        title = [NSString stringWithFormat:@"%ld minute ago", time];
     } else if (time < 60) {
-        title = [NSString stringWithFormat:@"%d minutes ago", time];
+        title = [NSString stringWithFormat:@"%ld minutes ago", time];
     } else if (time == 60) {
-        title = [NSString stringWithFormat:@"%d hour ago", time / 60];
+        title = [NSString stringWithFormat:@"%ld hour ago", time / 60];
     } else {
-        title = [NSString stringWithFormat:@"%d hours ago", time / 60];
+        title = [NSString stringWithFormat:@"%ld hours ago", time / 60];
     }
     
     return title;
@@ -218,13 +243,13 @@
     if (time == 0) {
         title = @"Now";
     } else if (time == 1) {
-        title = [NSString stringWithFormat:@"%d minute", time];
+        title = [NSString stringWithFormat:@"%ld minute", time];
     } else if (time < 60) {
-        title = [NSString stringWithFormat:@"%d minutes", time];
+        title = [NSString stringWithFormat:@"%ld minutes", time];
     } else if (time == 60) {
-        title = [NSString stringWithFormat:@"%d hour", time / 60];
+        title = [NSString stringWithFormat:@"%ld hour", time / 60];
     } else {
-        title = [NSString stringWithFormat:@"%d hours", time / 60];
+        title = [NSString stringWithFormat:@"%ld hours", time / 60];
     }
     
     return title;

@@ -34,7 +34,7 @@ typedef enum{
 @property (assign, nonatomic) NSInteger itemCategory;
 @property (assign, nonatomic) PDLogType logType;
 @property (assign, nonatomic) BOOL isPublic;
-@property (assign, nonatomic) NSDate *itemTime;
+@property (strong, nonatomic) NSDate *itemTime;
 @property (assign, nonatomic) NSInteger itemDuration;
 
 

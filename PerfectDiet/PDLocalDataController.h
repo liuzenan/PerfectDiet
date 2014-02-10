@@ -10,4 +10,6 @@
 
 @interface PDLocalDataController : NSObject
 
++ (NSArray*) getLoggedItemsForDate:(NSDate*)date;
+
 @end
