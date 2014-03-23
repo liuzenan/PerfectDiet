@@ -10,13 +10,7 @@
 #import "PDPropertyListController.h"
 #import "PDMoreItemsViewController.h"
 #import "PDActivity.h"
-
-@interface PDSaveLogViewController ()
-
-@property (nonatomic, assign) BOOL isPickerDisplay;
-@property (nonatomic, assign) PDPickerType currentType;
-
-@end
+#import <MMPickerView.h>
 
 @implementation PDSaveLogViewController
 
@@ -33,8 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"save log view did load");
-        
+    
     NSString *itemName = [PDPropertyListController getItemNameForItemId:self.itemId logType:self.logType];
     [self.itemNameButton setTitle:itemName forState:UIControlStateNormal];
     NSString *category = [PDPropertyListController getItemCategoryNameForItemId:self.itemCategory logType:self.logType];
@@ -44,36 +37,36 @@
     self.durationList = [PDPropertyListController getLogDurationArray];
     self.timeList = [PDPropertyListController getLogTimeArray];
     
-    [self setupPicker];
-    [self setupPicker];
-    
-    [self.timePicker setTag:kPDTimePicker];
-    [self.durationPicker setTag:kPDDurationPicker];
-    
-    [self resetPicker:self.timePicker selection:5];
-    
-    [self resetPicker:self.durationPicker selection:3];
-    
-    self.isPickerDisplay = NO;
+    [[VPPLocationController sharedInstance] addLocationDelegate:self];
+    [[VPPLocationController sharedInstance] addGeocoderDelegate:self];
+
     
 }
 
-- (void) setupPicker
+
+-(void)geocoderError:(NSError *)error
 {
-    self.timePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 180)];
-    self.timePicker.dataSource = self;
-    self.timePicker.delegate = self;
-    self.timePicker.showsSelectionIndicator = YES;
-    self.timePicker.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.timePicker];
+    [self.locationLabel setText:@"Unknown location"];
+}
+
+-(void)geocoderUpdate:(MKPlacemark *)placemark
+{
+    [self.locationLabel setText: [NSString stringWithFormat:@"%@, %@", placemark.locality, placemark.administrativeArea]];
+}
+
+-(void)locationDenied
+{
     
+}
+
+-(void)locationError:(NSError *)error
+{
     
-    self.durationPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 180)];
-    self.durationPicker.dataSource = self;
-    self.durationPicker.delegate = self;
-    self.durationPicker.showsSelectionIndicator = YES;
-    self.durationPicker.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.durationPicker];
+}
+
+-(void)locationUpdate:(CLLocation *)location
+{
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,19 +87,6 @@
 }
 */
 
-- (void) resetPicker:(UIPickerView*)picker selection:(NSInteger)row
-{
-    [picker selectRow:row inComponent:0 animated:NO];
-    if (picker.tag == kPDTimePicker) {
-        NSNumber *number = [self.timeList objectAtIndex:row];
-        NSInteger time = [number integerValue];
-        self.itemTime = [NSDate dateWithTimeIntervalSinceNow: -(time * 60)];
-    } else if (picker.tag == kPDDurationPicker) {
-        NSNumber *number = [self.durationList objectAtIndex:row];
-        NSInteger duration = [number integerValue];
-        self.itemDuration = duration * 60;
-    }
-}
 
 - (void)setItemId:(NSInteger)itemId itemCategory:(NSInteger)itemCategory logType:(PDLogType)logType
 {
@@ -124,7 +104,7 @@
 
     PDActivity *item = [PDActivity MR_createEntity];
     item.item_id = [NSNumber numberWithLong:self.itemId];
-    item.item_type = [NSNumber numberWithLong:self.itemCategory];
+    item.item_type = [NSNumber numberWithInteger:self.logType];
     item.is_public = [NSNumber numberWithBool:self.publicSwitch.isOn];
     item.time = self.itemTime;
     item.duration = [NSNumber numberWithLong:self.itemDuration];
@@ -141,17 +121,37 @@
 }
 
 - (IBAction)itemTimeButtonPressed:(id)sender {
-    self.currentType = kPDTimePicker;
-    [self hideShowPickerView:self.timePicker];
+    [MMPickerView showPickerViewInView:self.view withObjects:self.timeList withOptions:nil objectToStringConverter:^NSString *(id object) {
+        return [self titleForTimeObject:object];
+    } completion:^(id selectedObject) {
+        if (![selectedObject isKindOfClass:[NSNumber class]]) {
+            return;
+        }
+        NSLog(@"%@", [self titleForTimeObject:selectedObject]);
+        [self.itemTimeButton setTitle:[self titleForTimeObject:selectedObject] forState:UIControlStateNormal];
+        self.itemTime = [NSDate dateWithTimeIntervalSinceNow: - ([selectedObject integerValue] * 60)];
+    }];
+    
+}
+
+
+- (IBAction)durationButtonPressed:(id)sender {
+    [MMPickerView showPickerViewInView:self.view withObjects:self.durationList withOptions:nil objectToStringConverter:^NSString *(id object) {
+        return [self titleForDurationObject:object];
+    } completion:^(id selectedObject) {
+        if (![selectedObject isKindOfClass:[NSNumber class]]) {
+            return;
+        }
+        NSLog(@"%@", [self titleForDurationObject:selectedObject]);
+        [self.durationButton setTitle:[self titleForDurationObject:selectedObject] forState:UIControlStateNormal];
+        self.itemDuration = [selectedObject integerValue] * 60;
+    }];
 }
 
 - (IBAction)publicChanged:(id)sender {
 }
 
-- (IBAction)durationButtonPressed:(id)sender {
-    self.currentType = kPDDurationPicker;
-    [self hideShowPickerView:self.durationPicker];
-}
+
 
 - (IBAction)addMoodBtnPressed:(id)sender {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
@@ -169,54 +169,8 @@
     
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
 
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    NSInteger count = 0;
-    if (pickerView.tag == kPDTimePicker) {
-        count = [self.timeList count];
-    } else if (pickerView.tag == kPDDurationPicker) {
-        count = [self.durationList count];
-    }
-    return count;
-}
-
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    
-    NSString *title = @"";
-    if (pickerView.tag == kPDTimePicker) {
-        title = [self titleForRowInTimePickerView:row];
-    } else if (pickerView.tag == kPDDurationPicker) {
-        title = [self titleForRowInDurationPickerView:row];
-    }
-    
-    return title;
-}
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    if (pickerView.tag == kPDTimePicker) {
-        NSNumber *number = [self.timeList objectAtIndex:row];
-        NSInteger time = [number integerValue];
-        self.itemTime = [NSDate dateWithTimeIntervalSinceNow: -(time * 60)];
-        [self.itemTimeButton setTitle:[self titleForRowInTimePickerView:row] forState:UIControlStateNormal];
-    } else if (pickerView.tag == kPDDurationPicker) {
-        NSNumber *number = [self.durationList objectAtIndex:row];
-        NSInteger duration = [number integerValue];
-        self.itemDuration = duration * 60;
-        [self.durationButton setTitle:[self titleForRowInDurationPickerView:row] forState:UIControlStateNormal];
-    }
-}
-
-
--(NSString*)titleForRowInTimePickerView:(NSInteger)row
-{
-    NSNumber *number = [self.timeList objectAtIndex:row];
+-(NSString*)titleForTimeObject:(NSNumber*) number {
     NSInteger time = [number integerValue];
     NSString *title = @"";
     if (time == 0) {
@@ -234,9 +188,8 @@
     return title;
 }
 
--(NSString*)titleForRowInDurationPickerView:(NSInteger)row
-{
-    NSNumber *number = [self.durationList objectAtIndex:row];
+
+-(NSString*)titleForDurationObject:(NSNumber*) number {
     NSInteger time = [number integerValue];
     NSString *title = @"";
     
@@ -253,27 +206,6 @@
     }
     
     return title;
-}
-
--(void)hideShowPickerView:(UIPickerView*)picker
-{
-    if (!self.isPickerDisplay) {
-        [UIView animateWithDuration:0.25 animations:^{
-            CGRect temp = picker.frame;
-            temp.origin.y = self.view.frame.size.height - picker.frame.size.height;
-            picker.frame = temp;
-        } completion:^(BOOL finished) {
-            self.isPickerDisplay = YES;
-        }];
-    } else {
-        [UIView animateWithDuration:0.25 animations:^{
-            CGRect temp = picker.frame;
-            temp.origin.y = self.view.frame.size.height;
-            picker.frame = temp;
-        } completion:^(BOOL finished) {
-            self.isPickerDisplay = NO;
-        }];
-    }
 }
 
 @end

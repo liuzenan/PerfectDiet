@@ -7,14 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <VPPLocation/VPPLocationController.h>
 
-
-typedef enum{
-    kPDTimePicker = 0,
-    kPDDurationPicker = 1
-} PDPickerType;
-
-@interface PDSaveLogViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface PDSaveLogViewController : UIViewController <VPPLocationControllerGeocoderDelegate, VPPLocationControllerLocationDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *itemNameButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemType;

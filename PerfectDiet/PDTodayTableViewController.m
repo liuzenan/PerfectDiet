@@ -9,7 +9,9 @@
 #import "PDTodayTableViewController.h"
 #import "PDLocalDataController.h"
 #import "PDTodayTopTableViewCell.h"
+#import "PDActivity.h"
 #import "PDReviewCell.h"
+#import "PDPropertyListController.h"
 
 @interface PDTodayTableViewController ()
 
@@ -33,6 +35,16 @@
     self.logItems = [PDLocalDataController getLoggedItemsForDate:[NSDate new]];
     UINib *reviewCell = [UINib nibWithNibName:@"PDReviewCell" bundle:nil];
     [self.tableView registerNib:reviewCell forCellReuseIdentifier:@"ReviewCell"];
+    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.logItems = [PDLocalDataController getLoggedItemsForDate:[NSDate new]];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,6 +92,38 @@
     } else {
 
         PDReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCell" forIndexPath:indexPath];
+        
+        PDActivity *item = (PDActivity*) [self.logItems objectAtIndex:indexPath.row];
+        
+        NSString *title = [PDPropertyListController getItemNameForItemId:item.item_id.integerValue logType:(PDLogType)item.item_type.integerValue];
+        
+        if ((PDLogType)item.item_type.integerValue == kFood) {
+            title = [@"Had " stringByAppendingString:title];
+        }
+        
+        if ((PDLogType)item.item_type.integerValue == kMood) {
+            title = [@"Feel " stringByAppendingString:title];
+        }
+        
+        [cell.itemTitle setText:title];
+        
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"HH:mm"];
+        [cell.time setText:[format stringFromDate:item.time]];
+        
+        if (item.duration != nil) {
+            NSInteger duration = item.duration.integerValue;
+            NSString *ds = @"";
+            if (duration < 60 * 60) {
+                ds = [NSString stringWithFormat:@"%ldm", item.duration.integerValue / 60];
+            } else if ((duration / 60) % 60 == 0) {
+                ds = [NSString stringWithFormat:@"%ldh", item.duration.integerValue / 3600];
+            } else {
+                ds = [NSString stringWithFormat:@"%ldh%ldm", item.duration.integerValue / 3600, (item.duration.integerValue / 60) % 60];
+            }
+            
+            [cell.duration setText:ds];
+        }
         
         return cell;
     }
