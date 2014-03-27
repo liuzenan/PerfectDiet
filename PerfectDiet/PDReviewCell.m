@@ -7,6 +7,7 @@
 //
 
 #import "PDReviewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PDReviewCell
 
@@ -49,6 +50,19 @@
     self.noteWrapper.layer.shadowOpacity = 0.2f;
     self.noteWrapper.layer.shadowRadius = 1.0f;
     self.noteWrapper.layer.shadowPath = shadowPath.CGPath;
+    
+
+    UIBezierPath *photoShadowPath = [UIBezierPath bezierPathWithRect:self.photoWrapper.bounds];
+    self.photoWrapper.layer.masksToBounds = NO;
+    self.photoWrapper.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.photoWrapper.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    self.photoWrapper.layer.shadowOpacity = 0.2f;
+    self.photoWrapper.layer.shadowRadius = 1.0f;
+    self.photoWrapper.layer.shadowPath = photoShadowPath.CGPath;
+    [self.photoWrapper.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [self.photoWrapper.layer setBorderWidth:2.0f];
+    self.photo.layer.masksToBounds = YES;
+    [self.photo setContentMode:UIViewContentModeScaleAspectFill];
     
     [self.itemTitle setFont:[UIFont boldSystemFontOfSize:17.0f]];
     [_note setFont:[UIFont fontWithName:@"Georgia" size:12.0f]];

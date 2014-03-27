@@ -8,7 +8,7 @@
 
 #import "PDAddMoodViewController.h"
 #import "PDPropertyListController.h"
-#import "PDMoreItemsViewController.h"
+#import "PDMoreItemTableViewController.h"
 
 
 @implementation PDAddMoodViewController
@@ -100,7 +100,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     NSLog(@"cell button pressed in add mood:%@", self.delegate);
     if (itemId == ADD_BUTTON_ID) {
-        PDMoreItemsViewController *mi = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
+        PDMoreItemTableViewController *mi = (PDMoreItemTableViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
         [self presentViewController:mi animated:YES completion:nil];
     } else {
         

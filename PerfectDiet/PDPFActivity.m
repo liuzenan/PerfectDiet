@@ -22,6 +22,7 @@
 @dynamic duration;
 @dynamic work_done;
 @dynamic work_todo;
+@dynamic creator;
 
 +(NSString *)parseClassName
 {

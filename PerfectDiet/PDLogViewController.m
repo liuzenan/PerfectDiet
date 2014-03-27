@@ -9,7 +9,7 @@
 #import "PDLogViewController.h"
 #import "PDPropertyListController.h"
 #import "PDSaveLogViewController.h"
-#import "PDMoreItemsViewController.h"
+#import "PDMoreItemTableViewController.h"
 #import "PDSaveProductivityLogViewController.h"
 
 @interface PDLogViewController ()
@@ -113,11 +113,14 @@
 }
 
 - (IBAction)productivityButtonPressed:(id)sender {
+    [ProgressHUD show:@"Loading"];
     [self setCurrentType:kProductivity];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     PDSaveProductivityLogViewController *spl = (PDSaveProductivityLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveProductivityLog"];
-    [self presentViewController:spl animated:YES completion:nil];
+    [self presentViewController:spl animated:YES completion:^{
+        [ProgressHUD dismiss];
+    }];
 }
 
 
@@ -165,12 +168,29 @@
 
 -(void)cellButtonPressedWithItemId:(NSInteger)itemId itemCategory:(NSInteger)category
 {
+    
+    [ProgressHUD show:@"Loading..."];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     
     if (itemId == ADD_BUTTON_ID) {
         NSLog(@"will open more view");
-        PDMoreItemsViewController *mi = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
-        [self presentViewController:mi animated:YES completion:nil];
+        
+        UINavigationController *nc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
+        
+        if (nc == nil) {
+            [ProgressHUD dismiss];
+            return;
+        }
+        
+        PDMoreItemTableViewController *mi = (PDMoreItemTableViewController*) nc.topViewController;
+        
+        [mi setLogType:self.currentType];
+        
+
+        
+        [self presentViewController:nc animated:YES completion:^{
+            [ProgressHUD dismiss];
+        }];
     } else {
         NSLog(@"will open save view");
         
@@ -192,11 +212,18 @@
                 break;
         }
         
+        if (nc == nil) {
+            [ProgressHUD dismiss];
+            return;
+        }
+        
         PDSaveLogViewController *sl = (PDSaveLogViewController*)nc.topViewController;
         
         [sl setItemId:itemId itemCategory:category logType:self.currentType];
         
-        [self presentViewController:nc animated:YES completion:nil];
+        [self presentViewController:nc animated:YES completion:^{
+            [ProgressHUD dismiss];
+        }];
     }
     
 }

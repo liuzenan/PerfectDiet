@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 #import "PDAddMoodViewController.h"
 #import "PDAddNoteViewController.h"
-#import "PDMoreItemsViewController.h"
+#import "PDMoreItemTableViewController.h"
 #import "PDPFActivity.h"
 
 @interface PDSaveLogViewController : UIViewController <VPPLocationControllerGeocoderDelegate, VPPLocationControllerLocationDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddMoodDelegate, AddNoteDelegate>

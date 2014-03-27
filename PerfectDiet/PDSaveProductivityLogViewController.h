@@ -11,5 +11,8 @@
 @interface PDSaveProductivityLogViewController : UIViewController
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)saveButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *work_todo;
+@property (weak, nonatomic) IBOutlet UISlider *work_done;
+@property (weak, nonatomic) IBOutlet UISwitch *publicSwitch;
 
 @end

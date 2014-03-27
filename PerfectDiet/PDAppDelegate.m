@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <ProgressHUD/ProgressHUD.h>
 #import "PDPFActivity.h"
+#import "PDActivityType.h"
 
 @implementation PDAppDelegate
 
@@ -19,6 +20,7 @@
     // Override point for customization after application launch.
     
     [PDPFActivity registerSubclass];
+    [PDActivityType registerSubclass];
     [Parse setApplicationId:@"oJctCPN8uHayUuR48fTJXe1F9Qtp9k8Pa9gLHaKb"
                   clientKey:@"CsMXy8RdGLhjMzroaIo8pfokE8OGZHJhBRbfJVAe"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

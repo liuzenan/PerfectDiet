@@ -1,18 +1,18 @@
 //
-//  PDMoreItemsViewController.m
+//  PDNewItemViewController.m
 //  PerfectDiet
 //
-//  Created by Liu Zenan on 7/2/14.
+//  Created by Liu Zenan on 28/3/14.
 //  Copyright (c) 2014 NUS. All rights reserved.
 //
 
-#import "PDMoreItemsViewController.h"
+#import "PDNewItemViewController.h"
 
-@interface PDMoreItemsViewController ()
+@interface PDNewItemViewController ()
 
 @end
 
-@implementation PDMoreItemsViewController
+@implementation PDNewItemViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +27,23 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    switch (self.logType) {
+        case kActivity:
+            [self.navigationItem setTitle:@"New Activity"];
+            break;
+            
+        case kFood:
+            [self.navigationItem setTitle:@"New Food"];
+            break;
+            
+        case kMood:
+            [self.navigationItem setTitle:@"New Mood"];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +63,8 @@
 }
 */
 
-- (IBAction)cancelButtonPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+- (IBAction)doneEditing:(id)sender {
+    [self.nameField endEditing:YES];
 }
 @end

@@ -18,4 +18,5 @@
     #import "CoreData+MagicalRecord.h"
     #import "PDConstants.h"
     #import <HexColors/HexColor.h>
+    #import <ProgressHUD/ProgressHUD.h>
 #endif

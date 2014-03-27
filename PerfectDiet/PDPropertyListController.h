@@ -20,4 +20,5 @@
 + (NSString *) getItemNameForItemId:(NSInteger)itemId logType:(PDLogType)logType;
 + (NSArray *) getLogTimeArray;
 + (NSArray *)getLogDurationArray;
+
 @end

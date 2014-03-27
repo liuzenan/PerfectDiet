@@ -34,7 +34,12 @@
 {
     [super viewDidLoad];
     
-    self.logItems = [PDActivityDataController getLoggedItemsForDate:[NSDate new]];
+    self.logItems = [NSArray new];
+    [PDActivityDataController getLoggedItemsForDate:[NSDate new] withBlock:^(NSArray *objects, NSError *error) {
+        self.logItems = objects;
+        [self.tableView reloadData];
+    }];
+    
     UINib *reviewCell = [UINib nibWithNibName:@"PDReviewCell" bundle:nil];
     UINib *reviewCellWithImage = [UINib nibWithNibName:@"PDReviewCellWithImage" bundle:nil];
     UINib *reviewCellWithNote = [UINib nibWithNibName:@"PDReviewCellWithNote" bundle:nil];
@@ -94,12 +99,14 @@
     self.tableView.backgroundView = tempImageView;
 }
 
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.logItems = [PDActivityDataController getLoggedItemsForDate:[NSDate new]];
-    [self.tableView reloadData];
+    [PDActivityDataController getLoggedItemsForDate:[NSDate new] withBlock:^(NSArray *objects, NSError *error) {
+        self.logItems = objects;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,9 +140,14 @@
     PDReviewCell *cell;
     
     PDPFActivity *item = (PDPFActivity*) [self.logItems objectAtIndex:indexPath.row];
-        
-    NSString *title = [PDPropertyListController getItemNameForItemId:item.item_id logType:(PDLogType)item.item_type];
-        
+    
+    NSString *title = @"";
+    if ((PDLogType)item.item_type == kProductivity) {
+        title = @"Productivity";
+    } else {
+        title = [PDPropertyListController getItemNameForItemId:item.item_id logType:(PDLogType)item.item_type];
+    }
+    
     if ((PDLogType)item.item_type == kFood) {
         title = [@"Had " stringByAppendingString:title];
     }
@@ -145,20 +157,22 @@
     }
     
     if ((PDLogType)item.item_type == kActivity) {
-    }
-    
-    if ((PDLogType)item.item_type == kProductivity) {
         
     }
+    
+
     
     if (item.note == nil && item.photo == nil) {
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCell" forIndexPath:indexPath];
-        [cell.note setText:item.note];
         
     } else if (item.note == nil) {
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCellWithImage" forIndexPath:indexPath];
+        
+        [item.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [cell.photo setImage:[UIImage imageWithData:data]];
+        }];
         
     } else if (item.photo == nil) {
         
@@ -168,7 +182,10 @@
     } else {
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCellWithNoteAndImage" forIndexPath:indexPath];
-        
+        [item.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [cell.photo setImage:[UIImage imageWithData:data]];
+        }];
+        [cell.note setText:item.note];
     }
     
     // set title label;
@@ -215,7 +232,7 @@
     } else if (item.photo == nil) {
         height = 208.0;
     } else if (item.note == nil) {
-        height = 353.0;
+        height = 223.0;
     } else {
         height = 343.0;
     }

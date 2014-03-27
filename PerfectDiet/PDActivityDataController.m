@@ -17,7 +17,9 @@
     PFQuery *query = [PDPFActivity query];
     [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:date]];
     [query whereKey:@"time" lessThanOrEqualTo:[PDActivityDataController endOfDay:date]];
-    
+    [query whereKey:@"creator" equalTo:[[PFUser currentUser] username]];
+    [query orderByAscending:@"time"];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         block(objects, error);
     }];

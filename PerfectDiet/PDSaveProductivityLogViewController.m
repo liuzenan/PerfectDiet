@@ -7,6 +7,7 @@
 //
 
 #import "PDSaveProductivityLogViewController.h"
+#import "PDPFActivity.h"
 
 @interface PDSaveProductivityLogViewController ()
 
@@ -27,6 +28,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.work_todo setMaximumValue:100.0f];
+    [self.work_todo setMinimumValue:0.0f];
+    [self.work_todo setValue:50.0f];
+    
+    [self.work_done setMaximumValue:100.0f];
+    [self.work_done setMinimumValue:0.0f];
+    [self.work_done setValue:50.0f];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,5 +60,21 @@
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
+    NSInteger workTodo = (NSInteger)self.work_todo.value;
+    NSInteger workDone = (NSInteger)self.work_done.value;
+    
+    PDPFActivity *item = [PDPFActivity object];
+    item.is_public = self.publicSwitch.isOn;
+    item.item_type = kProductivity;
+    item.time = [NSDate new];
+    item.logged_time = [NSDate new];
+    item.work_done = workDone;
+    item.work_todo = workTodo;
+    item.creator = [[PFUser currentUser] username];
+    
+    [item saveEventually];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 @end

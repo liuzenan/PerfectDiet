@@ -46,12 +46,19 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-0O-WFh">
-                        <rect key="frame" x="55" y="206" width="200" height="116"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tsw-9V-A9f">
+                        <rect key="frame" x="55" y="190" width="200" height="135"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOx-nE-TJ1">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="135"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Mx-qG-6yM">
-                        <rect key="frame" x="55" y="62" width="200" height="129"/>
+                        <rect key="frame" x="55" y="62" width="200" height="120"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -66,7 +73,8 @@
                 <outlet property="itemTitle" destination="WEM-Db-N31" id="ofw-w1-GL4"/>
                 <outlet property="location" destination="2YW-Kl-dOM" id="eHH-68-KJv"/>
                 <outlet property="noteWrapper" destination="7Mx-qG-6yM" id="tFm-rY-RTD"/>
-                <outlet property="photo" destination="DX0-0O-WFh" id="iP2-xx-NNZ"/>
+                <outlet property="photo" destination="FOx-nE-TJ1" id="LcD-zH-iDy"/>
+                <outlet property="photoWrapper" destination="tsw-9V-A9f" id="nRa-80-cUh"/>
                 <outlet property="time" destination="PTC-Hc-d6U" id="WfU-iA-l7J"/>
             </connections>
         </tableViewCell>

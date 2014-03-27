@@ -13,6 +13,14 @@
 #import <ProgressHUD/ProgressHUD.h>
 #import <BYLBadgeView/BYLBadgeView.h>
 
+@interface PDSaveLogViewController() {
+    TBImagePickerController *imageController;
+    UIStoryboard *sb;
+    UINavigationController *mcam;
+    UINavigationController *mcan;
+}
+
+@end
 
 @implementation PDSaveLogViewController
 
@@ -29,6 +37,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    imageController = [[TBImagePickerController alloc] init];
+    imageController.delegate = self;
+    sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
+    
+    mcam = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"AddMood"];
+    PDAddMoodViewController *am = (PDAddMoodViewController*)mcam.topViewController;
+    am.delegate = self;
+    
+    mcan = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"AddNote"];
+    PDAddNoteViewController *an = (PDAddNoteViewController*)mcan.topViewController;
+    an.delegate = self;
     
     NSString *itemName = [PDPropertyListController getItemNameForItemId:self.itemId logType:self.logType];
     [self.itemNameButton setTitle:itemName forState:UIControlStateNormal];
@@ -82,6 +102,20 @@
         [self.addNoteButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[badgeView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
     }
     self.note = note;
+}
+
+- (void)addPhotoBadge
+{
+    if (!self.imageData) {
+        BYLBadgeView *badgeView = [[BYLBadgeView alloc] initWithBadge:1];
+        badgeView.translatesAutoresizingMaskIntoConstraints = NO;
+        badgeView.opaque = NO;
+        badgeView.layer.zPosition = 10;
+        
+        [self.addPhotoButton addSubview:badgeView]; // Created from IB
+        [self.addPhotoButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[badgeView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
+        [self.addPhotoButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[badgeView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
+    }
 }
 
 -(void)geocoderError:(NSError *)error
@@ -158,7 +192,7 @@
     item.location_name = self.locationLabel.text;
     item.duration = self.itemDuration;
     item.logged_time = [NSDate new];
-    
+    item.creator = [[PFUser currentUser] username];
     if (self.note) {
         item.note = self.note;
     }
@@ -172,16 +206,24 @@
     
     if (self.imageData) {
         item.photo = [PFFile fileWithData:self.imageData];
+        [item.photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                item.photo = nil;
+            }
+            [item saveEventually];
+        }];
+    } else {
+        [item saveEventually];
     }
     
-    [item saveEventually];
+    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)itemNameButtonPressed:(id)sender {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    PDMoreItemsViewController *mc = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
+    
+    PDMoreItemTableViewController *mc = (PDMoreItemTableViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
     [self presentViewController:mc animated:YES completion:nil];
 }
 
@@ -220,22 +262,17 @@
 
 - (IBAction)addMoodBtnPressed:(id)sender {
     [ProgressHUD show:@"Please wait..."];
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    UINavigationController *mc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"AddMood"];
-    PDAddMoodViewController *am = (PDAddMoodViewController*)mc.topViewController;
-    am.delegate = self;
-    [self presentViewController:mc animated:YES completion:^{
+
+    [self presentViewController:mcam animated:YES completion:^{
         [ProgressHUD dismiss];
     }];
+    
 }
 
 - (IBAction)addNoteBtnPressed:(id)sender {
     [ProgressHUD show:@"Please wait..."];
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    UINavigationController *mc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"AddNote"];
-    PDAddNoteViewController *an = (PDAddNoteViewController*)mc.topViewController;
-    an.delegate = self;
-    [self presentViewController:mc animated:YES completion:^{
+    
+    [self presentViewController:mcan animated:YES completion:^{
         [ProgressHUD dismiss];
     }];
 }
@@ -243,11 +280,9 @@
 - (IBAction)addPhotoBtnPressed:(id)sender {
     [ProgressHUD show:@"Please wait..."];
     
-    TBImagePickerController *imageController = [[TBImagePickerController alloc] init];
-    imageController.delegate = self;
-    
     [self presentViewController:imageController animated:YES completion:^{
         [ProgressHUD dismiss];
+        [self addPhotoBadge];
     }];
 }
 
@@ -265,6 +300,7 @@
     // Upload image
     NSData *imageData = UIImageJPEGRepresentation(smallImage, 0.05f);
     self.imageData = imageData;
+    
 }
 
 
