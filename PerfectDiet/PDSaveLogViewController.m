@@ -8,9 +8,11 @@
 
 #import "PDSaveLogViewController.h"
 #import "PDPropertyListController.h"
-#import "PDMoreItemsViewController.h"
-#import "PDActivity.h"
 #import <MMPickerView.h>
+#import <TBImagePickerController/TBImagePickerController.h>
+#import <ProgressHUD/ProgressHUD.h>
+#import <BYLBadgeView/BYLBadgeView.h>
+
 
 @implementation PDSaveLogViewController
 
@@ -32,17 +34,55 @@
     [self.itemNameButton setTitle:itemName forState:UIControlStateNormal];
     NSString *category = [PDPropertyListController getItemCategoryNameForItemId:self.itemCategory logType:self.logType];
     [self.itemType setText:category];
-    
+    [self.view setBackgroundColor:[UIColor colorWithHexString:BACKGROUND_COLOR]];
     
     self.durationList = [PDPropertyListController getLogDurationArray];
     self.timeList = [PDPropertyListController getLogTimeArray];
     
     [[VPPLocationController sharedInstance] addLocationDelegate:self];
     [[VPPLocationController sharedInstance] addGeocoderDelegate:self];
-
+    
+    [[BYLBadgeView appearanceWhenContainedIn:[UIButton class], nil] setBadgeBackgroundColor:[UIColor blackColor]];
+    [[BYLBadgeView appearanceWhenContainedIn:[UIButton class], nil] setBadgeTextColor:[UIColor whiteColor]];
+    [[BYLBadgeView appearanceWhenContainedIn:[UIButton class], nil] setBadgeRadius:10.0f];
+    NSDictionary *titleAttributes = @{NSFontAttributeName: [UIFont fontWithDescriptor:[UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline] size:10.0f]};
+    [[BYLBadgeView appearanceWhenContainedIn:[UIButton class], nil] setBadgeTextAttributes:titleAttributes];
     
 }
 
+
+-(void)addMood:(PDPFActivity *)mood
+{
+    
+    if (!self.mood) {
+        BYLBadgeView *badgeView = [[BYLBadgeView alloc] initWithBadge:1];
+        badgeView.translatesAutoresizingMaskIntoConstraints = NO;
+        badgeView.opaque = NO;
+        badgeView.layer.zPosition = 10;
+
+        [self.addMoodBtn addSubview:badgeView]; // Created from IB
+        [self.addMoodBtn addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[badgeView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
+        [self.addMoodBtn addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[badgeView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
+    }
+    
+    self.mood = mood;
+
+}
+
+-(void)addNote:(NSString *)note
+{
+    if (!self.note) {
+        BYLBadgeView *badgeView = [[BYLBadgeView alloc] initWithBadge:1];
+        badgeView.translatesAutoresizingMaskIntoConstraints = NO;
+        badgeView.opaque = NO;
+        badgeView.layer.zPosition = 10;
+        
+        [self.addNoteButton addSubview:badgeView]; // Created from IB
+        [self.addNoteButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[badgeView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
+        [self.addNoteButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[badgeView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(badgeView)]];
+    }
+    self.note = note;
+}
 
 -(void)geocoderError:(NSError *)error
 {
@@ -102,15 +142,40 @@
 
 - (IBAction)saveButtonPressed:(id)sender {
 
-    PDActivity *item = [PDActivity MR_createEntity];
-    item.item_id = [NSNumber numberWithLong:self.itemId];
-    item.item_type = [NSNumber numberWithInteger:self.logType];
-    item.is_public = [NSNumber numberWithBool:self.publicSwitch.isOn];
+    if (!self.itemTime) {
+        self.itemTime = [NSDate dateWithTimeIntervalSinceNow: - (2 * 60 * 60)];
+    }
+    
+    if (!self.itemDuration && self.logType == kActivity) {
+        self.itemDuration = 60 * 60;
+    }
+    
+    PDPFActivity *item = [PDPFActivity object];
+    item.item_id = self.itemId;
+    item.item_type = self.logType;
+    item.is_public = self.publicSwitch.isOn;
     item.time = self.itemTime;
-    item.duration = [NSNumber numberWithLong:self.itemDuration];
+    item.location_name = self.locationLabel.text;
+    item.duration = self.itemDuration;
     item.logged_time = [NSDate new];
     
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    if (self.note) {
+        item.note = self.note;
+    }
+    
+    if (self.mood) {
+        self.mood.is_public = self.publicSwitch.isOn;
+        self.mood.time = self.itemTime;
+        self.mood.location_name = self.locationLabel.text;
+        self.mood.logged_time = item.logged_time;
+    }
+    
+    if (self.imageData) {
+        item.photo = [PFFile fileWithData:self.imageData];
+    }
+    
+    [item saveEventually];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -154,21 +219,59 @@
 
 
 - (IBAction)addMoodBtnPressed:(id)sender {
+    [ProgressHUD show:@"Please wait..."];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    PDMoreItemsViewController *mc = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"AddMood"];
-    [self presentViewController:mc animated:YES completion:nil];
+    UINavigationController *mc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"AddMood"];
+    PDAddMoodViewController *am = (PDAddMoodViewController*)mc.topViewController;
+    am.delegate = self;
+    [self presentViewController:mc animated:YES completion:^{
+        [ProgressHUD dismiss];
+    }];
 }
 
 - (IBAction)addNoteBtnPressed:(id)sender {
+    [ProgressHUD show:@"Please wait..."];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    PDMoreItemsViewController *mc = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"AddNote"];
-    [self presentViewController:mc animated:YES completion:nil];
+    UINavigationController *mc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"AddNote"];
+    PDAddNoteViewController *an = (PDAddNoteViewController*)mc.topViewController;
+    an.delegate = self;
+    [self presentViewController:mc animated:YES completion:^{
+        [ProgressHUD dismiss];
+    }];
 }
 
 - (IBAction)addPhotoBtnPressed:(id)sender {
+    [ProgressHUD show:@"Please wait..."];
     
+    TBImagePickerController *imageController = [[TBImagePickerController alloc] init];
+    imageController.delegate = self;
+    
+    [self presentViewController:imageController animated:YES completion:^{
+        [ProgressHUD dismiss];
+    }];
 }
 
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    // Resize image
+    UIGraphicsBeginImageContext(CGSizeMake(640, 960));
+    [image drawInRect: CGRectMake(0, 0, 640, 960)];
+    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Upload image
+    NSData *imageData = UIImageJPEGRepresentation(smallImage, 0.05f);
+    self.imageData = imageData;
+}
+
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(NSString*)titleForTimeObject:(NSNumber*) number {
     NSInteger time = [number integerValue];

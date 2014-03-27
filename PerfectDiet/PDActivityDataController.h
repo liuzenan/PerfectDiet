@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PDLocalDataController : NSObject
+@interface PDActivityDataController : NSObject
 
-+ (NSArray*) getLoggedItemsForDate:(NSDate*)date;
++(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 
 @end

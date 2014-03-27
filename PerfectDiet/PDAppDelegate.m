@@ -8,13 +8,23 @@
 
 #import "PDAppDelegate.h"
 #import "PDSplashViewController.h"
+#import <Parse/Parse.h>
+#import <ProgressHUD/ProgressHUD.h>
+#import "PDPFActivity.h"
 
 @implementation PDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [PDPFActivity registerSubclass];
+    [Parse setApplicationId:@"oJctCPN8uHayUuR48fTJXe1F9Qtp9k8Pa9gLHaKb"
+                  clientKey:@"CsMXy8RdGLhjMzroaIo8pfokE8OGZHJhBRbfJVAe"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    [PFFacebookUtils initializeFacebook];
     [MagicalRecord setupAutoMigratingCoreDataStack];
+    
     return YES;
 }
 							
@@ -35,13 +45,25 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
+    PDSplashViewController *sv = (PDSplashViewController*)[sb instantiateViewControllerWithIdentifier:@"SplashView"];
+    [self.window.rootViewController presentViewController:sv animated:NO completion:nil];
     
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-//    PDSplashViewController *sv = (PDSplashViewController*)[sb instantiateViewControllerWithIdentifier:@"SplashView"];
-//    [self.window.rootViewController presentViewController:sv animated:NO completion:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

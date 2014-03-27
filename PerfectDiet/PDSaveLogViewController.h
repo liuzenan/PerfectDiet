@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <VPPLocation/VPPLocationController.h>
+#import <Parse/Parse.h>
+#import "PDAddMoodViewController.h"
+#import "PDAddNoteViewController.h"
+#import "PDMoreItemsViewController.h"
+#import "PDPFActivity.h"
 
-@interface PDSaveLogViewController : UIViewController <VPPLocationControllerGeocoderDelegate, VPPLocationControllerLocationDelegate>
+@interface PDSaveLogViewController : UIViewController <VPPLocationControllerGeocoderDelegate, VPPLocationControllerLocationDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddMoodDelegate, AddNoteDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *itemNameButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemType;
@@ -19,8 +24,9 @@
 @property (weak, nonatomic) IBOutlet UISwitch *publicSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *durationQuestionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *durationButton;
-@property (strong, nonatomic) UIPickerView *timePicker;
-@property (strong, nonatomic) UIPickerView *durationPicker;
+@property (weak, nonatomic) IBOutlet UIButton *addMoodBtn;
+@property (weak, nonatomic) IBOutlet UIButton *addNoteButton;
+@property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
 
 @property (strong, nonatomic) NSArray *timeList;
 @property (strong, nonatomic) NSArray *durationList;
@@ -31,6 +37,9 @@
 @property (assign, nonatomic) BOOL isPublic;
 @property (strong, nonatomic) NSDate *itemTime;
 @property (assign, nonatomic) NSInteger itemDuration;
+@property (strong, nonatomic) NSString *note;
+@property (strong, nonatomic) PDPFActivity *mood;
+@property (strong, nonatomic) NSData *imageData;
 
 
 - (IBAction)cancelButtonPressed:(id)sender;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DALinedTextView/DALinedTextView.h>
 
 @interface PDReviewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *itemTitle;
@@ -14,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *duration;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (weak, nonatomic) IBOutlet UIImageView *photo;
-@property (weak, nonatomic) IBOutlet UITextView *note;
+@property (weak, nonatomic) IBOutlet UIView *noteWrapper;
+@property (strong, nonatomic) DALinedTextView *note;
 
 @end

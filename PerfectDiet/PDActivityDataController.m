@@ -6,19 +6,21 @@
 //  Copyright (c) 2014 NUS. All rights reserved.
 //
 
-#import "PDLocalDataController.h"
-#import "PDActivity.h"
+#import "PDActivityDataController.h"
+#import "PDPFActivity.h"
 
-@implementation PDLocalDataController
+@implementation PDActivityDataController
 
-+(NSArray *)getLoggedItemsForDate:(NSDate *)date
++(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block
 {
     
-    NSDate *startDate = [PDLocalDataController begginingOfDay:date];
-    NSDate *endDate = [PDLocalDataController endOfDay:date];
-    NSPredicate *dateRange = [NSPredicate predicateWithFormat:@"(time >= %@) AND (time <= %@)", startDate, endDate];
-    NSArray *result = [PDActivity MR_findAllWithPredicate:dateRange];
-    return result;
+    PFQuery *query = [PDPFActivity query];
+    [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:date]];
+    [query whereKey:@"time" lessThanOrEqualTo:[PDActivityDataController endOfDay:date]];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        block(objects, error);
+    }];
 }
 
 

@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum{
-    kTopSection = 0,
-    kLogSection = 1
-} PDTodayTableSection;
-
 @interface PDTodayTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray* logItems;

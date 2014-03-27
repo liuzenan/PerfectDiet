@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PDSplashViewController : UIViewController
+- (IBAction)loginButtonPressed:(id)sender;
 
 @end

@@ -8,11 +8,10 @@
 
 #import "PDAddNoteViewController.h"
 
-@interface PDAddNoteViewController ()
 
-@end
-
-@implementation PDAddNoteViewController
+@implementation PDAddNoteViewController {
+    CGSize _keyboardSize;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +26,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.noteView.placeholder = @"Write your note here...";
+    
+    CGRect frame = self.noteView.frame;
+    frame.size.height -= 216;
+    self.noteView.frame = frame;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.noteView becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,5 +51,11 @@
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
+    if (!(self.noteView.text == nil || [self.noteView.text isEqualToString:@""])) {
+        [self.delegate addNote:self.noteView.text];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 @end

@@ -18,6 +18,7 @@ NSString* const MOOD_TYPE_LIST = @"PDMoodTypeList";
 NSInteger const ADD_BUTTON_ID = -1;
 NSString* const STORYBOARD_NAME = @"Main_iPhone";
 NSString* const COLLECTION_VIEW_CELL = @"LogScreenCell";
+NSString* const BACKGROUND_COLOR = @"#f8f8f8";
 
 @implementation PDConstants
 

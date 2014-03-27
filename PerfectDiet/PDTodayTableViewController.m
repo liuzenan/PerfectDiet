@@ -7,11 +7,13 @@
 //
 
 #import "PDTodayTableViewController.h"
-#import "PDLocalDataController.h"
+#import "PDActivityDataController.h"
 #import "PDTodayTopTableViewCell.h"
-#import "PDActivity.h"
 #import "PDReviewCell.h"
 #import "PDPropertyListController.h"
+#import <APParallaxHeader/UIScrollView+APParallaxHeader.h>
+#import <THLabel/THLabel.h>
+#import "PDPFActivity.h"
 
 @interface PDTodayTableViewController ()
 
@@ -32,18 +34,71 @@
 {
     [super viewDidLoad];
     
-    self.logItems = [PDLocalDataController getLoggedItemsForDate:[NSDate new]];
+    self.logItems = [PDActivityDataController getLoggedItemsForDate:[NSDate new]];
     UINib *reviewCell = [UINib nibWithNibName:@"PDReviewCell" bundle:nil];
-    [self.tableView registerNib:reviewCell forCellReuseIdentifier:@"ReviewCell"];
+    UINib *reviewCellWithImage = [UINib nibWithNibName:@"PDReviewCellWithImage" bundle:nil];
+    UINib *reviewCellWithNote = [UINib nibWithNibName:@"PDReviewCellWithNote" bundle:nil];
+    UINib *reviewCellWithNoteAndImage = [UINib nibWithNibName:@"PDReviewCellWithNoteAndImage" bundle:nil];
     
+    [self.tableView registerNib:reviewCell forCellReuseIdentifier:@"ReviewCell"];
+    [self.tableView registerNib:reviewCellWithImage forCellReuseIdentifier:@"ReviewCellWithImage"];
+    [self.tableView registerNib:reviewCellWithNote forCellReuseIdentifier:@"ReviewCellWithNote"];
+    [self.tableView registerNib:reviewCellWithNoteAndImage forCellReuseIdentifier:@"ReviewCellWithNoteAndImage"];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
+    [containerView setAutoresizesSubviews:YES];
+    
+    THLabel *date = [[THLabel alloc] initWithFrame:CGRectMake(30, 80, 260, 40)];
+    [date setShadowBlur:4.0f];
+    [date setShadowOffset:CGSizeMake(0.0f, 0.0f)];
+    [date setShadowColor:[UIColor blackColor]];
+    [date setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSLocale *locale = [NSLocale currentLocale];
+    [formatter setLocale:locale];
+    [formatter setDateFormat:@"EEEE, d MMMM"];
+    
+    [date setText:[formatter stringFromDate:[NSDate new]]];
+    [date setFont:[UIFont boldSystemFontOfSize:24.0f]];
+    [date setTextColor:[UIColor whiteColor]];
+    
+    
+    THLabel *stats = [[THLabel alloc] initWithFrame:CGRectMake(30, 110, 260, 40)];
+    [stats setText:@"2 Activities, 5 Moods, 2 Food"];
+    [stats setFont:[UIFont systemFontOfSize:14.0f]];
+    [stats setTextColor:[UIColor whiteColor]];
+    [stats setShadowBlur:4.0f];
+    [stats setShadowOffset:CGSizeMake(0.0f, 0.0f)];
+    [stats setShadowColor:[UIColor blackColor]];
+    [stats setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ParallaxImage.jpg"]];
+    [imageView setFrame:containerView.frame];
+    [imageView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth)];
+    [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    
+    [containerView addSubview:imageView];
+    [containerView insertSubview:date aboveSubview:imageView];
+    [containerView insertSubview:stats aboveSubview:imageView];
+    
+    [self.tableView addParallaxWithView:containerView andHeight:160.0f];
+    
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"review_background.png"]];
+    [tempImageView setFrame:self.tableView.frame];
+    
+    self.tableView.backgroundView = tempImageView;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.logItems = [PDLocalDataController getLoggedItemsForDate:[NSDate new]];
+    self.logItems = [PDActivityDataController getLoggedItemsForDate:[NSDate new]];
     [self.tableView reloadData];
 }
 
@@ -58,77 +113,114 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    
-    NSInteger numOfRow = 0;
-    
-    if (section == kTopSection) {
-        numOfRow = 1;
-    } else if (section == kLogSection){
-        numOfRow = [self.logItems count];
-    }
-    
-    return  numOfRow;
+
+    return [self.logItems count];
+
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.section == kTopSection) {
-        PDTodayTopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TodayTopCell" forIndexPath:indexPath];
-        
-        NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        [format setDateFormat:@"EEEE, d MMMM"];
-        
-        [cell.date setText: [[format stringFromDate:[NSDate new]] capitalizedString]];
-        
-        return cell;
-    } else {
+    
 
-        PDReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCell" forIndexPath:indexPath];
+    PDReviewCell *cell;
+    
+    PDPFActivity *item = (PDPFActivity*) [self.logItems objectAtIndex:indexPath.row];
         
-        PDActivity *item = (PDActivity*) [self.logItems objectAtIndex:indexPath.row];
+    NSString *title = [PDPropertyListController getItemNameForItemId:item.item_id logType:(PDLogType)item.item_type];
         
-        NSString *title = [PDPropertyListController getItemNameForItemId:item.item_id.integerValue logType:(PDLogType)item.item_type.integerValue];
-        
-        if ((PDLogType)item.item_type.integerValue == kFood) {
-            title = [@"Had " stringByAppendingString:title];
-        }
-        
-        if ((PDLogType)item.item_type.integerValue == kMood) {
-            title = [@"Feel " stringByAppendingString:title];
-        }
-        
-        [cell.itemTitle setText:title];
-        
-        NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        [format setDateFormat:@"HH:mm"];
-        [cell.time setText:[format stringFromDate:item.time]];
-        
-        if (item.duration != nil) {
-            NSInteger duration = item.duration.integerValue;
-            NSString *ds = @"";
-            if (duration < 60 * 60) {
-                ds = [NSString stringWithFormat:@"%ldm", item.duration.integerValue / 60];
-            } else if ((duration / 60) % 60 == 0) {
-                ds = [NSString stringWithFormat:@"%ldh", item.duration.integerValue / 3600];
-            } else {
-                ds = [NSString stringWithFormat:@"%ldh%ldm", item.duration.integerValue / 3600, (item.duration.integerValue / 60) % 60];
-            }
-            
-            [cell.duration setText:ds];
-        }
-        
-        return cell;
+    if ((PDLogType)item.item_type == kFood) {
+        title = [@"Had " stringByAppendingString:title];
     }
+        
+    if ((PDLogType)item.item_type == kMood) {
+        title = [@"Feel " stringByAppendingString:title];
+    }
+    
+    if ((PDLogType)item.item_type == kActivity) {
+    }
+    
+    if ((PDLogType)item.item_type == kProductivity) {
+        
+    }
+    
+    if (item.note == nil && item.photo == nil) {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCell" forIndexPath:indexPath];
+        [cell.note setText:item.note];
+        
+    } else if (item.note == nil) {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCellWithImage" forIndexPath:indexPath];
+        
+    } else if (item.photo == nil) {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCellWithNote" forIndexPath:indexPath];
+        [cell.note setText:item.note];
+        
+    } else {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ReviewCellWithNoteAndImage" forIndexPath:indexPath];
+        
+    }
+    
+    // set title label;
+    [cell.itemTitle setText:title];
+    
+    // set time and location label
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"HH:mm"];
+    [cell.time setText:[format stringFromDate:item.time]];
+    [cell.location setText:item.location_name];
+        
+    
+    // set duration label
+    if ((PDLogType)item.item_type == kActivity) {
+        NSInteger duration = item.duration;
+        NSString *ds = @"";
+        if (duration < 60 * 60) {
+            ds = [NSString stringWithFormat:@"%ldm", item.duration / 60];
+        } else if ((duration / 60) % 60 == 0) {
+            ds = [NSString stringWithFormat:@"%ldh", item.duration / 3600];
+        } else {
+            ds = [NSString stringWithFormat:@"%ldh%ldm", item.duration / 3600, (item.duration / 60) % 60];
+        }
+            
+        [cell.duration setText:ds];
+    } else {
+        [cell.duration setText:@""];
+    }
+    
+    
+    return cell;
+
+}
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height;
+    
+    PDPFActivity *item = (PDPFActivity*) [self.logItems objectAtIndex:indexPath.row];
+    
+    if (item.photo == nil && item.note == nil) {
+        height = 76.0;
+    } else if (item.photo == nil) {
+        height = 208.0;
+    } else if (item.note == nil) {
+        height = 353.0;
+    } else {
+        height = 343.0;
+    }
+    
+    return height;
 }
 
 

@@ -17,4 +17,5 @@
     #define MR_SHORTHAND
     #import "CoreData+MagicalRecord.h"
     #import "PDConstants.h"
+    #import <HexColors/HexColor.h>
 #endif

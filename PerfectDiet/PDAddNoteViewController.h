@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CHTTextView/CHTTextView.h>
 
-@interface PDAddNoteViewController : UIViewController
+@protocol AddNoteDelegate
+
+- (void) addNote:(NSString*) note;
+
+@end
+
+
+@interface PDAddNoteViewController : UIViewController <UITextViewDelegate>
+@property (nonatomic, weak) id<AddNoteDelegate> delegate;
+@property (weak, nonatomic) IBOutlet CHTTextView *noteView;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
 

@@ -19,7 +19,7 @@ extern NSString* const MOOD_TYPE_LIST;
 extern NSInteger const ADD_BUTTON_ID;
 extern NSString* const STORYBOARD_NAME;
 extern NSString* const COLLECTION_VIEW_CELL;
-
+extern NSString* const BACKGROUND_COLOR;
 
 typedef enum{
     kActivity = 0,

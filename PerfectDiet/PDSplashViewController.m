@@ -7,6 +7,8 @@
 //
 
 #import "PDSplashViewController.h"
+#import <Parse/Parse.h>
+#import <ProgressHUD/ProgressHUD.h>
 
 @interface PDSplashViewController ()
 
@@ -27,6 +29,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if ([PFUser currentUser] && // Check if a user is cached
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
+    {
+        
+        [self dismissViewControllerAnimated:NO completion:nil];
+
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,4 +55,33 @@
 }
 */
 
+- (IBAction)loginButtonPressed:(id)sender {
+    
+    // The permissions requested from the user
+    NSArray *permissionsArray = @[ @"email", @"user_birthday", @"basic_info", @"read_friendlists"];
+    
+    [ProgressHUD show:@"Please wait..."];
+    
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        
+        if (!user) {
+            [ProgressHUD dismiss];
+            [ProgressHUD showError:@"Login failed"];
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            [ProgressHUD dismiss];
+            NSLog(@"User with facebook signed up and logged in!");
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [ProgressHUD dismiss];
+            NSLog(@"User with facebook logged in!");
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+}
 @end

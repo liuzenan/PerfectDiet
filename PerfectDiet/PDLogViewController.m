@@ -32,10 +32,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    [self.view setBackgroundColor:[UIColor colorWithHexString:BACKGROUND_COLOR]];
+    
     // load collection view
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LogCollectionView" owner:self options:nil];
     self.collectionView = (UICollectionView*) [nib objectAtIndex:0];
     [self.collectionView setCenter:CGPointMake(160, 200)];
+    [self.collectionView setContentInset:UIEdgeInsetsMake(10, 0, 0, 0)];
+    [self.collectionView setBackgroundColor:[UIColor colorWithHexString:BACKGROUND_COLOR]];
     
     // load mood wheel view
     
@@ -162,7 +167,7 @@
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     
-    if (itemId == -1) {
+    if (itemId == ADD_BUTTON_ID) {
         NSLog(@"will open more view");
         PDMoreItemsViewController *mi = (PDMoreItemsViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
         [self presentViewController:mi animated:YES completion:nil];
