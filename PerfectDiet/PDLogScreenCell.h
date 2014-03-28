@@ -13,7 +13,7 @@
 
 @optional
 - (void) cellButtonPressed:(id) sender;
-- (void) cellButtonPressedWithItemId:(NSInteger)itemId itemCategory: (NSInteger)category;
+- (void) cellButtonPressedWithItemTypeId:(NSString*)itemTypeId itemCategory: (NSInteger)category;
 
 @end
 
@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *logItemLabel;
 @property (assign, nonatomic) NSInteger itemCategory;
 @property (assign, nonatomic) NSInteger itemId;
+@property (strong, nonatomic) NSString *itemTypeId;
 
 - (IBAction)logItemButtonPressed:(id)sender;
 

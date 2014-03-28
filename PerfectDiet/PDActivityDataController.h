@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PDPFActivity.h"
+#import "PDActivityType.h"
 
 @interface PDActivityDataController : NSObject
 
++ (void) getItemType:(NSString*)typeId withBlock:(void(^)(PDActivityType *object, NSError *error)) block;
++ (void) getItemTypeList:(PDLogType)type withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 +(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 
 @end

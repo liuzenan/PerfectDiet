@@ -12,6 +12,7 @@
 		E407592418E4A4E6003B12B9 /* PDMoreItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E407592318E4A4E6003B12B9 /* PDMoreItemTableViewController.m */; };
 		E407592718E4A8A8003B12B9 /* PDActivityType.m in Sources */ = {isa = PBXBuildFile; fileRef = E407592618E4A8A8003B12B9 /* PDActivityType.m */; };
 		E407592D18E4AFDE003B12B9 /* PDNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E407592C18E4AFDE003B12B9 /* PDNewItemViewController.m */; };
+		E407593018E4B8BC003B12B9 /* PDChooseTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E407592F18E4B8BC003B12B9 /* PDChooseTypeTableViewController.m */; };
 		E43DA99918A4180D005F6F52 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E43DA99818A4180D005F6F52 /* Media.xcassets */; };
 		E43DA9BA18A42E4F005F6F52 /* PDLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9B918A42E4F005F6F52 /* PDLogViewController.m */; };
 		E43DA9BE18A432A7005F6F52 /* PDLogScreenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9BD18A432A7005F6F52 /* PDLogScreenCell.m */; };
@@ -27,8 +28,6 @@
 		E43DA9D718A4C1DB005F6F52 /* PDPropertyListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9D618A4C1DB005F6F52 /* PDPropertyListController.m */; };
 		E43DA9DA18A4D3AD005F6F52 /* PDSaveLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9D918A4D3AD005F6F52 /* PDSaveLogViewController.m */; };
 		E43DA9E518A508FE005F6F52 /* PDSaveProductivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9E418A508FE005F6F52 /* PDSaveProductivityLogViewController.m */; };
-		E43DA9E818A50DAC005F6F52 /* PDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9E718A50DAC005F6F52 /* PDLoginViewController.m */; };
-		E43DA9EB18A50DB6005F6F52 /* PDSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9EA18A50DB6005F6F52 /* PDSignupViewController.m */; };
 		E43DA9EE18A512C1005F6F52 /* PDSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */; };
 		E43DA9F218A5186D005F6F52 /* LogMoodWheelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */; };
 		E43DA9F418A51931005F6F52 /* LogCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */; };
@@ -99,6 +98,8 @@
 		E407592618E4A8A8003B12B9 /* PDActivityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDActivityType.m; sourceTree = "<group>"; };
 		E407592B18E4AFDE003B12B9 /* PDNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDNewItemViewController.h; sourceTree = "<group>"; };
 		E407592C18E4AFDE003B12B9 /* PDNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDNewItemViewController.m; sourceTree = "<group>"; };
+		E407592E18E4B8BC003B12B9 /* PDChooseTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDChooseTypeTableViewController.h; sourceTree = "<group>"; };
+		E407592F18E4B8BC003B12B9 /* PDChooseTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDChooseTypeTableViewController.m; sourceTree = "<group>"; };
 		E43DA99818A4180D005F6F52 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E43DA9B818A42E4F005F6F52 /* PDLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogViewController.h; sourceTree = "<group>"; };
 		E43DA9B918A42E4F005F6F52 /* PDLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogViewController.m; sourceTree = "<group>"; };
@@ -120,10 +121,6 @@
 		E43DA9D918A4D3AD005F6F52 /* PDSaveLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSaveLogViewController.m; sourceTree = "<group>"; };
 		E43DA9E318A508FE005F6F52 /* PDSaveProductivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSaveProductivityLogViewController.h; sourceTree = "<group>"; };
 		E43DA9E418A508FE005F6F52 /* PDSaveProductivityLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSaveProductivityLogViewController.m; sourceTree = "<group>"; };
-		E43DA9E618A50DAC005F6F52 /* PDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLoginViewController.h; sourceTree = "<group>"; };
-		E43DA9E718A50DAC005F6F52 /* PDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLoginViewController.m; sourceTree = "<group>"; };
-		E43DA9E918A50DB6005F6F52 /* PDSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSignupViewController.h; sourceTree = "<group>"; };
-		E43DA9EA18A50DB6005F6F52 /* PDSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSignupViewController.m; sourceTree = "<group>"; };
 		E43DA9EC18A512C1005F6F52 /* PDSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSplashViewController.h; sourceTree = "<group>"; };
 		E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSplashViewController.m; sourceTree = "<group>"; };
 		E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogMoodWheelView.xib; sourceTree = "<group>"; };
@@ -258,10 +255,6 @@
 				E407592318E4A4E6003B12B9 /* PDMoreItemTableViewController.m */,
 				E43DA9E318A508FE005F6F52 /* PDSaveProductivityLogViewController.h */,
 				E43DA9E418A508FE005F6F52 /* PDSaveProductivityLogViewController.m */,
-				E43DA9E618A50DAC005F6F52 /* PDLoginViewController.h */,
-				E43DA9E718A50DAC005F6F52 /* PDLoginViewController.m */,
-				E43DA9E918A50DB6005F6F52 /* PDSignupViewController.h */,
-				E43DA9EA18A50DB6005F6F52 /* PDSignupViewController.m */,
 				E43DA9EC18A512C1005F6F52 /* PDSplashViewController.h */,
 				E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */,
 				E46A0DC118A53CD60093CF05 /* PDSettingsViewController.h */,
@@ -276,6 +269,8 @@
 				E46EC9FD18A9433200FE23AE /* PDTodayTableViewController.m */,
 				E407592B18E4AFDE003B12B9 /* PDNewItemViewController.h */,
 				E407592C18E4AFDE003B12B9 /* PDNewItemViewController.m */,
+				E407592E18E4B8BC003B12B9 /* PDChooseTypeTableViewController.h */,
+				E407592F18E4B8BC003B12B9 /* PDChooseTypeTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -597,10 +592,9 @@
 				E4B58A9718A7965C00DA3372 /* PDActivityDataController.m in Sources */,
 				E4767071180CE021002E261A /* PDViewController.m in Sources */,
 				E46A0DC618A53E570093CF05 /* PDAddFriendsViewController.m in Sources */,
-				E43DA9E818A50DAC005F6F52 /* PDLoginViewController.m in Sources */,
+				E407593018E4B8BC003B12B9 /* PDChooseTypeTableViewController.m in Sources */,
 				E43DA9EE18A512C1005F6F52 /* PDSplashViewController.m in Sources */,
 				E4767064180CE021002E261A /* main.m in Sources */,
-				E43DA9EB18A50DB6005F6F52 /* PDSignupViewController.m in Sources */,
 				E43DA9D718A4C1DB005F6F52 /* PDPropertyListController.m in Sources */,
 				E407592118E47ECB003B12B9 /* PDPFActivity.m in Sources */,
 				E43DA9DA18A4D3AD005F6F52 /* PDSaveLogViewController.m in Sources */,

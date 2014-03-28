@@ -20,5 +20,8 @@
 + (NSString *) getItemNameForItemId:(NSInteger)itemId logType:(PDLogType)logType;
 + (NSArray *) getLogTimeArray;
 + (NSArray *)getLogDurationArray;
++ (NSArray *)loadActivityTypeList;
++ (NSArray *)loadFoodTypeList;
++ (NSArray *)loadMoodTypeList;
 
 @end

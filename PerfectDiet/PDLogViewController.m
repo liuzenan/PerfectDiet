@@ -11,6 +11,7 @@
 #import "PDSaveLogViewController.h"
 #import "PDMoreItemTableViewController.h"
 #import "PDSaveProductivityLogViewController.h"
+#import "PDActivityDataController.h"
 
 @interface PDLogViewController ()
 
@@ -42,13 +43,6 @@
     [self.collectionView setContentInset:UIEdgeInsetsMake(10, 0, 0, 0)];
     [self.collectionView setBackgroundColor:[UIColor colorWithHexString:BACKGROUND_COLOR]];
     
-    // load mood wheel view
-    
-    nib = [[NSBundle mainBundle] loadNibNamed:@"LogMoodWheelView" owner:self options:nil];
-    self.moodWheel = (PDMoodWheelView*) [nib objectAtIndex:0];
-    CGRect frame = self.moodWheel.frame;
-    frame.origin = CGPointMake(320, 0);
-    [self.moodWheel setFrame:frame];
     
     [self.scrollView addSubview:self.collectionView];
     
@@ -94,22 +88,32 @@
 - (IBAction)activityButtonPressed:(id)sender {
     [self setCurrentTypeAndHighlight:kActivity];
     self.logItems = [PDPropertyListController loadActivityList];
-    [self.collectionView reloadData];
-    [self removeMoodWheelView];
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 - (IBAction)foodButtonPressed:(id)sender {
     [self setCurrentTypeAndHighlight:kFood];
     self.logItems = [PDPropertyListController loadFoodList];
-    [self.collectionView reloadData];
-    [self removeMoodWheelView];
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (IBAction)moodButtonPressed:(id)sender {
     [self setCurrentTypeAndHighlight:kMood];
     self.logItems = [PDPropertyListController loadMoodList];
-    [self insertMoodWheelView];
-    [self.collectionView reloadData];
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (IBAction)productivityButtonPressed:(id)sender {
@@ -122,7 +126,6 @@
         [ProgressHUD dismiss];
     }];
 }
-
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -140,39 +143,29 @@
         [cell.logItemLabel setText:self.logItems[indexPath.row][@"Name"]];
         [cell setItemId:[self.logItems[indexPath.row][@"ID"] integerValue]];
         [cell setItemCategory:[self.logItems[indexPath.row][@"Type"] integerValue]];
+        [cell setItemTypeId:self.logItems[indexPath.row][@"ObjectId"]];
+         
     } else {
         
         [cell.logItemButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
         [cell.logItemLabel setText:@"More"];
         [cell setItemId:ADD_BUTTON_ID];
+        [cell setItemTypeId:nil];
+    
     }
 
     return cell;
     
 }
 
-- (void) insertMoodWheelView
-{
-    [self.scrollView addSubview:self.moodWheel];
-    [self.scrollView setContentSize:CGSizeMake(640, self.scrollView.frame.size.height)];
-}
-
-- (void) removeMoodWheelView
-{
-    [self.moodWheel removeFromSuperview];
-    [self.scrollView setContentSize:CGSizeMake(320, self.scrollView.frame.size.height)];
-}
-
 #pragma mark - UICollectionViewDelegateFlowLayout
 
-
--(void)cellButtonPressedWithItemId:(NSInteger)itemId itemCategory:(NSInteger)category
+-(void)cellButtonPressedWithItemTypeId:(NSString *)itemTypeId itemCategory:(NSInteger)category
 {
-    
     [ProgressHUD show:@"Loading..."];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     
-    if (itemId == ADD_BUTTON_ID) {
+    if (itemTypeId == nil) {
         NSLog(@"will open more view");
         
         UINavigationController *nc = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
@@ -186,7 +179,7 @@
         
         [mi setLogType:self.currentType];
         
-
+        
         
         [self presentViewController:nc animated:YES completion:^{
             [ProgressHUD dismiss];
@@ -217,15 +210,17 @@
             return;
         }
         
-        PDSaveLogViewController *sl = (PDSaveLogViewController*)nc.topViewController;
         
-        [sl setItemId:itemId itemCategory:category logType:self.currentType];
-        
-        [self presentViewController:nc animated:YES completion:^{
-            [ProgressHUD dismiss];
+        [PDActivityDataController getItemType:itemTypeId withBlock:^(PDActivityType *object, NSError *error) {
+            PDSaveLogViewController *sl = (PDSaveLogViewController*)nc.topViewController;
+            [sl setItemObjectId:object];
+            [self presentViewController:nc animated:YES completion:^{
+                [ProgressHUD dismiss];
+            }];
         }];
+        
+        
     }
-    
 }
 
 #pragma mark - Misc

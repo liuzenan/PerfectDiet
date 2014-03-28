@@ -18,9 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    [PDPFActivity registerSubclass];
     [PDActivityType registerSubclass];
+    [PDPFActivity registerSubclass];
     [Parse setApplicationId:@"oJctCPN8uHayUuR48fTJXe1F9Qtp9k8Pa9gLHaKb"
                   clientKey:@"CsMXy8RdGLhjMzroaIo8pfokE8OGZHJhBRbfJVAe"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -62,9 +61,17 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    PDSplashViewController *sv = (PDSplashViewController*)[sb instantiateViewControllerWithIdentifier:@"SplashView"];
-    [self.window.rootViewController presentViewController:sv animated:NO completion:nil];
+    // Do any additional setup after loading the view.
+    if (!([PFUser currentUser] && // Check if a user is cached
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])) // Check if user is linked to Facebook
+    {
+        
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
+        UINavigationController *sv = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"SplashView"];
+        [self.window.rootViewController presentViewController:sv animated:NO completion:nil];
+        
+    }
+    
     
 }
 

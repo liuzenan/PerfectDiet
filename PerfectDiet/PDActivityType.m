@@ -11,7 +11,6 @@
 
 @implementation PDActivityType
 
-@dynamic item_id;
 @dynamic item_type;
 @dynamic item_subtype;
 @dynamic item_name;

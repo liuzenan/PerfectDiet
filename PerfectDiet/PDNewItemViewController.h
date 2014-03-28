@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PDChooseTypeTableViewController.h"
 
-@interface PDNewItemViewController : UITableViewController
+@interface PDNewItemViewController : UITableViewController <UITextFieldDelegate, PDChooseTypeDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
 - (IBAction)doneEditing:(id)sender;
@@ -16,5 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameCell;
 
 @property (assign, nonatomic) PDLogType logType;
+@property (assign, nonatomic) NSInteger itemType;
+
+- (IBAction)saveButtonPressed:(id)sender;
 
 @end

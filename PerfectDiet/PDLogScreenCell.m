@@ -30,6 +30,6 @@
 
 - (IBAction)logItemButtonPressed:(id)sender {
     NSLog(@"log button pressed");
-    [self.delegate cellButtonPressedWithItemId:self.itemId itemCategory:self.itemCategory];
+    [self.delegate cellButtonPressedWithItemTypeId:self.itemTypeId itemCategory:self.itemCategory];
 }
 @end

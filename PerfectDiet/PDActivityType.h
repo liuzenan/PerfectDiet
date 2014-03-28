@@ -11,7 +11,6 @@
 @interface PDActivityType : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 
-@property NSInteger item_id;
 @property NSInteger item_type;
 @property NSInteger item_subtype;
 @property (retain) NSString *item_name;

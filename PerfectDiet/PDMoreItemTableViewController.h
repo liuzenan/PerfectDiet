@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PDActivityType.h"
+
+@protocol PDMoreItemDelegate
+
+- (void) didSelectItem:(PDActivityType*)type;
+
+@end
 
 @interface PDMoreItemTableViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
 - (IBAction)cancelButtonPressed:(id)sender;
 
+@property (weak, nonatomic) id<PDMoreItemDelegate> typeDelegate;
+@property (strong, nonatomic) NSArray *itemList;
 @property (assign, nonatomic) PDLogType logType;
+@property (assign, nonatomic) BOOL isAttachMode;
+@property (strong, nonatomic) NSMutableArray *filterArray;
 
 @end

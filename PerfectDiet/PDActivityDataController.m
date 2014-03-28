@@ -7,9 +7,31 @@
 //
 
 #import "PDActivityDataController.h"
-#import "PDPFActivity.h"
+
 
 @implementation PDActivityDataController
+
++ (void) getItemType:(NSString*)typeId withBlock:(void(^)(PDActivityType *object, NSError *error)) block
+{
+    PFQuery *query = [PDActivityType query];
+    [query whereKey:@"objectId" equalTo:typeId];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        block((PDActivityType*)object, error);
+    }];
+}
+
++ (void) getItemTypeList:(PDLogType)type withBlock:(void(^)(NSArray *objects, NSError *error)) block
+{
+    PFQuery *query = [PDActivityType query];
+    [query whereKey:@"item_type" equalTo:[NSNumber numberWithInt:type]];
+    [query orderByAscending:@"item_name"];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        block(objects, error);
+    }];
+    
+}
 
 +(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block
 {

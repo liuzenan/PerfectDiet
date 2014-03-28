@@ -31,7 +31,7 @@
 @property (strong, nonatomic) NSArray *timeList;
 @property (strong, nonatomic) NSArray *durationList;
 
-@property (assign, nonatomic) NSInteger itemId;
+@property (strong, nonatomic) PDActivityType *itemActivityType;
 @property (assign, nonatomic) NSInteger itemCategory;
 @property (assign, nonatomic) PDLogType logType;
 @property (assign, nonatomic) BOOL isPublic;
@@ -52,6 +52,6 @@
 - (IBAction)addNoteBtnPressed:(id)sender;
 - (IBAction)addPhotoBtnPressed:(id)sender;
 
-- (void) setItemId:(NSInteger)itemId itemCategory:(NSInteger)itemCategory logType:(PDLogType)logType;
+- (void) setItemObjectId:(PDActivityType*)itemType;
 
 @end

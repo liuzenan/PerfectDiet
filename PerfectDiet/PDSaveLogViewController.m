@@ -50,7 +50,7 @@
     PDAddNoteViewController *an = (PDAddNoteViewController*)mcan.topViewController;
     an.delegate = self;
     
-    NSString *itemName = [PDPropertyListController getItemNameForItemId:self.itemId logType:self.logType];
+    NSString *itemName = self.itemActivityType.item_name;
     [self.itemNameButton setTitle:itemName forState:UIControlStateNormal];
     NSString *category = [PDPropertyListController getItemCategoryNameForItemId:self.itemCategory logType:self.logType];
     [self.itemType setText:category];
@@ -106,7 +106,8 @@
 
 - (void)addPhotoBadge
 {
-    if (!self.imageData) {
+    NSLog(@"add photo subview:%ld", [self.addPhotoButton.subviews count]);
+    if (self.imageData && [self.addPhotoButton.subviews count] == 1) {
         BYLBadgeView *badgeView = [[BYLBadgeView alloc] initWithBadge:1];
         badgeView.translatesAutoresizingMaskIntoConstraints = NO;
         badgeView.opaque = NO;
@@ -162,12 +163,11 @@
 */
 
 
-- (void)setItemId:(NSInteger)itemId itemCategory:(NSInteger)itemCategory logType:(PDLogType)logType
+- (void) setItemObjectId:(PDActivityType*)itemType
 {
-    NSLog(@"set item id in save log view");
-    self.itemId = itemId;
-    self.itemCategory = itemCategory;
-    self.logType = logType;
+    self.itemActivityType = itemType;
+    self.itemCategory = itemType.item_subtype;
+    self.logType = (PDLogType)itemType.item_type;
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -185,7 +185,7 @@
     }
     
     PDPFActivity *item = [PDPFActivity object];
-    item.item_id = self.itemId;
+    item.item_activity_type = self.itemActivityType;
     item.item_type = self.logType;
     item.is_public = self.publicSwitch.isOn;
     item.time = self.itemTime;
@@ -193,6 +193,10 @@
     item.duration = self.itemDuration;
     item.logged_time = [NSDate new];
     item.creator = [[PFUser currentUser] username];
+    item.item_name = self.itemActivityType.item_name;
+    item.item_subtype = self.itemActivityType.item_subtype;
+    item.item_icon = self.itemActivityType.item_icon;
+    
     if (self.note) {
         item.note = self.note;
     }
@@ -202,6 +206,12 @@
         self.mood.time = self.itemTime;
         self.mood.location_name = self.locationLabel.text;
         self.mood.logged_time = item.logged_time;
+        self.mood.creator = [[PFUser currentUser] username];
+        
+        self.mood.item_name = self.mood.item_activity_type.item_name;
+        self.mood.item_subtype = self.mood.item_activity_type.item_subtype;
+        self.mood.item_icon = self.mood.item_activity_type.item_icon;
+        [self.mood saveEventually];
     }
     
     if (self.imageData) {
@@ -223,8 +233,11 @@
 
 - (IBAction)itemNameButtonPressed:(id)sender {
     
-    PDMoreItemTableViewController *mc = (PDMoreItemTableViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
-    [self presentViewController:mc animated:YES completion:nil];
+    PDMoreItemTableViewController *mc = (PDMoreItemTableViewController*)[sb instantiateViewControllerWithIdentifier:@"ChooseItem"];
+    
+    mc.logType = self.logType;
+    
+    [self.navigationController pushViewController:mc animated:YES];
 }
 
 - (IBAction)itemTimeButtonPressed:(id)sender {
@@ -282,7 +295,6 @@
     
     [self presentViewController:imageController animated:YES completion:^{
         [ProgressHUD dismiss];
-        [self addPhotoBadge];
     }];
 }
 
@@ -300,7 +312,7 @@
     // Upload image
     NSData *imageData = UIImageJPEGRepresentation(smallImage, 0.05f);
     self.imageData = imageData;
-    
+    [self addPhotoBadge];
 }
 
 

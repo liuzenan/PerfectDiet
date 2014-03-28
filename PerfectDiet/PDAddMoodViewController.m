@@ -8,8 +8,7 @@
 
 #import "PDAddMoodViewController.h"
 #import "PDPropertyListController.h"
-#import "PDMoreItemTableViewController.h"
-
+#import "PDActivityDataController.h"
 
 @implementation PDAddMoodViewController
 
@@ -77,11 +76,13 @@
         [cell.logItemLabel setText:self.logItems[indexPath.row][@"Name"]];
         [cell setItemId:[self.logItems[indexPath.row][@"ID"] integerValue]];
         [cell setItemCategory:[self.logItems[indexPath.row][@"Type"] integerValue]];
+        [cell setItemTypeId:self.logItems[indexPath.row][@"ObjectId"]];
     } else {
         
         [cell.logItemButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
         [cell.logItemLabel setText:@"More"];
         [cell setItemId:ADD_BUTTON_ID];
+        [cell setItemTypeId:nil];
     }
     
     return cell;
@@ -94,22 +95,36 @@
     [self.scrollView setContentSize:CGSizeMake(640, self.scrollView.frame.size.height)];
 }
 
-
--(void)cellButtonPressedWithItemId:(NSInteger)itemId itemCategory:(NSInteger)category
+-(void)cellButtonPressedWithItemTypeId:(NSString *)itemTypeId itemCategory:(NSInteger)category
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
-    NSLog(@"cell button pressed in add mood:%@", self.delegate);
-    if (itemId == ADD_BUTTON_ID) {
-        PDMoreItemTableViewController *mi = (PDMoreItemTableViewController*)[sb instantiateViewControllerWithIdentifier:@"MoreLog"];
-        [self presentViewController:mi animated:YES completion:nil];
+    if (itemTypeId == nil) {
+        PDMoreItemTableViewController *mi = (PDMoreItemTableViewController*)[sb instantiateViewControllerWithIdentifier:@"ChooseItem"];
+        mi.logType = kMood;
+        mi.isAttachMode = YES;
+        mi.typeDelegate = self;
+        [self.navigationController pushViewController:mi animated:YES];
     } else {
         
-        PDPFActivity *mood = [PDPFActivity object];
-        mood.item_id = itemId;
-        mood.item_type = kMood;
-        [self.delegate addMood:mood];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [PDActivityDataController getItemType:itemTypeId withBlock:^(PDActivityType *object, NSError *error) {
+            PDPFActivity *mood = [PDPFActivity object];
+            mood.item_type = kMood;
+            mood.item_activity_type = object;
+            [self.delegate addMood:mood];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+
     }
+}
+
+-(void)didSelectItem:(PDActivityType *)type
+{
+    PDPFActivity *mood = [PDPFActivity object];
+    mood.item_type = kMood;
+    mood.item_activity_type = type;
+    [self.delegate addMood:mood];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 @end

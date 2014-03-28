@@ -135,23 +135,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
 
     PDReviewCell *cell;
     
     PDPFActivity *item = (PDPFActivity*) [self.logItems objectAtIndex:indexPath.row];
-    
     NSString *title = @"";
+    
     if ((PDLogType)item.item_type == kProductivity) {
         title = @"Productivity";
     } else {
-        title = [PDPropertyListController getItemNameForItemId:item.item_id logType:(PDLogType)item.item_type];
+        
+        title = item.item_name;
+        
     }
     
     if ((PDLogType)item.item_type == kFood) {
         title = [@"Had " stringByAppendingString:title];
     }
-        
+    
     if ((PDLogType)item.item_type == kMood) {
         title = [@"Feel " stringByAppendingString:title];
     }
@@ -159,7 +160,6 @@
     if ((PDLogType)item.item_type == kActivity) {
         
     }
-    
 
     
     if (item.note == nil && item.photo == nil) {

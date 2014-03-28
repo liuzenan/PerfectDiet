@@ -24,7 +24,6 @@
 @property (assign, nonatomic) PDLogType currentType;
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) PDMoodWheelView *moodWheel;
 
 - (IBAction)activityButtonPressed:(id)sender;
 - (IBAction)foodButtonPressed:(id)sender;

@@ -12,7 +12,6 @@
 @implementation PDPFActivity
 
 @dynamic is_public;
-@dynamic item_id;
 @dynamic item_type;
 @dynamic location_name;
 @dynamic logged_time;
@@ -23,6 +22,10 @@
 @dynamic work_done;
 @dynamic work_todo;
 @dynamic creator;
+@dynamic item_activity_type;
+@dynamic item_name;
+@dynamic item_icon;
+@dynamic item_subtype;
 
 +(NSString *)parseClassName
 {

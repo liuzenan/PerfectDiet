@@ -10,6 +10,8 @@
 #import "PDMoodWheelView.h"
 #import "PDLogScreenCell.h"
 #import "PDPFActivity.h"
+#import "PDMoreItemTableViewController.h"
+
 
 @protocol AddMoodDelegate <NSObject>
 
@@ -17,7 +19,7 @@
 
 @end
 
-@interface PDAddMoodViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate>
+@interface PDAddMoodViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate, PDMoreItemDelegate>
 
 @property (weak, nonatomic) id<AddMoodDelegate> delegate;
 @property (weak, nonatomic) NSArray *logItems;
