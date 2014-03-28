@@ -1058,7 +1058,7 @@
         <scene sceneID="n2r-tm-7aA">
             <objects>
                 <tableViewController id="zJ8-Ew-xC3" customClass="PDTodayTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="131" sectionHeaderHeight="22" sectionFooterHeight="22" id="XTX-BO-3Fy">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="131" sectionHeaderHeight="22" sectionFooterHeight="22" id="XTX-BO-3Fy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1070,7 +1070,7 @@
                     <navigationItem key="navigationItem" title="Today" id="jz3-C9-w0K">
                         <barButtonItem key="leftBarButtonItem" title="Month" id="Sb3-ta-rfl">
                             <connections>
-                                <segue destination="vG8-h8-A0l" kind="push" id="4wt-HV-UzZ"/>
+                                <segue destination="vG8-h8-A0l" kind="push" identifier="PushMonth" id="4wt-HV-UzZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Trends" id="aqx-3G-aTo"/>
@@ -1080,20 +1080,38 @@
             </objects>
             <point key="canvasLocation" x="2714" y="107"/>
         </scene>
-        <!--Table View Controller - February-->
+        <!--Month Table View Controller - Month-->
         <scene sceneID="mTs-de-zl1">
             <objects>
-                <tableViewController id="vG8-h8-A0l" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5j6-gs-tsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="vG8-h8-A0l" customClass="PDMonthTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7wV-6s-pJ5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g3d-EY-xx4">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrendCell" textLabel="1OB-qx-Kzc" style="IBUITableViewCellStyleDefault" id="g3d-EY-xx4">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g3d-EY-xx4" id="r6x-SN-fap">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1OB-qx-Kzc">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CalendarCell" rowHeight="100" id="JEC-Ap-H6W">
+                                <rect key="frame" x="0.0" y="130" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JEC-Ap-H6W" id="3h8-Dk-69O">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1103,11 +1121,14 @@
                             <outlet property="delegate" destination="vG8-h8-A0l" id="aL3-Ct-Qrt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="February" id="7zQ-SB-S8C">
-                        <barButtonItem key="rightBarButtonItem" title="Trends" id="qp5-wP-6OE"/>
+                    <navigationItem key="navigationItem" title="Month" id="7zQ-SB-S8C">
+                        <barButtonItem key="rightBarButtonItem" title="Today" id="qp5-wP-6OE">
+                            <connections>
+                                <action selector="TodayPressed:" destination="vG8-h8-A0l" id="cf6-yT-Zeu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5j6-gs-tsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3106" y="107"/>
         </scene>

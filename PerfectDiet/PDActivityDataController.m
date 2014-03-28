@@ -11,6 +11,69 @@
 
 @implementation PDActivityDataController
 
+
++ (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block
+{
+    PFQuery *query = [PDPFActivity query];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:date];
+    [comp setDay:1];
+    NSDate *firstDayOfMonthDate = [gregorian dateFromComponents:comp];
+    
+    
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* comps = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:date]; // Get necessary date components
+    
+    // set last of month
+    [comps setMonth:[comps month]+1];
+    [comps setDay:1];
+    NSDate *tDateMonth = [calendar dateFromComponents:comps];
+    
+    [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:firstDayOfMonthDate]];
+    [query whereKey:@"time" lessThan:[PDActivityDataController endOfDay:tDateMonth]];
+    [query whereKey:@"creator" equalTo:[[PFUser currentUser] username]];
+    [query orderByAscending:@"time"];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        
+        for (PDPFActivity *item in objects) {
+            NSDate *itemDate = item.time;
+            NSDateComponents* comps = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:itemDate];
+            
+            NSUInteger day = [comps day];
+            NSString *dayString = [NSString stringWithFormat:@"%lu", day];
+            
+            if ([dict valueForKey:dayString] == nil) {
+                [dict setObject:[NSNumber numberWithBool:YES] forKey:dayString];
+            }
+            
+        }
+        
+        block(dict, error);
+        
+    }];
+}
+
++ (NSString*) getProductivityDescription:(NSInteger) todo withDone:(NSInteger)done
+{
+    NSString * desc = @"";
+
+    if (todo >66) {
+        desc = @"Lots of work today";
+    } else if (todo > 33) {
+        desc = @"Some work to do";
+    } else {
+        desc = @"Not much to do";
+    }
+    
+    return desc;
+}
+
 + (void) getItemType:(NSString*)typeId withBlock:(void(^)(PDActivityType *object, NSError *error)) block
 {
     PFQuery *query = [PDActivityType query];

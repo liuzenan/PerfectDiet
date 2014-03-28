@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PDPFActivity.h"
+#import "PDSaveProductivityLogViewController.h"
 
-@interface PDTodayTableViewController : UITableViewController
+@interface PDTodayTableViewController : UITableViewController <PDSaveProductivityDelegate>
 
-@property (nonatomic, strong) NSArray* logItems;
+@property (nonatomic, strong) NSMutableArray* logItems;
+@property (nonatomic, strong) PDPFActivity *productivity;
+@property (nonatomic, strong) NSDate *reviewDate;
 
 @end

@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PDSaveProductivityDelegate
+
+- (void) didSaveProductivity;
+
+@end
+
 @interface PDSaveProductivityLogViewController : UIViewController
+@property (weak, nonatomic) id<PDSaveProductivityDelegate> delegate;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)saveButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *work_todo;

@@ -72,7 +72,11 @@
     item.work_todo = workTodo;
     item.creator = [[PFUser currentUser] username];
     
-    [item saveEventually];
+    [item saveEventually:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            [self.delegate didSaveProductivity];
+        }
+    }];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
