@@ -92,10 +92,17 @@
 		E48EF04C18E6C5A100E9A170 /* PDMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF04B18E6C5A100E9A170 /* PDMessagesTableViewController.m */; };
 		E48EF04F18E6C79900E9A170 /* PDTrendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF04E18E6C79900E9A170 /* PDTrendsTableViewController.m */; };
 		E48EF05218E6CC1F00E9A170 /* PDFindFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF05118E6CC1F00E9A170 /* PDFindFriendTableViewCell.m */; };
-		E48EF05518E6CFEE00E9A170 /* PDFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF05418E6CFEE00E9A170 /* PDFollow.m */; };
 		E48EF05818E6EC3500E9A170 /* PDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF05718E6EC3500E9A170 /* PDBaseViewController.m */; };
 		E48EF05B18E6EC7A00E9A170 /* PDBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF05A18E6EC7A00E9A170 /* PDBaseTableViewController.m */; };
-		E48EF06018E6F2BB00E9A170 /* PDFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF05F18E6F2BB00E9A170 /* PDFriendsViewController.m */; };
+		E48EF06318E6F3D500E9A170 /* PDFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF06218E6F3D500E9A170 /* PDFriendsTableViewController.m */; };
+		E48EF06618E6FD4000E9A170 /* PDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF06518E6FD4000E9A170 /* PDUser.m */; };
+		E48EF06818E717DF00E9A170 /* PDFriendFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EF06718E717DF00E9A170 /* PDFriendFeedCell.xib */; };
+		E48EF06A18E717F400E9A170 /* PDFriendFeedCellWithNote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EF06918E717F400E9A170 /* PDFriendFeedCellWithNote.xib */; };
+		E48EF06C18E7180600E9A170 /* PDFriendFeedCellWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EF06B18E7180600E9A170 /* PDFriendFeedCellWithImage.xib */; };
+		E48EF06E18E7181900E9A170 /* PDFriendFeedCellWithNoteAndImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EF06D18E7181900E9A170 /* PDFriendFeedCellWithNoteAndImage.xib */; };
+		E48EF07118E719D700E9A170 /* PDFriendFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF07018E719D700E9A170 /* PDFriendFeedCell.m */; };
+		E48EF07718E7308E00E9A170 /* GHWalkThroughPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF07418E7308E00E9A170 /* GHWalkThroughPageCell.m */; };
+		E48EF07818E7308E00E9A170 /* GHWalkThroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EF07618E7308E00E9A170 /* GHWalkThroughView.m */; };
 		E4B58A8C18A7681100DA3372 /* PDTimeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4B58A8B18A7681100DA3372 /* PDTimeList.plist */; };
 		E4B58A8E18A7720900DA3372 /* PDDurationList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4B58A8D18A7720900DA3372 /* PDDurationList.plist */; };
 		E4B58A9118A77D0C00DA3372 /* PDAddMoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B58A9018A77D0C00DA3372 /* PDAddMoodViewController.m */; };
@@ -243,14 +250,24 @@
 		E48EF04E18E6C79900E9A170 /* PDTrendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTrendsTableViewController.m; sourceTree = "<group>"; };
 		E48EF05018E6CC1F00E9A170 /* PDFindFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFindFriendTableViewCell.h; sourceTree = "<group>"; };
 		E48EF05118E6CC1F00E9A170 /* PDFindFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFindFriendTableViewCell.m; sourceTree = "<group>"; };
-		E48EF05318E6CFEE00E9A170 /* PDFollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFollow.h; sourceTree = "<group>"; };
-		E48EF05418E6CFEE00E9A170 /* PDFollow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFollow.m; sourceTree = "<group>"; };
 		E48EF05618E6EC3500E9A170 /* PDBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseViewController.h; sourceTree = "<group>"; };
 		E48EF05718E6EC3500E9A170 /* PDBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseViewController.m; sourceTree = "<group>"; };
 		E48EF05918E6EC7A00E9A170 /* PDBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseTableViewController.h; sourceTree = "<group>"; };
 		E48EF05A18E6EC7A00E9A170 /* PDBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseTableViewController.m; sourceTree = "<group>"; };
-		E48EF05E18E6F2BB00E9A170 /* PDFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFriendsViewController.h; sourceTree = "<group>"; };
-		E48EF05F18E6F2BB00E9A170 /* PDFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFriendsViewController.m; sourceTree = "<group>"; };
+		E48EF06118E6F3D500E9A170 /* PDFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFriendsTableViewController.h; sourceTree = "<group>"; };
+		E48EF06218E6F3D500E9A170 /* PDFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFriendsTableViewController.m; sourceTree = "<group>"; };
+		E48EF06418E6FD4000E9A170 /* PDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDUser.h; sourceTree = "<group>"; };
+		E48EF06518E6FD4000E9A170 /* PDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDUser.m; sourceTree = "<group>"; };
+		E48EF06718E717DF00E9A170 /* PDFriendFeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFriendFeedCell.xib; sourceTree = "<group>"; };
+		E48EF06918E717F400E9A170 /* PDFriendFeedCellWithNote.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFriendFeedCellWithNote.xib; sourceTree = "<group>"; };
+		E48EF06B18E7180600E9A170 /* PDFriendFeedCellWithImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFriendFeedCellWithImage.xib; sourceTree = "<group>"; };
+		E48EF06D18E7181900E9A170 /* PDFriendFeedCellWithNoteAndImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFriendFeedCellWithNoteAndImage.xib; sourceTree = "<group>"; };
+		E48EF06F18E719D700E9A170 /* PDFriendFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFriendFeedCell.h; sourceTree = "<group>"; };
+		E48EF07018E719D700E9A170 /* PDFriendFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFriendFeedCell.m; sourceTree = "<group>"; };
+		E48EF07318E7308E00E9A170 /* GHWalkThroughPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughPageCell.h; sourceTree = "<group>"; };
+		E48EF07418E7308E00E9A170 /* GHWalkThroughPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWalkThroughPageCell.m; sourceTree = "<group>"; };
+		E48EF07518E7308E00E9A170 /* GHWalkThroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWalkThroughView.h; sourceTree = "<group>"; };
+		E48EF07618E7308E00E9A170 /* GHWalkThroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWalkThroughView.m; sourceTree = "<group>"; };
 		E4B58A8B18A7681100DA3372 /* PDTimeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDTimeList.plist; sourceTree = "<group>"; };
 		E4B58A8D18A7720900DA3372 /* PDDurationList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PDDurationList.plist; sourceTree = "<group>"; };
 		E4B58A8F18A77D0C00DA3372 /* PDAddMoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAddMoodViewController.h; sourceTree = "<group>"; };
@@ -332,8 +349,8 @@
 				E407592018E47ECB003B12B9 /* PDPFActivity.m */,
 				E407592518E4A8A8003B12B9 /* PDActivityType.h */,
 				E407592618E4A8A8003B12B9 /* PDActivityType.m */,
-				E48EF05318E6CFEE00E9A170 /* PDFollow.h */,
-				E48EF05418E6CFEE00E9A170 /* PDFollow.m */,
+				E48EF06418E6FD4000E9A170 /* PDUser.h */,
+				E48EF06518E6FD4000E9A170 /* PDUser.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -372,8 +389,8 @@
 				E48EF04B18E6C5A100E9A170 /* PDMessagesTableViewController.m */,
 				E48EF04D18E6C79900E9A170 /* PDTrendsTableViewController.h */,
 				E48EF04E18E6C79900E9A170 /* PDTrendsTableViewController.m */,
-				E48EF05E18E6F2BB00E9A170 /* PDFriendsViewController.h */,
-				E48EF05F18E6F2BB00E9A170 /* PDFriendsViewController.m */,
+				E48EF06118E6F3D500E9A170 /* PDFriendsTableViewController.h */,
+				E48EF06218E6F3D500E9A170 /* PDFriendsTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -391,6 +408,8 @@
 				E48EEFF018E5BF6B00E9A170 /* PDProductivityTableViewCell.m */,
 				E48EF05018E6CC1F00E9A170 /* PDFindFriendTableViewCell.h */,
 				E48EF05118E6CC1F00E9A170 /* PDFindFriendTableViewCell.m */,
+				E48EF06F18E719D700E9A170 /* PDFriendFeedCell.h */,
+				E48EF07018E719D700E9A170 /* PDFriendFeedCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -407,6 +426,10 @@
 				E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */,
 				E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */,
 				E48EEFED18E5BE6F00E9A170 /* PDProductivityCell.xib */,
+				E48EF06718E717DF00E9A170 /* PDFriendFeedCell.xib */,
+				E48EF06918E717F400E9A170 /* PDFriendFeedCellWithNote.xib */,
+				E48EF06B18E7180600E9A170 /* PDFriendFeedCellWithImage.xib */,
+				E48EF06D18E7181900E9A170 /* PDFriendFeedCellWithNoteAndImage.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -469,6 +492,7 @@
 		E476705D180CE020002E261A /* PerfectDiet */ = {
 			isa = PBXGroup;
 			children = (
+				E48EF07218E7308200E9A170 /* WalkThrough */,
 				E43DA9BF18A43489005F6F52 /* PDConstants.h */,
 				E43DA9C018A43489005F6F52 /* PDConstants.m */,
 				E46A0DCC18A564F90093CF05 /* DataControllers */,
@@ -577,6 +601,17 @@
 			name = Base;
 			sourceTree = "<group>";
 		};
+		E48EF07218E7308200E9A170 /* WalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				E48EF07318E7308E00E9A170 /* GHWalkThroughPageCell.h */,
+				E48EF07418E7308E00E9A170 /* GHWalkThroughPageCell.m */,
+				E48EF07518E7308E00E9A170 /* GHWalkThroughView.h */,
+				E48EF07618E7308E00E9A170 /* GHWalkThroughView.m */,
+			);
+			name = WalkThrough;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -664,6 +699,7 @@
 				E48EF03C18E6145F00E9A170 /* ParallaxImage13.jpg in Resources */,
 				E48EF02F18E6145F00E9A170 /* ParallaxImage26.jpg in Resources */,
 				E48EF04318E6145F00E9A170 /* ParallaxImage06.jpg in Resources */,
+				E48EF06E18E7181900E9A170 /* PDFriendFeedCellWithNoteAndImage.xib in Resources */,
 				E48EF02E18E6145F00E9A170 /* ParallaxImage27.jpg in Resources */,
 				E43DA9D418A4BD8E005F6F52 /* PDFoodTypeList.plist in Resources */,
 				E48EF00318E60DAE00E9A170 /* p_background@2x.png in Resources */,
@@ -682,12 +718,15 @@
 				E48EF03318E6145F00E9A170 /* ParallaxImage22.jpg in Resources */,
 				E4D1747818A8BB8700201ADC /* PDReviewCell.xib in Resources */,
 				E48EF04918E6205D00E9A170 /* review_background_blank.png in Resources */,
+				E48EF06A18E717F400E9A170 /* PDFriendFeedCellWithNote.xib in Resources */,
 				E48EF03618E6145F00E9A170 /* ParallaxImage19.jpg in Resources */,
+				E48EF06C18E7180600E9A170 /* PDFriendFeedCellWithImage.xib in Resources */,
 				E4767073180CE021002E261A /* Images.xcassets in Resources */,
 				E4D1747418A8BAFD00201ADC /* PDReviewCellWithNoteAndImage.xib in Resources */,
 				E476706B180CE021002E261A /* Main_iPhone.storyboard in Resources */,
 				E48EF04518E6145F00E9A170 /* ParallaxImage04.jpg in Resources */,
 				E46A0DC818A546F30093CF05 /* LogCollectionView.xib in Resources */,
+				E48EF06818E717DF00E9A170 /* PDFriendFeedCell.xib in Resources */,
 				E4767062180CE020002E261A /* InfoPlist.strings in Resources */,
 				E48EF03E18E6145F00E9A170 /* ParallaxImage11.jpg in Resources */,
 				E48EF03218E6145F00E9A170 /* ParallaxImage23.jpg in Resources */,
@@ -769,6 +808,7 @@
 				E407592718E4A8A8003B12B9 /* PDActivityType.m in Sources */,
 				E407592418E4A4E6003B12B9 /* PDMoreItemTableViewController.m in Sources */,
 				E48EF05218E6CC1F00E9A170 /* PDFindFriendTableViewCell.m in Sources */,
+				E48EF07118E719D700E9A170 /* PDFriendFeedCell.m in Sources */,
 				E4767068180CE021002E261A /* PDAppDelegate.m in Sources */,
 				E43DA9C118A43489005F6F52 /* PDConstants.m in Sources */,
 				E46A0DCB18A54C210093CF05 /* PDMoodWheelView.m in Sources */,
@@ -777,21 +817,23 @@
 				E43DA9C418A4B4AC005F6F52 /* PDLogObjectModel.xcdatamodeld in Sources */,
 				E46EC9FE18A9433200FE23AE /* PDTodayTableViewController.m in Sources */,
 				E46EC9F918A9341D00FE23AE /* PDReviewCell.m in Sources */,
-				E48EF06018E6F2BB00E9A170 /* PDFriendsViewController.m in Sources */,
 				E48EF04F18E6C79900E9A170 /* PDTrendsTableViewController.m in Sources */,
 				E407592D18E4AFDE003B12B9 /* PDNewItemViewController.m in Sources */,
-				E48EF05518E6CFEE00E9A170 /* PDFollow.m in Sources */,
 				E43DA9E518A508FE005F6F52 /* PDSaveProductivityLogViewController.m in Sources */,
 				E46ECA0118A943A000FE23AE /* PDTodayTopTableViewCell.m in Sources */,
 				E43DA9BA18A42E4F005F6F52 /* PDLogViewController.m in Sources */,
 				E48EEFF718E5CA9500E9A170 /* PDMonthTableViewController.m in Sources */,
+				E48EF06318E6F3D500E9A170 /* PDFriendsTableViewController.m in Sources */,
 				E4B58A9418A77DC700DA3372 /* PDAddNoteViewController.m in Sources */,
 				E4B58A9718A7965C00DA3372 /* PDActivityDataController.m in Sources */,
 				E48EEFF118E5BF6B00E9A170 /* PDProductivityTableViewCell.m in Sources */,
 				E46A0DC618A53E570093CF05 /* PDAddFriendsViewController.m in Sources */,
+				E48EF07718E7308E00E9A170 /* GHWalkThroughPageCell.m in Sources */,
 				E407593018E4B8BC003B12B9 /* PDChooseTypeTableViewController.m in Sources */,
+				E48EF06618E6FD4000E9A170 /* PDUser.m in Sources */,
 				E43DA9EE18A512C1005F6F52 /* PDSplashViewController.m in Sources */,
 				E4767064180CE021002E261A /* main.m in Sources */,
+				E48EF07818E7308E00E9A170 /* GHWalkThroughView.m in Sources */,
 				E48EF05B18E6EC7A00E9A170 /* PDBaseTableViewController.m in Sources */,
 				E43DA9D718A4C1DB005F6F52 /* PDPropertyListController.m in Sources */,
 				E407592118E47ECB003B12B9 /* PDPFActivity.m in Sources */,

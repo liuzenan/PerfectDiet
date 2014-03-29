@@ -8,8 +8,11 @@
 
 #import "PDAddFriendsViewController.h"
 #import "PDFindFriendTableViewCell.h"
+#import "PDActivityDataController.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "PDUser.h"
 
-@interface PDAddFriendsViewController ()
+@interface PDAddFriendsViewController () <PDAddFriendCellDelegate>
 
 @end
 
@@ -35,6 +38,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.userList = [NSArray array];
     
+    [PDActivityDataController getAllActiveUsersWithBlock:^(NSArray *users, NSError *error) {
+        if (!error) {
+            self.userList = users;
+            [self.tableView reloadData];
+        }
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,17 +65,44 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return [self.userList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"AddFriendCell";
+    PDFindFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    PDUser *user = [self.userList objectAtIndex: indexPath.row];
+    NSURL *imageURL = [NSURL URLWithString:user.avatar];
+    [cell.profileImage setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [cell.name setText:user.name];
+    cell.userId = user.objectId;
+    cell.delegate = self;
+    
+    NSString *userId = user.objectId;
+    
+    PDUser *current = [PDUser currentUser];
+    NSArray *followings = current.following;
+    
+    BOOL isFollowing = NO;
+    
+    for (NSString *following in followings) {
+        if ([userId isEqualToString:following]) {
+            isFollowing = YES;
+            break;
+        }
+    }
+    
+    [cell setIsFollowed:isFollowing];
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
 }
 
 /*
@@ -121,4 +159,33 @@
 - (IBAction)doneButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(void)didAddFriend:(NSString *)userId forCell:(id)cell
+{
+    PDFindFriendTableViewCell *ffCell = (PDFindFriendTableViewCell*)cell;
+    PDUser *me = [PDUser currentUser];
+    NSArray *fo = me.following;
+    NSMutableArray *array = [NSMutableArray array];
+    if (fo) {
+       array = [NSMutableArray arrayWithArray:fo];
+    }
+    
+    BOOL exists = NO;
+    for (NSString *user  in array) {
+        if ([user isEqualToString:userId]) {
+            exists = YES;
+            break;
+        }
+    }
+    if (!exists) {
+        [array addObject:userId];
+        me.following = array;
+        [me saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [ffCell setIsFollowed:YES];
+            [self.tableView reloadData];
+        }];
+    }
+    
+}
+
 @end

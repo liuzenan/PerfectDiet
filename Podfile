@@ -13,3 +13,4 @@ pod 'HexColors'
 pod 'DALinedTextView'
 pod 'CKCalendar'
 pod 'BKECircularProgressView'
+pod "AFNetworking", "~> 2.0"

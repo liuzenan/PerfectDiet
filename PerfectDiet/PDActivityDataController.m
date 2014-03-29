@@ -7,15 +7,33 @@
 //
 
 #import "PDActivityDataController.h"
+#import "PDUser.h"
 
 
 @implementation PDActivityDataController
 
 
++ (void) getUserFollowFeedWithBlock:(void(^)(NSArray *feeds)) block
+{
+    [PFCloud callFunctionInBackground:@"followFeed" withParameters:@{} block:^(PFObject *object, NSError *error) {
+        if (!error) {
+            NSArray *array = [object objectForKey:@"feed"];
+            block(array);
+        } else {
+            NSLog(@"%@", error);
+        }
+    }];
+}
 
 + (void) getAllActiveUsersWithBlock:(void(^)(NSArray *users, NSError *error)) block
 {
-    PFQuery *query = [PFUser query];
+    PFQuery *query = [PDUser query];
+    
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        block(objects, error);
+    }];
     
 }
 
@@ -39,7 +57,7 @@
     
     [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:firstDayOfMonthDate]];
     [query whereKey:@"time" lessThan:[PDActivityDataController endOfDay:tDateMonth]];
-    [query whereKey:@"creator" equalTo:[[PFUser currentUser] username]];
+    [query whereKey:@"creator" equalTo:[[PFUser currentUser] objectId]];
     [query orderByAscending:@"time"];
     query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -71,8 +89,9 @@
     NSString * desc = @"";
 
     if (todo >66) {
-        desc = @"Lots of work today";
+        desc = @"You are very productive today";
     } else if (todo > 33) {
+        
         desc = @"Some work to do";
     } else {
         desc = @"Not much to do";
@@ -109,7 +128,7 @@
     PFQuery *query = [PDPFActivity query];
     [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:date]];
     [query whereKey:@"time" lessThanOrEqualTo:[PDActivityDataController endOfDay:date]];
-    [query whereKey:@"creator" equalTo:[[PFUser currentUser] username]];
+    [query whereKey:@"creator" equalTo:[[PFUser currentUser] objectId]];
     [query orderByAscending:@"time"];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

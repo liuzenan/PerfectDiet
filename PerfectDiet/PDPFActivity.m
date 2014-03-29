@@ -26,6 +26,7 @@
 @dynamic item_name;
 @dynamic item_icon;
 @dynamic item_subtype;
+@dynamic creatorObject;
 
 +(NSString *)parseClassName
 {

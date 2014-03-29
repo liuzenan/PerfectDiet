@@ -1,17 +1,17 @@
 //
-//  PDFollow.h
+//  PDUser.h
 //  PerfectDiet
 //
 //  Created by Liu Zenan on 29/3/14.
 //  Copyright (c) 2014 NUS. All rights reserved.
 //
 
-#import <Parse/Parse.h>
+#import <Parse/PFUser.h>
 
-@interface PDFollow : PFObject<PFSubclassing>
-+ (NSString *)parseClassName;
+@interface PDUser : PFUser<PFSubclassing>
 
-@property (retain) NSString *userId;
+@property (retain) NSString *avatar;
+@property (retain) NSString *name;
 @property (retain) NSArray *following;
 
 @end

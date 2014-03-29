@@ -192,10 +192,11 @@
     item.location_name = self.locationLabel.text;
     item.duration = self.itemDuration;
     item.logged_time = [NSDate new];
-    item.creator = [[PFUser currentUser] username];
+    item.creator = [[PDUser currentUser] objectId];
     item.item_name = self.itemActivityType.item_name;
     item.item_subtype = self.itemActivityType.item_subtype;
     item.item_icon = self.itemActivityType.item_icon;
+    item.creatorObject = [PDUser currentUser];
     
     if (self.note) {
         item.note = self.note;
@@ -206,11 +207,12 @@
         self.mood.time = self.itemTime;
         self.mood.location_name = self.locationLabel.text;
         self.mood.logged_time = item.logged_time;
-        self.mood.creator = [[PFUser currentUser] username];
+        self.mood.creator = [[PDUser currentUser] objectId];
         
         self.mood.item_name = self.mood.item_activity_type.item_name;
         self.mood.item_subtype = self.mood.item_activity_type.item_subtype;
         self.mood.item_icon = self.mood.item_activity_type.item_icon;
+        self.mood.creatorObject = [PDUser currentUser];
         [self.mood saveEventually];
     }
     

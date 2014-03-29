@@ -270,7 +270,7 @@
     }
     
     if ((PDLogType)item.item_type == kMood) {
-        title = [@"Feel " stringByAppendingString:title];
+        title = [@"Feeling " stringByAppendingString:title];
     }
     
     if ((PDLogType)item.item_type == kActivity) {

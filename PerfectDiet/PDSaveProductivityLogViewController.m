@@ -60,6 +60,9 @@
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
+    
+    [ProgressHUD show:@"Saving"];
+    
     NSInteger workTodo = (NSInteger)self.work_todo.value;
     NSInteger workDone = (NSInteger)self.work_done.value;
     
@@ -70,15 +73,23 @@
     item.logged_time = [NSDate new];
     item.work_done = workDone;
     item.work_todo = workTodo;
-    item.creator = [[PFUser currentUser] username];
+    item.creator = [[PDUser currentUser] objectId];
+    item.creatorObject = [PDUser currentUser];
     
-    [item saveEventually:^(BOOL succeeded, NSError *error) {
+    
+    [item saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        [ProgressHUD dismiss];
+     
         if (!error) {
             [self.delegate didSaveProductivity];
         }
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
     }];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+
     
 }
 @end

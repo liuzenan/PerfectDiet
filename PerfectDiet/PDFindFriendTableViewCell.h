@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PDAddFriendCellDelegate
+
+- (void) didAddFriend:(NSString*) userId forCell:(id)cell;
+
+@end
+
 @interface PDFindFriendTableViewCell : UITableViewCell
+@property (weak, nonatomic) id<PDAddFriendCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UIButton *addbutton;
 @property (weak, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) NSString *userId;
+@property (assign, nonatomic) BOOL isFollowed;
 - (IBAction)addPressed:(id)sender;
 
 @end

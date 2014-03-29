@@ -9,6 +9,8 @@
 #import "PDSplashViewController.h"
 #import <Parse/Parse.h>
 #import <ProgressHUD/ProgressHUD.h>
+#import "PDUser.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface PDSplashViewController ()
 
@@ -74,14 +76,49 @@
                 NSLog(@"Uh oh. An error occurred: %@", error);
             }
         } else if (user.isNew) {
-            [ProgressHUD dismiss];
             NSLog(@"User with facebook signed up and logged in!");
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [self saveUserFacebookDetail];
+            
+            
         } else {
-            [ProgressHUD dismiss];
             NSLog(@"User with facebook logged in!");
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [self saveUserFacebookDetail];
+            
         }
     }];
+}
+
+- (void) saveUserFacebookDetail
+{
+    [FBRequestConnection
+     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+         if (!error) {
+             NSLog(@"%@", result);
+             
+             NSString *facebookId = [result objectForKey:@"id"];
+             NSString *avatarString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=160&type=normal&width=160", facebookId];
+             NSString *name = [result objectForKey:@"name"];
+             NSString *email = [result objectForKey:@"email"];
+             
+             PDUser *user = (PDUser*)[PDUser currentUser];
+             
+             user.email = email;
+             user.avatar = avatarString;
+             user.name = name;
+             
+             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                 [ProgressHUD dismiss];
+                 if (!error) {
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                 } else {
+                     [ProgressHUD showError:@"Error logging in"];
+                     [PDUser logOut];
+                 }
+             }];
+             
+         }
+     }];
 }
 @end

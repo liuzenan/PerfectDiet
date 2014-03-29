@@ -17,5 +17,6 @@
 +(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 + (NSString*) getProductivityDescription:(NSInteger) todo withDone:(NSInteger)done;
 + (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block;
-
++ (void) getAllActiveUsersWithBlock:(void(^)(NSArray *users, NSError *error)) block;
++ (void) getUserFollowFeedWithBlock:(void(^)(NSArray *feeds)) block;
 @end

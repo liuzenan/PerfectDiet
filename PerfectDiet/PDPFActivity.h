@@ -8,6 +8,7 @@
 
 #import <Parse/Parse.h>
 #import "PDActivityType.h"
+#import "PDUser.h"
 
 @interface PDPFActivity : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
@@ -27,5 +28,6 @@
 @property (retain) NSString *item_name;
 @property NSInteger item_subtype;
 @property (retain) NSString *item_icon;
+@property (retain) PDUser *creatorObject;
 
 @end
