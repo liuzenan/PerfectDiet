@@ -10,9 +10,7 @@
 #import "PDLogScreenCell.h"
 #import "PDMoodWheelView.h"
 
-
-
-@interface PDLogViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate>
+@interface PDLogViewController : PDBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate>
 
 @property (weak, nonatomic) NSArray *logItems;
 @property (weak, nonatomic) IBOutlet UIButton *activityButton;

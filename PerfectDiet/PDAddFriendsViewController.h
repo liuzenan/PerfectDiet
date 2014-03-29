@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PDAddFriendsViewController : UITableViewController
+@interface PDAddFriendsViewController : PDBaseTableViewController
+
+@property (nonatomic, strong) NSArray *userList;
+
 - (IBAction)doneButtonPressed:(id)sender;
 
 @end

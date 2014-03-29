@@ -55,7 +55,7 @@
     self.tabIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"down_arrow"]];
     CGRect temp = self.tabIndicator.frame;
     temp.origin.x = 37;
-    temp.origin.y = 142;
+    temp.origin.y = 84;
     self.tabIndicator.frame = temp;
     [self.view addSubview:self.tabIndicator];
     

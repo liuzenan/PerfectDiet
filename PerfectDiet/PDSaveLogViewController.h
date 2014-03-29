@@ -14,7 +14,7 @@
 #import "PDMoreItemTableViewController.h"
 #import "PDPFActivity.h"
 
-@interface PDSaveLogViewController : UIViewController <VPPLocationControllerGeocoderDelegate, VPPLocationControllerLocationDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddMoodDelegate, AddNoteDelegate>
+@interface PDSaveLogViewController : PDBaseViewController <VPPLocationControllerGeocoderDelegate, VPPLocationControllerLocationDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddMoodDelegate, AddNoteDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *itemNameButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemType;

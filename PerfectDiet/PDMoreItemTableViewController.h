@@ -15,7 +15,7 @@
 
 @end
 
-@interface PDMoreItemTableViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
+@interface PDMoreItemTableViewController : PDBaseTableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
 - (IBAction)cancelButtonPressed:(id)sender;
 
 @property (weak, nonatomic) id<PDMoreItemDelegate> typeDelegate;

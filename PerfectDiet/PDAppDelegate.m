@@ -12,6 +12,7 @@
 #import <ProgressHUD/ProgressHUD.h>
 #import "PDPFActivity.h"
 #import "PDActivityType.h"
+#import "PDFollow.h"
 
 @implementation PDAppDelegate
 
@@ -20,6 +21,7 @@
     // Override point for customization after application launch.
     [PDActivityType registerSubclass];
     [PDPFActivity registerSubclass];
+    [PDFollow registerSubclass];
     [Parse setApplicationId:@"oJctCPN8uHayUuR48fTJXe1F9Qtp9k8Pa9gLHaKb"
                   clientKey:@"CsMXy8RdGLhjMzroaIo8pfokE8OGZHJhBRbfJVAe"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

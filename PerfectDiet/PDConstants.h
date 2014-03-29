@@ -20,6 +20,7 @@ extern NSInteger const ADD_BUTTON_ID;
 extern NSString* const STORYBOARD_NAME;
 extern NSString* const COLLECTION_VIEW_CELL;
 extern NSString* const BACKGROUND_COLOR;
+extern NSString* const NAVIGATION_BAR_COLOR;
 
 typedef enum{
     kActivity = 0,

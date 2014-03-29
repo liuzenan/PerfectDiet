@@ -14,7 +14,7 @@
 
 @end
 
-@interface PDSaveProductivityLogViewController : UIViewController
+@interface PDSaveProductivityLogViewController : PDBaseViewController
 @property (weak, nonatomic) id<PDSaveProductivityDelegate> delegate;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)saveButtonPressed:(id)sender;

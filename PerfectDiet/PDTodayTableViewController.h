@@ -10,7 +10,7 @@
 #import "PDPFActivity.h"
 #import "PDSaveProductivityLogViewController.h"
 
-@interface PDTodayTableViewController : UITableViewController <PDSaveProductivityDelegate>
+@interface PDTodayTableViewController : PDBaseTableViewController <PDSaveProductivityDelegate>
 
 @property (nonatomic, strong) NSMutableArray* logItems;
 @property (nonatomic, strong) PDPFActivity *productivity;

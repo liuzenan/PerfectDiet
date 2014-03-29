@@ -16,7 +16,7 @@
 @end
 
 
-@interface PDAddNoteViewController : UIViewController <UITextViewDelegate>
+@interface PDAddNoteViewController : PDBaseViewController <UITextViewDelegate>
 @property (nonatomic, weak) id<AddNoteDelegate> delegate;
 @property (weak, nonatomic) IBOutlet CHTTextView *noteView;
 - (IBAction)cancelButtonPressed:(id)sender;

@@ -20,6 +20,7 @@
 @interface PDTodayTableViewController ()<PDDaySelectDelegate>{
     THLabel *date;
     NSDateFormatter *formatter;
+    UIImageView *imageView;
 }
 
 @end
@@ -74,7 +75,7 @@
     formatter = [[NSDateFormatter alloc] init];
     NSLocale *locale = [NSLocale currentLocale];
     [formatter setLocale:locale];
-    [formatter setDateFormat:@"EEEE, d MMMM"];
+    [formatter setDateFormat:@" EEEE, d MMMM"];
     
     [date setText:[formatter stringFromDate:self.reviewDate]];
     [date setFont:[UIFont boldSystemFontOfSize:24.0f]];
@@ -82,16 +83,20 @@
     
     
     THLabel *stats = [[THLabel alloc] initWithFrame:CGRectMake(30, 110, 260, 40)];
-    [stats setText:@"2 Activities, 5 Moods, 2 Food"];
+    [stats setText:@"  2 Activities, 5 Moods, 2 Food"];
     [stats setFont:[UIFont systemFontOfSize:14.0f]];
     [stats setTextColor:[UIColor whiteColor]];
     [stats setShadowBlur:4.0f];
     [stats setShadowOffset:CGSizeMake(0.0f, 0.0f)];
     [stats setShadowColor:[UIColor blackColor]];
     [stats setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
-
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ParallaxImage.jpg"]];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self.reviewDate];
+    
+    NSString *dayString =  [NSString stringWithFormat:@"%02lu", [comp day]];
+    
+    imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"ParallaxImage%@.jpg", dayString]]];
     [imageView setFrame:containerView.frame];
     [imageView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth)];
     [imageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -99,6 +104,8 @@
     [containerView addSubview:imageView];
     [containerView insertSubview:date aboveSubview:imageView];
     [containerView insertSubview:stats aboveSubview:imageView];
+    
+    
     
     [self.tableView addParallaxWithView:containerView andHeight:160.0f];
     
@@ -156,6 +163,13 @@
     self.logItems = [NSMutableArray array];
     [self.tableView reloadData];
     
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self.reviewDate];
+    
+    NSString *dayString =  [NSString stringWithFormat:@"%02lu", [comp day]];
+    
+    [imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ParallaxImage%@.jpg", dayString]]];
+    
     [PDActivityDataController getLoggedItemsForDate:self.reviewDate withBlock:^(NSArray *objects, NSError *error) {
         self.logItems = [NSMutableArray arrayWithArray:objects];
         [self findProductivity];
@@ -177,7 +191,6 @@
     
     [date setText:[formatter stringFromDate:self.reviewDate]];
     
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSUInteger dayOfYear =
     [gregorian ordinalityOfUnit:NSDayCalendarUnit
                          inUnit:NSYearCalendarUnit forDate:[NSDate date]];

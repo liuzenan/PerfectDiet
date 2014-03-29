@@ -1,21 +1,18 @@
 //
-//  PDMonthTableViewController.m
+//  PDMessagesTableViewController.m
 //  PerfectDiet
 //
-//  Created by Liu Zenan on 28/3/14.
+//  Created by Liu Zenan on 29/3/14.
 //  Copyright (c) 2014 NUS. All rights reserved.
 //
 
-#import "PDMonthTableViewController.h"
-#import "PDActivityDataController.h"
+#import "PDMessagesTableViewController.h"
 
-@interface PDMonthTableViewController ()
-
-@property (nonatomic, strong) CKCalendarView *calendar;
+@interface PDMessagesTableViewController ()
 
 @end
 
-@implementation PDMonthTableViewController
+@implementation PDMessagesTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,14 +32,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.calendar = [[CKCalendarView alloc] init];
-    
-    self.calendar.delegate = self;
-    
-    [PDActivityDataController getMonthLoggedDates:[NSDate date] withBlock:^(NSDictionary *dates, NSError *error) {
-        [self.calendar colorLoggedDateButtons:dates];
-    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,94 +40,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-#pragma mark - Calendar delegates
-
--(void)calendar:(CKCalendarView *)calendar didSelectDate:(NSDate *)date
-{
-    if (date == nil) {
-        return;
-    }
-    
-    if ([date compare:[NSDate date]] == NSOrderedDescending) {
-        return;
-    }
-    
-    NSLog(@"did select date:%@", date);
-    
-    [self.delegate didSelectDate:date];
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
-
-
--(void)calendar:(CKCalendarView *)calendar didChangeToMonth:(NSDate *)date
-{
-    [PDActivityDataController getMonthLoggedDates:date withBlock:^(NSDictionary *dates, NSError *error) {
-        [self.calendar colorLoggedDateButtons:dates];
-    }];
-}
-
-
--(BOOL)calendar:(CKCalendarView *)calendar willSelectDate:(NSDate *)date
-{
-    return YES;
-}
-
--(BOOL)calendar:(CKCalendarView *)calendar willChangeToMonth:(NSDate *)date
-{
-    return YES;
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 2;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    if (section==0) {
-        return 1;
-    }
-    return 10;
+    return 0;
 }
 
-
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    UITableViewCell *cell;
+    // Configure the cell...
     
-    if (indexPath.section == 0) {
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:@"CalendarCell" forIndexPath:indexPath];
-        [cell addSubview:self.calendar];
-        return cell;
-        
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"TrendCell" forIndexPath:indexPath];
-        
-        // Configure the cell...
-        
-        return cell;
-    }
-    
+    return cell;
 }
-
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0) {
-        return 350.0f;
-    } else {
-        return 44.0f;
-    }
-}
-
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -189,17 +116,7 @@
 }
 */
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if (section == 1) {
-        return @"Trends";
-    } else {
-        return nil;
-    }
-}
-
-- (IBAction)TodayPressed:(id)sender {
-    [self.delegate didSelectDate:[NSDate date]];
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)doneButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

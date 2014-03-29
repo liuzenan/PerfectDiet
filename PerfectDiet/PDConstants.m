@@ -19,6 +19,7 @@ NSInteger const ADD_BUTTON_ID = -1;
 NSString* const STORYBOARD_NAME = @"Main_iPhone";
 NSString* const COLLECTION_VIEW_CELL = @"LogScreenCell";
 NSString* const BACKGROUND_COLOR = @"#f8f8f8";
+NSString* const NAVIGATION_BAR_COLOR = @"#1abc9c";
 
 @implementation PDConstants
 

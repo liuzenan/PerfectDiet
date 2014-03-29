@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PDChooseTypeTableViewController.h"
 
-@interface PDNewItemViewController : UITableViewController <UITextFieldDelegate, PDChooseTypeDelegate>
+@interface PDNewItemViewController : PDBaseTableViewController <UITextFieldDelegate, PDChooseTypeDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
 - (IBAction)doneEditing:(id)sender;

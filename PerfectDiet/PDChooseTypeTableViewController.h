@@ -14,7 +14,7 @@
 
 @end
 
-@interface PDChooseTypeTableViewController : UITableViewController
+@interface PDChooseTypeTableViewController : PDBaseTableViewController
 
 @property (nonatomic, weak) id<PDChooseTypeDelegate> typeDelegate;
 @property (nonatomic, strong) NSArray *typeList;

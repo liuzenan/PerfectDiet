@@ -12,6 +12,13 @@
 @implementation PDActivityDataController
 
 
+
++ (void) getAllActiveUsersWithBlock:(void(^)(NSArray *users, NSError *error)) block
+{
+    PFQuery *query = [PFUser query];
+    
+}
+
 + (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block
 {
     PFQuery *query = [PDPFActivity query];

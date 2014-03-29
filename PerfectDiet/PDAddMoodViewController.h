@@ -19,7 +19,7 @@
 
 @end
 
-@interface PDAddMoodViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate, PDMoreItemDelegate>
+@interface PDAddMoodViewController : PDBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate, PDMoreItemDelegate>
 
 @property (weak, nonatomic) id<AddMoodDelegate> delegate;
 @property (weak, nonatomic) NSArray *logItems;

@@ -15,7 +15,7 @@
 
 @end
 
-@interface PDMonthTableViewController : UITableViewController <CKCalendarDelegate>
+@interface PDMonthTableViewController : PDBaseTableViewController <CKCalendarDelegate>
 
 - (IBAction)TodayPressed:(id)sender;
 @property (nonatomic, weak) id<PDDaySelectDelegate> delegate;
