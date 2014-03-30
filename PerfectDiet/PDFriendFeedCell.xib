@@ -43,12 +43,13 @@
                         <rect key="frame" x="3" y="18" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnr-ib-lLS">
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnr-ib-lLS">
                         <rect key="frame" x="286" y="17" width="24" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="icon_like">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
+                        <state key="normal" image="icon_like"/>
+                        <connections>
+                            <action selector="likeButtonPressed:" destination="9e8-Fh-RKD" eventType="touchUpInside" id="JBg-yV-LGh"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

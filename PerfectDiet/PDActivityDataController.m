@@ -8,14 +8,50 @@
 
 #import "PDActivityDataController.h"
 #import "PDUser.h"
-
+#import "PFCloud+Cache.h"
 
 @implementation PDActivityDataController
 
 
++ (void) getMessagesWithBlock:(void(^)(NSArray* messages, NSError *error)) block
+{
+    
+    [PFCloud callFunctionInBackground:@"fetchMessages"
+                       withParameters:@{}
+                          cachePolicy:kPFCachePolicyNetworkElseCache
+                                block:^(NSArray *msgs, NSError *error) {
+        NSLog(@"%@", error);
+        block(msgs, error);
+    }];
+    
+}
+
++ (void) followUser:(NSString*) user WithBlock:(void(^)(NSError *error)) block
+{
+    [PFCloud callFunctionInBackground:@"followUser"
+                       withParameters:@{@"targetUser": user}
+                                block:^(id object, NSError *error) {
+        NSLog(@"%@",error);
+        block(error);
+    }];
+}
+
++ (void) likePDActivityFeed:(NSString*) fId  WithBlock:(void(^)(NSError *error)) block
+{
+    [PFCloud callFunctionInBackground:@"likeFeed"
+                       withParameters:@{@"feedId" : fId}
+                                block:^(PFObject *object, NSError *error) {
+        block(error);
+    }];
+}
+
+
 + (void) getUserFollowFeedWithBlock:(void(^)(NSArray *feeds)) block
 {
-    [PFCloud callFunctionInBackground:@"followFeed" withParameters:@{} block:^(PFObject *object, NSError *error) {
+    [PFCloud callFunctionInBackground:@"fetchFollowedFeeds"
+                       withParameters:@{}
+                          cachePolicy:kPFCachePolicyCacheThenNetwork
+                                block:^(PFObject *object, NSError *error) {
         if (!error) {
             NSArray *array = [object objectForKey:@"feed"];
             block(array);
@@ -27,11 +63,11 @@
 
 + (void) getAllActiveUsersWithBlock:(void(^)(NSArray *users, NSError *error)) block
 {
-    PFQuery *query = [PDUser query];
-    
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+    [PFCloud callFunctionInBackground:@"fetchActiveUsers"
+                       withParameters:@{}
+                          cachePolicy:kPFCachePolicyNetworkElseCache
+                                block:^(NSArray *objects, NSError *error) {
         block(objects, error);
     }];
     
@@ -39,7 +75,6 @@
 
 + (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block
 {
-    PFQuery *query = [PDPFActivity query];
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:date];
@@ -52,49 +87,59 @@
     
     // set last of month
     [comps setMonth:[comps month]+1];
-    [comps setDay:1];
+    [comps setDay:0];
     NSDate *tDateMonth = [calendar dateFromComponents:comps];
     
-    [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:firstDayOfMonthDate]];
-    [query whereKey:@"time" lessThan:[PDActivityDataController endOfDay:tDateMonth]];
-    [query whereKey:@"creator" equalTo:[[PFUser currentUser] objectId]];
-    [query orderByAscending:@"time"];
-    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        
-        for (PDPFActivity *item in objects) {
-            NSDate *itemDate = item.time;
-            NSDateComponents* comps = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:itemDate];
-            
-            NSUInteger day = [comps day];
-            NSString *dayString = [NSString stringWithFormat:@"%lu", day];
-            
-            if ([dict valueForKey:dayString] == nil) {
-                [dict setObject:[NSNumber numberWithBool:YES] forKey:dayString];
-            }
-            
-        }
-        
-        block(dict, error);
-        
+    
+    NSDictionary *params = @{@"creator": [[PFUser currentUser] username],
+                             @"startTime" : [PDActivityDataController begginingOfDay:firstDayOfMonthDate],
+                             @"endTime" : [PDActivityDataController endOfDay:tDateMonth]};
+    
+    
+    [PFCloud callFunctionInBackground:@"fetchLogsForDuration"
+                       withParameters:params
+                          cachePolicy:kPFCachePolicyCacheThenNetwork block:^(NSArray *objects, NSError *error) {
+                              
+                              NSCalendar* calendar = [NSCalendar currentCalendar];
+                              
+                              NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                              
+                              for (PDPFActivity *item in objects) {
+                                  NSDate *itemDate = item.time;
+                                  NSDateComponents* comps = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:itemDate];
+                                  
+                                  NSUInteger day = [comps day];
+                                  NSString *dayString = [NSString stringWithFormat:@"%lu", day];
+                                  
+                                  if ([dict valueForKey:dayString] == nil) {
+                                      [dict setObject:[NSNumber numberWithBool:YES] forKey:dayString];
+                                  }
+                                  
+                              }
+                              
+                              block(dict, error);
     }];
+    
 }
 
-+ (NSString*) getProductivityDescription:(NSInteger) todo withDone:(NSInteger)done
++ (NSArray*) getProductivityDescription:(NSInteger) todo withDone:(NSInteger)done
 {
-    NSString * desc = @"";
+    NSMutableArray *desc = [NSMutableArray arrayWithCapacity:2];
 
     if (todo >66) {
-        desc = @"You are very productive today";
+        [desc addObject:@"You had lots of work to do."];
     } else if (todo > 33) {
-        
-        desc = @"Some work to do";
+        [desc addObject:@"Average workload."];
     } else {
-        desc = @"Not much to do";
+        [desc addObject:@"Not much work today."];
+    }
+    
+    if (done > 70) {
+        [desc addObject:@"Feeling productive"];
+    } else if (done > 50) {
+        [desc addObject:@"Average productivity"];
+    } else {
+        [desc addObject:@"Not productive"];
     }
     
     return desc;
@@ -115,7 +160,7 @@
     PFQuery *query = [PDActivityType query];
     [query whereKey:@"item_type" equalTo:[NSNumber numberWithInt:type]];
     [query orderByAscending:@"item_name"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         block(objects, error);
     }];
@@ -125,15 +170,17 @@
 +(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block
 {
     
-    PFQuery *query = [PDPFActivity query];
-    [query whereKey:@"time" greaterThanOrEqualTo:[PDActivityDataController begginingOfDay:date]];
-    [query whereKey:@"time" lessThanOrEqualTo:[PDActivityDataController endOfDay:date]];
-    [query whereKey:@"creator" equalTo:[[PFUser currentUser] objectId]];
-    [query orderByAscending:@"time"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    NSDictionary *params = @{@"creator": [[PDUser currentUser] username],
+                             @"startTime": [PDActivityDataController begginingOfDay:date],
+                             @"endTime":[PDActivityDataController endOfDay:date]};
+    
+    [PFCloud callFunctionInBackground:@"fetchLogsForDuration"
+                       withParameters:params
+                          cachePolicy:kPFCachePolicyCacheThenNetwork
+                                block:^(NSArray *objects, NSError *error) {
         block(objects, error);
     }];
+    
 }
 
 

@@ -35,7 +35,27 @@
     // Configure the view for the selected state
 }
 
+-(void)setIsLiked:(BOOL)isLiked
+{
+    _isLiked = isLiked;
+    if (_isLiked) {
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_liked"] forState:UIControlStateNormal];
+        [self.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
+
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
+        [self.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
+
+    }
+}
+
 - (IBAction)likeButtonPressed:(id)sender {
+    
+    if (self.feedId && !self.isLiked) {
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_liked"] forState:UIControlStateNormal];
+        [self.delegate didLikeFeed:self.feedId forCell:self];
+    }
+    
 }
 
 - (void) setupNote
@@ -74,6 +94,7 @@
     self.avatar.layer.masksToBounds = YES;
     self.avatar.layer.cornerRadius = 20.0f;
     
+    [self.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
     
 }
 @end

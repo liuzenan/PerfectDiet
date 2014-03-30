@@ -11,6 +11,7 @@
 #import "PDActivityDataController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "PDUser.h"
+#import "PDActivityDataController.h"
 
 @interface PDAddFriendsViewController () <PDAddFriendCellDelegate>
 
@@ -38,14 +39,37 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.userList = [NSArray array];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+
+- (void) reloadData
+{
     [PDActivityDataController getAllActiveUsersWithBlock:^(NSArray *users, NSError *error) {
         if (!error) {
-            self.userList = users;
-            [self.tableView reloadData];
+            
+            @try {
+                [[PDUser currentUser] refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    if (!error) {
+                        self.userList = users;
+                        [self.tableView reloadData];
+                    }
+                }];
+            }
+            @catch (NSException *exception) {
+            }
+            @finally {
+            }
+            
+
         }
         
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,15 +102,17 @@
     NSURL *imageURL = [NSURL URLWithString:user.avatar];
     [cell.profileImage setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     [cell.name setText:user.name];
-    cell.userId = user.objectId;
+    cell.userName = [user username];
     cell.delegate = self;
     
-    NSString *userId = user.objectId;
+    NSString *userId = [user username];
     
     PDUser *current = [PDUser currentUser];
     NSArray *followings = current.following;
     
     BOOL isFollowing = NO;
+    
+    NSLog(@"following:%@", followings);
     
     for (NSString *following in followings) {
         if ([userId isEqualToString:following]) {
@@ -160,31 +186,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)didAddFriend:(NSString *)userId forCell:(id)cell
+-(void)didAddFriend:(NSString *)userName forCell:(id)cell
 {
-    PDFindFriendTableViewCell *ffCell = (PDFindFriendTableViewCell*)cell;
-    PDUser *me = [PDUser currentUser];
-    NSArray *fo = me.following;
-    NSMutableArray *array = [NSMutableArray array];
-    if (fo) {
-       array = [NSMutableArray arrayWithArray:fo];
-    }
-    
-    BOOL exists = NO;
-    for (NSString *user  in array) {
-        if ([user isEqualToString:userId]) {
-            exists = YES;
-            break;
+
+    [PDActivityDataController followUser:userName WithBlock:^(NSError *error) {
+        if (!error) {
+            PDFindFriendTableViewCell *ffc = (PDFindFriendTableViewCell*)cell;
+            [ffc setIsFollowed:YES];
+            [self reloadData];
         }
-    }
-    if (!exists) {
-        [array addObject:userId];
-        me.following = array;
-        [me saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [ffCell setIsFollowed:YES];
-            [self.tableView reloadData];
-        }];
-    }
+    }];
     
 }
 

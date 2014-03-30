@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *productivityLabel;
 @property (weak, nonatomic) IBOutlet BKECircularProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UILabel *progressValue;
+@property (weak, nonatomic) IBOutlet UILabel *subtitle;
 
 @end

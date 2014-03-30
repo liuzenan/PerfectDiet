@@ -45,6 +45,8 @@
     [self setNeedsStatusBarAppearanceUpdate];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

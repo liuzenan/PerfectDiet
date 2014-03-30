@@ -14,3 +14,8 @@ pod 'DALinedTextView'
 pod 'CKCalendar'
 pod 'BKECircularProgressView'
 pod "AFNetworking", "~> 2.0"
+pod "SKBounceAnimation"
+pod 'BBBadgeBarButtonItem'
+pod 'TMCache'
+pod 'NSData+MD5Digest'
+pod 'Reachability'

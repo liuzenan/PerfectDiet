@@ -20,4 +20,7 @@
     #import <ProgressHUD/ProgressHUD.h>
     #import "PDBaseViewController.h"
     #import "PDBaseTableViewController.h"
+    #import "TestFlight.h"
+    #import "TestFlight+AsyncLogging.h"
+    #import "TestFlight+ManualSessions.h"
 #endif

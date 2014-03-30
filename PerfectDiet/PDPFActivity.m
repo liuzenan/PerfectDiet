@@ -27,6 +27,7 @@
 @dynamic item_icon;
 @dynamic item_subtype;
 @dynamic creatorObject;
+@dynamic likedBy;
 
 +(NSString *)parseClassName
 {

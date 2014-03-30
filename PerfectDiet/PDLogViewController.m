@@ -12,8 +12,12 @@
 #import "PDMoreItemTableViewController.h"
 #import "PDSaveProductivityLogViewController.h"
 #import "PDActivityDataController.h"
+#import <SKBounceAnimation/SKBounceAnimation.h>
+#import "PDSettingsViewController.h"
+#define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
+#define fequalzero(a) (fabs(a) < FLT_EPSILON)
 
-@interface PDLogViewController ()
+@interface PDLogViewController () <PDSettingsDelegate>
 
 @end
 
@@ -35,7 +39,7 @@
     
     
     [self.view setBackgroundColor:[UIColor colorWithHexString:BACKGROUND_COLOR]];
-    
+    [self.scrollView setBackgroundColor:[UIColor colorWithHexString:BACKGROUND_COLOR]];
     // load collection view
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LogCollectionView" owner:self options:nil];
     self.collectionView = (UICollectionView*) [nib objectAtIndex:0];
@@ -74,7 +78,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self resetTabs];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -82,8 +93,24 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ShowSettings"]) {
+        UINavigationController *nc = [segue destinationViewController];
+        PDSettingsViewController *sv = (PDSettingsViewController*)[nc topViewController];
+        sv.delegate = self;
+    }
 }
-*/
+
+
+- (void) resetTabs
+{
+    [self setCurrentTypeAndHighlight:kActivity];
+    self.logItems = [PDPropertyListController loadActivityList];
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 - (IBAction)activityButtonPressed:(id)sender {
     [self setCurrentTypeAndHighlight:kActivity];
@@ -117,8 +144,8 @@
 }
 
 - (IBAction)productivityButtonPressed:(id)sender {
-    [ProgressHUD show:@"Loading"];
-    [self setCurrentType:kProductivity];
+    [ProgressHUD show:@"Loading..."];
+    [self resetTabs];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     PDSaveProductivityLogViewController *spl = (PDSaveProductivityLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveProductivityLog"];
@@ -238,10 +265,52 @@
     for (UIView* view in subviews) {
         if (view.tag == selectedTab) {
             [view setAlpha:1];
+            [self bounceDown:view];
         } else {
-            [view setAlpha:0.5];
+            [view setAlpha:0.8];
+            [self bounceUp:view];
         }
     }
+}
+
+
+- (void) bounceUp:(UIView*)view
+{
+    NSString *keyPath = @"position.y";
+    
+    NSNumber *value = [view.layer valueForKeyPath:keyPath];
+    
+    if (fequal([value floatValue], 35.0f)) {
+        return;
+    }
+    
+    id finalValue = [NSNumber numberWithFloat:35.0f];
+    [view.layer setValue:finalValue forKeyPath:keyPath];
+    
+    SKBounceAnimation *bounceAnimation = [SKBounceAnimation animationWithKeyPath:keyPath];
+    bounceAnimation.fromValue = [NSNumber numberWithFloat:view.center.x];
+    bounceAnimation.toValue = finalValue;
+    bounceAnimation.duration = 0.8f;
+    bounceAnimation.numberOfBounces = 1;
+    
+    [view.layer addAnimation:bounceAnimation forKey:@"bounceUp"];
+}
+
+- (void) bounceDown:(UIView*)view
+{
+    
+    NSString *keyPath = @"position.y";
+    
+    id finalValue = [NSNumber numberWithFloat:45.0f];
+    [view.layer setValue:finalValue forKeyPath:keyPath];
+    
+    SKBounceAnimation *bounceAnimation = [SKBounceAnimation animationWithKeyPath:keyPath];
+    bounceAnimation.fromValue = [NSNumber numberWithFloat:view.center.x];
+    bounceAnimation.toValue = finalValue;
+    bounceAnimation.duration = 0.8f;
+    bounceAnimation.numberOfBounces = 1;
+    
+    [view.layer addAnimation:bounceAnimation forKey:@"bounceDown"];
 }
 
 - (void) positionTabIndicator:(PDLogType)type
@@ -263,5 +332,14 @@
     NSLog(@"tab indicator: x:%ld", (long)self.tabIndicator.frame.origin.x);
 }
 
+-(void)didLogout
+{
+    NSLog(@"did logout");
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
+        UINavigationController *sv = (UINavigationController*)[sb instantiateViewControllerWithIdentifier:@"SplashView"];
+        [self presentViewController:sv animated:YES completion:nil];
+    }];
+}
     
 @end

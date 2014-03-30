@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PDSettingsDelegate
+
+- (void) didLogout;
+
+@end
+
 @interface PDSettingsViewController : PDBaseTableViewController
+
+@property (nonatomic, weak) id<PDSettingsDelegate> delegate;
 - (IBAction)doneButtonPressed:(id)sender;
 
 @end

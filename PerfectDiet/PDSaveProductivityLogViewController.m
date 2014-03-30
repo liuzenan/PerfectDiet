@@ -73,8 +73,9 @@
     item.logged_time = [NSDate new];
     item.work_done = workDone;
     item.work_todo = workTodo;
-    item.creator = [[PDUser currentUser] objectId];
+    item.creator = [[PDUser currentUser] username];
     item.creatorObject = [PDUser currentUser];
+    item.likedBy = @[];
     
     
     [item saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

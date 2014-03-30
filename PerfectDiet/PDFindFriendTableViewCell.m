@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        [self.userImage setUserInteractionEnabled:NO];
     }
     return self;
 }
@@ -22,13 +23,16 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    [self.userImage setUserInteractionEnabled:NO];
 }
 
 -(void)setIsFollowed:(BOOL)isFollowed
 {
     _isFollowed = isFollowed;
     if (_isFollowed) {
-        [self.addbutton setImage:[UIImage imageNamed:@"icon_checked_user"] forState:UIControlStateNormal];
+        [self.userImage setImage:[UIImage imageNamed:@"icon_checked_user"]];
+    } else {
+        [self.userImage setImage:[UIImage imageNamed:@"icon_add_user"]];
     }
 }
 
@@ -40,8 +44,9 @@
 }
 
 - (IBAction)addPressed:(id)sender {
-    if (self.userId && !self.isFollowed) {
-        [self.delegate didAddFriend:self.userId forCell:self];
+    if (self.userName && !self.isFollowed) {
+        [self.userImage setImage:[UIImage imageNamed:@"icon_checked_user"]];
+        [self.delegate didAddFriend:self.userName forCell:self];
     }
 }
 @end

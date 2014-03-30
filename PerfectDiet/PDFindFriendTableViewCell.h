@@ -10,7 +10,7 @@
 
 @protocol PDAddFriendCellDelegate
 
-- (void) didAddFriend:(NSString*) userId forCell:(id)cell;
+- (void) didAddFriend:(NSString*) userName forCell:(id)cell;
 
 @end
 
@@ -19,8 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UIButton *addbutton;
 @property (weak, nonatomic) IBOutlet UILabel *name;
-@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *userName;
 @property (assign, nonatomic) BOOL isFollowed;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
 - (IBAction)addPressed:(id)sender;
 
 @end

@@ -21,7 +21,7 @@
 @property (strong, nonatomic) UIImageView *tabIndicator;
 @property (assign, nonatomic) PDLogType currentType;
 @property (strong, nonatomic) UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *scrollView;
 
 - (IBAction)activityButtonPressed:(id)sender;
 - (IBAction)foodButtonPressed:(id)sender;

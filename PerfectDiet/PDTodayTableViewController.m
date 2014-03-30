@@ -232,18 +232,21 @@
         if (self.productivity) {
             [pdc.progressView setProgress:((CGFloat) self.productivity.work_done) / 100.0f];
             [pdc.progressValue setText:[NSString stringWithFormat:@"%ld", self.productivity.work_done]];
-            [pdc.productivityLabel setText:[PDActivityDataController getProductivityDescription:self.productivity.work_todo
-                                                                                       withDone:self.productivity.work_done]];
+            NSArray *desc = [PDActivityDataController getProductivityDescription:self.productivity.work_todo withDone:self.productivity.work_done];
+            [pdc.productivityLabel setText:(NSString*)[desc objectAtIndex:1]];
+            [pdc.subtitle setText:(NSString*) [desc objectAtIndex:0]];
         } else {
             
             if ([self.navigationItem.title isEqualToString:@"Today"]) {
                 [pdc.progressView setProgress:0.0f];
                 [pdc.progressValue setText:[NSString stringWithFormat:@"%d", 0]];
-                [pdc.productivityLabel setText:@"Tap to log productivity."];
+                [pdc.subtitle setText:@"Tap to log today's productivity"];
+                [pdc.productivityLabel setText:@"Productivity not logged"];
             } else {
                 [pdc.progressView setProgress:0.0f];
                 [pdc.progressValue setText:[NSString stringWithFormat:@"%d", 0]];
-                [pdc.productivityLabel setText:@"Productivity is not logged."];
+                [pdc.productivityLabel setText:@"Productivity not logged"];
+                [pdc.subtitle setText:@"You cannot log for previous days"];
             }
 
         }
@@ -346,6 +349,10 @@
         [self presentViewController:spl animated:YES completion:^{
             [ProgressHUD dismiss];
         }];
+    } else if(indexPath.section == 0 && self.productivity == nil){
+        [ProgressHUD showError:@"Day already passed."];
+    } else if(indexPath.section == 0) {
+        [ProgressHUD showError:@"Already logged."];
     }
 }
 

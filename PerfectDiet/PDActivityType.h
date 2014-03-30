@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "PFObject+NSCoding.h"
 
 @interface PDActivityType : PFObject<PFSubclassing>
 + (NSString *)parseClassName;

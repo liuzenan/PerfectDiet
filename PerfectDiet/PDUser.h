@@ -7,6 +7,7 @@
 //
 
 #import <Parse/PFUser.h>
+#import "PFObject+NSCoding.h"
 
 @interface PDUser : PFUser<PFSubclassing>
 

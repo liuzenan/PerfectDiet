@@ -93,7 +93,7 @@
     self.title = @"Title";
     self.desc = @"Default Description";
     
-    self.imgPositionY    = 50.0f;
+    self.imgPositionY    = 90.0f;
     self.titlePositionY  = 180.0f;
     self.descPositionY   = 160.0f;
     self.titleFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
@@ -111,7 +111,7 @@
     UIView *pageView = [[UIView alloc] initWithFrame:self.contentView.bounds];
     
     if (self.titleImageView == nil) {
-        UIImageView *titleImageView = self.titleImage != nil ? [[UIImageView alloc] initWithImage:self.titleImage] : [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 128, 128)];
+        UIImageView *titleImageView = self.titleImage != nil ? [[UIImageView alloc] initWithImage:self.titleImage] : [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120, 213)];
         self.titleImageView = titleImageView;
     }
     [pageView addSubview:self.titleImageView];

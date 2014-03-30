@@ -11,8 +11,9 @@
 #import "PDFriendFeedCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <NSDate+TimeAgo/NSDate+TimeAgo.h>
+#import "BBBadgeBarButtonItem.h"
 
-@interface PDFriendsTableViewController ()
+@interface PDFriendsTableViewController () <PDFriendFeedCellDelegate>
 
 @end
 
@@ -51,6 +52,7 @@
     
     self.feedList = [NSArray array];
 
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,11 +64,31 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+
+-(void)messageButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"ReadMessage" sender:self];
+}
+
+- (void) reloadData
+{
+    
+    UIButton *messageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [messageButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [messageButton setImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateNormal];
+    BBBadgeBarButtonItem *barButtonItem = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:messageButton];
+    barButtonItem.badgeValue = [NSString stringWithFormat:@"%ld", [UIApplication sharedApplication].applicationIconBadgeNumber];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    [messageButton addTarget:self action:@selector(messageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     [PDActivityDataController getUserFollowFeedWithBlock:^(NSArray *feeds) {
         self.feedList = feeds;
         [self.tableView reloadData];
         if ([self.feedList count] == 0) {
-            UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"review_background_blank.png"]];
+            UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"review_background_feeds_blank.png"]];
             [tempImageView setFrame:self.tableView.frame];
             
             self.tableView.backgroundView = tempImageView;
@@ -105,7 +127,9 @@
     
     if ((PDLogType)item.item_type == kProductivity) {
         
-        title = @"Productivity";
+        NSArray *desc = [PDActivityDataController getProductivityDescription:item.work_todo withDone:item.work_done];
+        
+        title = (NSString*)[desc objectAtIndex:1];
         
     } else {
         
@@ -157,12 +181,12 @@
     
     // set time and location label
     [cell.time setText:[item.time timeAgo]];
+    [cell.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
+
     
-    [item.creatorObject fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        PDUser *user = (PDUser*)object;
-        NSURL *url = [NSURL URLWithString:user.avatar];
-        [cell.avatar setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    }];
+    PDUser *user = item.creatorObject ;
+    NSURL *url = [NSURL URLWithString:user.avatar];
+    [cell.avatar setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     // set duration label
     if ((PDLogType)item.item_type == kActivity) {
@@ -180,6 +204,23 @@
     } else {
         [cell.subtitle setText:item.location_name];
     }
+    
+    
+    cell.delegate = self;
+    cell.feedId = item.objectId;
+    
+    BOOL isLiked = NO;
+    
+    NSString *userName = [[PDUser currentUser] username];
+    
+    for (NSString *userId in item.likedBy) {
+        if ([userId isEqualToString:userName]) {
+            isLiked = YES;
+            break;
+        }
+    }
+    
+    [cell setIsLiked:isLiked];
     
     return cell;
 }
@@ -255,5 +296,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)didLikeFeed:(id)likedItem forCell:(id)cell
+{
+    NSString *itemId = (NSString*) likedItem;
+    [PDActivityDataController likePDActivityFeed:itemId WithBlock:^(NSError *error) {
+        if (!error) {
+            PDFriendFeedCell *ffc = cell;
+            [ffc setIsLiked:YES];
+            [self reloadData];
+        }
+    }];
+    
+}
 
 @end
