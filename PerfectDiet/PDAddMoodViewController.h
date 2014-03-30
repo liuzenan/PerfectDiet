@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PDMoodWheelView.h"
 #import "PDLogScreenCell.h"
 #import "PDPFActivity.h"
 #import "PDMoreItemTableViewController.h"
@@ -23,7 +22,6 @@
 
 @property (weak, nonatomic) id<AddMoodDelegate> delegate;
 @property (weak, nonatomic) NSArray *logItems;
-@property (strong, nonatomic) PDMoodWheelView *moodWheel;
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 

@@ -51,7 +51,6 @@
     [self.scrollView addSubview:self.collectionView];
     
     self.logItems = [PDPropertyListController loadActivityList];
-    [self setCurrentTypeAndHighlight:kActivity];
     [self setAppearance];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"LogCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:COLLECTION_VIEW_CELL];
@@ -63,12 +62,63 @@
     self.tabIndicator.frame = temp;
     [self.view addSubview:self.tabIndicator];
     
+    for (int i = 0; i < 4; i ++) {
+        UIButton *button = [self createTopButtonForType:i];
+        [self.topTabContainer addSubview:button];
+    }
+    
+    [self setCurrentTypeAndHighlight:kActivity Animated:NO];
+
 }
 
-- (void) setCurrentTypeAndHighlight:(PDLogType)currentType
+
+- (UIButton*) createTopButtonForType:(PDLogType) type
+{
+    UIButton *container = [[UIButton alloc] initWithFrame:CGRectMake(80.0f*type, -5.0f, 80.0f, 80.0f)];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(20.0f, 15.0f, 40.0f, 40.0f)];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 55.0f, 80.0f, 21.0f)];
+    [label setFont:[UIFont systemFontOfSize:12.0f]];
+    [label setTextColor:[UIColor whiteColor]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    
+    switch (type) {
+        case kActivity:
+            [image setImage:[UIImage imageNamed:@"icon_activity"]];
+            [label setText:@"Activity"];
+            [container addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        case kFood:
+            [image setImage:[UIImage imageNamed:@"icon_food"]];
+            [label setText:@"Food"];
+            [container addTarget:self action:@selector(foodButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        case kMood:
+            [image setImage:[UIImage imageNamed:@"icon_mood"]];
+            [label setText:@"Mood"];
+            [container addTarget:self action:@selector(moodButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        case kProductivity:
+            [image setImage:[UIImage imageNamed:@"icon_productivity"]];
+            [label setText:@"Productivity"];
+            [container addTarget:self action:@selector(productivityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        default:
+            break;
+    }
+    
+    image.userInteractionEnabled = NO;
+    label.userInteractionEnabled = NO;
+    [container addSubview:image];
+    [container addSubview:label];
+    container.tag = type;
+    return container;
+}
+
+- (void) setCurrentTypeAndHighlight:(PDLogType)currentType Animated:(BOOL)animated
 {
     _currentType = currentType;
-    [self highlightSelectedTab:currentType];
+    [self highlightSelectedTab:currentType Animated:animated];
     [self positionTabIndicator:currentType];
 }
 
@@ -77,14 +127,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self resetTabs];
-}
-
+//
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    for (int i = 0; i < 4; i ++) {
+//        UIView *v = [self.topTabContainer.subviews objectAtIndex:i];
+//        NSLog(@"tag:%ld", v.tag);
+//        CGRect f = v.frame;
+//        if (v.tag == self.currentType) {
+//            f.origin.y = 5.0f;
+//        } else {
+//            f.origin.y = -5.0f;
+//        }
+//        v.frame = f;
+//        
+//        NSLog(@"will: %@", NSStringFromCGRect(v.frame));
+//    }
+//}
 
 #pragma mark - Navigation
 
@@ -100,20 +160,13 @@
     }
 }
 
-
 - (void) resetTabs
 {
-    [self setCurrentTypeAndHighlight:kActivity];
-    self.logItems = [PDPropertyListController loadActivityList];
-    [self.collectionView performBatchUpdates:^{
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-    } completion:^(BOOL finished) {
-        
-    }];
+    [self setCurrentTypeAndHighlight:self.currentType Animated:YES];
 }
 
-- (IBAction)activityButtonPressed:(id)sender {
-    [self setCurrentTypeAndHighlight:kActivity];
+- (void)activityButtonPressed:(id)sender {
+    [self setCurrentTypeAndHighlight:kActivity Animated:YES];
     self.logItems = [PDPropertyListController loadActivityList];
     [self.collectionView performBatchUpdates:^{
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
@@ -123,8 +176,8 @@
     
 }
 
-- (IBAction)foodButtonPressed:(id)sender {
-    [self setCurrentTypeAndHighlight:kFood];
+- (void)foodButtonPressed:(id)sender {
+    [self setCurrentTypeAndHighlight:kFood Animated:YES];
     self.logItems = [PDPropertyListController loadFoodList];
     [self.collectionView performBatchUpdates:^{
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
@@ -133,8 +186,8 @@
     }];
 }
 
-- (IBAction)moodButtonPressed:(id)sender {
-    [self setCurrentTypeAndHighlight:kMood];
+- (void)moodButtonPressed:(id)sender {
+    [self setCurrentTypeAndHighlight:kMood Animated:YES];
     self.logItems = [PDPropertyListController loadMoodList];
     [self.collectionView performBatchUpdates:^{
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
@@ -143,9 +196,8 @@
     }];
 }
 
-- (IBAction)productivityButtonPressed:(id)sender {
+- (void)productivityButtonPressed:(id)sender {
     [ProgressHUD show:@"Loading..."];
-    [self resetTabs];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:STORYBOARD_NAME bundle:nil];
     PDSaveProductivityLogViewController *spl = (PDSaveProductivityLogViewController*)[sb instantiateViewControllerWithIdentifier:@"SaveProductivityLog"];
@@ -259,58 +311,69 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
 }
 
-- (void) highlightSelectedTab:(NSInteger) selectedTab
+- (void) highlightSelectedTab:(NSInteger) selectedTab Animated:(BOOL) animated
 {
     NSArray* subviews = [self.topTabContainer subviews];
     for (UIView* view in subviews) {
         if (view.tag == selectedTab) {
             [view setAlpha:1];
-            [self bounceDown:view];
+            [self bounceDown:view Animated:animated];
         } else {
             [view setAlpha:0.8];
-            [self bounceUp:view];
+            [self bounceUp:view Animated:animated];
         }
     }
 }
 
 
-- (void) bounceUp:(UIView*)view
+- (void) bounceUp:(UIView*)view Animated:(BOOL) animated
 {
+    
     NSString *keyPath = @"position.y";
+    
+    CGFloat f = 35.0f;
     
     NSNumber *value = [view.layer valueForKeyPath:keyPath];
     
-    if (fequal([value floatValue], 35.0f)) {
+    if (fequal([value floatValue], f)) {
         return;
     }
     
-    id finalValue = [NSNumber numberWithFloat:35.0f];
-    [view.layer setValue:finalValue forKeyPath:keyPath];
+    id finalValue = [NSNumber numberWithFloat:f];
     
     SKBounceAnimation *bounceAnimation = [SKBounceAnimation animationWithKeyPath:keyPath];
-    bounceAnimation.fromValue = [NSNumber numberWithFloat:view.center.x];
+    bounceAnimation.fromValue = [NSNumber numberWithFloat:view.layer.position.y];
     bounceAnimation.toValue = finalValue;
-    bounceAnimation.duration = 0.8f;
-    bounceAnimation.numberOfBounces = 1;
+    bounceAnimation.duration = 1.0f;
+    bounceAnimation.numberOfBounces = 2;
+    bounceAnimation.removedOnCompletion = NO;
     
     [view.layer addAnimation:bounceAnimation forKey:@"bounceUp"];
+    [view.layer setValue:finalValue forKeyPath:keyPath];
+
+
 }
 
-- (void) bounceDown:(UIView*)view
+- (void) bounceDown:(UIView*)view Animated:(BOOL) animated
 {
+    CGFloat f = 45.0f;
     
+
     NSString *keyPath = @"position.y";
     
-    id finalValue = [NSNumber numberWithFloat:45.0f];
-    [view.layer setValue:finalValue forKeyPath:keyPath];
+    id finalValue = [NSNumber numberWithFloat:f];
     
     SKBounceAnimation *bounceAnimation = [SKBounceAnimation animationWithKeyPath:keyPath];
-    bounceAnimation.fromValue = [NSNumber numberWithFloat:view.center.x];
+    bounceAnimation.fromValue = [NSNumber numberWithFloat:view.layer.position.y];
     bounceAnimation.toValue = finalValue;
-    bounceAnimation.duration = 0.8f;
-    bounceAnimation.numberOfBounces = 1;
+    bounceAnimation.duration = 1.0f;
+    bounceAnimation.numberOfBounces = 2;
+    bounceAnimation.removedOnCompletion = NO;
+
     
     [view.layer addAnimation:bounceAnimation forKey:@"bounceDown"];
+    [view.layer setValue:finalValue forKeyPath:keyPath];
+
 }
 
 - (void) positionTabIndicator:(PDLogType)type

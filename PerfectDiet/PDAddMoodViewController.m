@@ -35,18 +35,11 @@
     [self.collectionView setCenter:CGPointMake(160, 240)];
     [self.collectionView setContentInset:UIEdgeInsetsMake(30, 0, 0, 0)];
     
-    // load mood wheel view
-    nib = [[NSBundle mainBundle] loadNibNamed:@"LogMoodWheelView" owner:self options:nil];
-    self.moodWheel = (PDMoodWheelView*) [nib objectAtIndex:0];
-    CGRect frame = self.moodWheel.frame;
-    frame.origin = CGPointMake(320, 0);
-    [self.moodWheel setFrame:frame];
     
     // register collection view cell
     [self.collectionView registerNib:[UINib nibWithNibName:@"LogCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:COLLECTION_VIEW_CELL];
     
     [self.scrollView addSubview:self.collectionView];
-    [self insertMoodWheelView];
 
 }
 
@@ -87,12 +80,6 @@
     
     return cell;
     
-}
-
-- (void) insertMoodWheelView
-{
-    [self.scrollView addSubview:self.moodWheel];
-    [self.scrollView setContentSize:CGSizeMake(640, self.scrollView.frame.size.height)];
 }
 
 -(void)cellButtonPressedWithItemTypeId:(NSString *)itemTypeId itemCategory:(NSInteger)category
