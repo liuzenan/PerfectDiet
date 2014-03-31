@@ -43,6 +43,10 @@
     [PDActivityDataController getMonthLoggedDates:[NSDate date] withBlock:^(NSDictionary *dates, NSError *error) {
         [self.calendar colorLoggedDateButtons:dates];
     }];
+    
+    [PDActivityDataController getMonthTrendsForDate:[NSDate date] WithBlock:^(NSArray *trends, NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning

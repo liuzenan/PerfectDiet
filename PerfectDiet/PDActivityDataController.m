@@ -13,6 +13,21 @@
 @implementation PDActivityDataController
 
 
++(void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSError *error)) block
+{
+    
+    [PFCloud callFunctionInBackground:@"fetchTrendsForMonth"
+                       withParameters:@{@"date":date}
+                                block:^(NSDictionary *object, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"%@", object);
+
+                                    } else {
+                                        NSLog(@"%@", error);
+                                    }
+    }];
+}
+
 + (void) getMessagesWithBlock:(void(^)(NSArray* messages, NSError *error)) block
 {
     

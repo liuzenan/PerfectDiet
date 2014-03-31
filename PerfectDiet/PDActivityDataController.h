@@ -14,7 +14,7 @@
 
 + (void) getItemType:(NSString*)typeId withBlock:(void(^)(PDActivityType *object, NSError *error)) block;
 + (void) getItemTypeList:(PDLogType)type withBlock:(void(^)(NSArray *objects, NSError *error)) block;
-+(void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block;
++ (void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 + (NSArray*) getProductivityDescription:(NSInteger) todo withDone:(NSInteger)done;
 + (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block;
 + (void) getAllActiveUsersWithBlock:(void(^)(NSArray *users, NSError *error)) block;
@@ -22,4 +22,5 @@
 + (void) likePDActivityFeed:(NSString*) fId  WithBlock:(void(^)(NSError *error)) block;
 + (void) followUser:(NSString*) user WithBlock:(void(^)(NSError *error)) block;
 + (void) getMessagesWithBlock:(void(^)(NSArray* messages, NSError *error)) block;
++ (void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSError *error)) block;
 @end
