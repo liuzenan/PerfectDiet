@@ -85,9 +85,9 @@
         NSMutableAttributedString* mas = [NSMutableAttributedString attributedStringWithString:text];
         
         if (idx == 0) {
-            [mas setFont:[UIFont systemFontOfSize: 28.0f]];
+            [mas setFont:[UIFont systemFontOfSize: 24.0f]];
         } else {
-            [mas setFont:[UIFont systemFontOfSize: 16.0f]];
+            [mas setFont:[UIFont systemFontOfSize: 15.0f]];
         }
         
        
@@ -226,7 +226,7 @@
         NSAttributedString* attrStr = [self.formattedList objectAtIndex:indexPath.row];
         CGSize sz = [attrStr sizeConstrainedToSize:CGSizeMake(320.0f - left - 20.0f, CGFLOAT_MAX)];
         
-        cell.trendTextLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(left, 10.0f, 320.0f - left - 20.0f, sz.height)];
+        cell.trendTextLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(left, 20, 320.0f - left - 20.0f, sz.height)];
         cell.trendTextLabel.centerVertically = YES;
         
         [cell addSubview:cell.trendTextLabel];
@@ -249,7 +249,7 @@
     } else {
         NSAttributedString* attrStr = [self.formattedList objectAtIndex:indexPath.row];
         CGSize sz = [attrStr sizeConstrainedToSize:CGSizeMake(280.0f, CGFLOAT_MAX)];
-        return sz.height + 2*10.0f;
+        return sz.height + 2*20.0f;
     }
 }
 

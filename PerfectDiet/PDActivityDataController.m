@@ -61,27 +61,6 @@
                                             }
                                             
                                         }
-                                        
-                                        
-                                        // mood
-                                        
-                                        @try {
-                                            if (ns) {
-                                                [array addObject:[NSString stringWithFormat:@"You feel negative {#ee0c58|%ld%%} of the time.", (NSInteger)([ns floatValue] * 100)]];
-                                            }
-                                        }
-                                        @catch (NSException *exception) {
-                                            
-                                        }
-
-                                        @try {
-                                            if (ps) {
-                                                [array addObject:[NSString stringWithFormat:@"You feel positive {#ee0c58|%ld%%} of the time.", (NSInteger)([ps floatValue] * 100)]];
-                                            }
-                                        }
-                                        @catch (NSException *exception) {
-                                            
-                                        }
 
                                         
                                         // work
@@ -185,7 +164,7 @@
                                             
                                             @try {
                                                 if (exercise) {
-                                                    [array addObject:[NSString stringWithFormat:@"You total exercised {#ee0c58|%ld} hours in the past 30 days.", [exercise integerValue] / 3600]];
+                                                    [array addObject:[NSString stringWithFormat:@"You exercised {#ee0c58|%ld} hours in the past 30 days.", [exercise integerValue] / 3600]];
                                                 }
                                             }
                                             @catch (NSException *exception) {
@@ -215,6 +194,26 @@
 
                                             
 
+                                        }
+                                        
+                                        // mood
+                                        
+                                        @try {
+                                            if (ns) {
+                                                [array addObject:[NSString stringWithFormat:@"You feel negative {#ee0c58|%ld%%} of the time.", (NSInteger)([ns floatValue] * 100)]];
+                                            }
+                                        }
+                                        @catch (NSException *exception) {
+                                            
+                                        }
+                                        
+                                        @try {
+                                            if (ps) {
+                                                [array addObject:[NSString stringWithFormat:@"You feel positive {#ee0c58|%ld%%} of the time.", (NSInteger)([ps floatValue] * 100)]];
+                                            }
+                                        }
+                                        @catch (NSException *exception) {
+                                            
                                         }
                                         
                                         
