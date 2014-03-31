@@ -1014,11 +1014,6 @@
                                 <segue destination="vG8-h8-A0l" kind="push" identifier="PushMonth" id="4wt-HV-UzZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Trends" id="aqx-3G-aTo">
-                            <connections>
-                                <segue destination="GHX-bF-Fsd" kind="modal" id="GeW-sl-Z2L"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joh-Wa-ZBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
