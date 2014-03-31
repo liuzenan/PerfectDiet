@@ -23,4 +23,5 @@
 + (void) followUser:(NSString*) user WithBlock:(void(^)(NSError *error)) block;
 + (void) getMessagesWithBlock:(void(^)(NSArray* messages, NSError *error)) block;
 + (void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSError *error)) block;
++ (void) testFollow:(NSString*) user WithBlock:(void(^)(NSError *error)) block;
 @end

@@ -41,6 +41,16 @@
     
 }
 
++ (void) testFollow:(NSString*) user WithBlock:(void(^)(NSError *error)) block
+{
+    [PFCloud callFunctionInBackground:@"testFollow"
+                       withParameters:@{@"targetUser": user}
+                                block:^(id object, NSError *error) {
+                                    NSLog(@"%@",error);
+                                    block(error);
+                                }];
+}
+
 + (void) followUser:(NSString*) user WithBlock:(void(^)(NSError *error)) block
 {
     [PFCloud callFunctionInBackground:@"followUser"

@@ -138,6 +138,7 @@
     }
     
     [cell setIsFollowed:isFollowing];
+    cell.delegate = self;
     
     return cell;
 }

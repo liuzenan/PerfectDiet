@@ -50,6 +50,7 @@
 
 - (void) reloadData
 {
+    
     [PDActivityDataController getAllActiveUsersWithBlock:^(NSArray *users, NSError *error) {
         if (!error) {
             
