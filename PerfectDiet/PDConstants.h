@@ -26,7 +26,8 @@ typedef enum{
     kActivity = 0,
     kFood = 1,
     kMood = 2,
-    kProductivity = 3
+    kProductivity = 3,
+    kPDLogTypeCount = 4
 } PDLogType;
 
 @interface PDConstants : NSObject

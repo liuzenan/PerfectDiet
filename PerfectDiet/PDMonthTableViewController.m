@@ -8,10 +8,14 @@
 
 #import "PDMonthTableViewController.h"
 #import "PDActivityDataController.h"
+#import "PDTrendTableViewCell.h"
+#import <OHAttributedLabel/NSAttributedString+Attributes.h>
+#import <OHAttributedLabel/OHASBasicMarkupParser.h>
 
 @interface PDMonthTableViewController ()
 
 @property (nonatomic, strong) CKCalendarView *calendar;
+@property (nonatomic, strong) NSArray *formattedList;
 
 @end
 
@@ -40,13 +44,62 @@
     
     self.calendar.delegate = self;
     
-    [PDActivityDataController getMonthLoggedDates:[NSDate date] withBlock:^(NSDictionary *dates, NSError *error) {
+    self.formattedList = [NSArray array];
+    
+    
+    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 40.0f, 0, 0)];
+    
+    [self reloadData:[NSDate date]];
+
+}
+
+- (void) reloadData:(NSDate*) date
+{
+    [PDActivityDataController getMonthLoggedDates:date withBlock:^(NSDictionary *dates, NSError *error) {
         [self.calendar colorLoggedDateButtons:dates];
     }];
     
-    [PDActivityDataController getMonthTrendsForDate:[NSDate date] WithBlock:^(NSArray *trends, NSError *error) {
+    [PDActivityDataController getMonthTrendsForDate:date WithBlock:^(NSArray *trends, NSError *error) {
+        NSArray *trendList = trends;
         
+        [self createFormattedString:trendList];
+        
+        @try {
+            NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:1];
+            [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        @catch (NSException *exception) {
+            
+        }
+
+
     }];
+}
+
+
+- (void) createFormattedString:(NSArray*)texts
+{
+    int idx = 0;
+    NSMutableArray *formatted = [NSMutableArray array];
+    for (NSString *text in texts) {
+        NSMutableAttributedString* mas = [NSMutableAttributedString attributedStringWithString:text];
+        
+        if (idx == 0) {
+            [mas setFont:[UIFont systemFontOfSize: 28.0f]];
+        } else {
+            [mas setFont:[UIFont systemFontOfSize: 16.0f]];
+        }
+        
+       
+        [mas setTextColor:[UIColor blackColor]];
+        [mas setTextAlignment:kCTLeftTextAlignment lineBreakMode:kCTLineBreakByWordWrapping];
+        [OHASBasicMarkupParser processMarkupInAttributedString:mas];
+        
+        [formatted addObject:mas];
+        idx ++;
+    }
+    
+    self.formattedList = formatted;
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,9 +131,31 @@
 
 -(void)calendar:(CKCalendarView *)calendar didChangeToMonth:(NSDate *)date
 {
-    [PDActivityDataController getMonthLoggedDates:date withBlock:^(NSDictionary *dates, NSError *error) {
-        [self.calendar colorLoggedDateButtons:dates];
-    }];
+
+    NSDate *now = [NSDate date];
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:( NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:now];
+    
+    NSDateComponents *dateComponents = [cal components:( NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:date];
+    
+    [components setYear:[dateComponents year]];
+    [components setMonth:[dateComponents month]];
+    
+    NSDate *newDate = [cal dateFromComponents:components];
+    
+    self.formattedList = [NSArray array];
+    
+    @try {
+        NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:1];
+        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    @catch (NSException *exception) {
+        
+    }
+
+
+    [self reloadData:newDate];
 }
 
 
@@ -100,6 +175,7 @@
 {
     // Return the number of sections.
     return 2;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -108,38 +184,72 @@
     if (section==0) {
         return 1;
     }
-    return 10;
+    return [self.formattedList count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return CGFLOAT_MIN;
+    } else {
+        return 40.0f;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell;
+   
     
     if (indexPath.section == 0) {
         
-        cell = [tableView dequeueReusableCellWithIdentifier:@"CalendarCell" forIndexPath:indexPath];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CalendarCell" forIndexPath:indexPath];
         [cell addSubview:self.calendar];
         return cell;
         
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"TrendCell" forIndexPath:indexPath];
+        PDTrendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrendCell" forIndexPath:indexPath];
         
-        // Configure the cell...
+        if (cell.trendTextLabel) {
+            [cell.trendTextLabel removeFromSuperview];
+        }
+        
+        CGFloat left;
+        
+        if (indexPath.row == 0) {
+            left = 20.0f;
+        } else {
+            left = 40.0f;
+        }
+        
+        NSAttributedString* attrStr = [self.formattedList objectAtIndex:indexPath.row];
+        CGSize sz = [attrStr sizeConstrainedToSize:CGSizeMake(320.0f - left - 20.0f, CGFLOAT_MAX)];
+        
+        cell.trendTextLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(left, 10.0f, 320.0f - left - 20.0f, sz.height)];
+        cell.trendTextLabel.centerVertically = YES;
+        
+        [cell addSubview:cell.trendTextLabel];
+        
+        cell.trendTextLabel.attributedText = [self.formattedList objectAtIndex:indexPath.row];
         
         return cell;
     }
     
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         return 350.0f;
     } else {
-        return 44.0f;
+        NSAttributedString* attrStr = [self.formattedList objectAtIndex:indexPath.row];
+        CGSize sz = [attrStr sizeConstrainedToSize:CGSizeMake(280.0f, CGFLOAT_MAX)];
+        return sz.height + 2*10.0f;
     }
 }
 

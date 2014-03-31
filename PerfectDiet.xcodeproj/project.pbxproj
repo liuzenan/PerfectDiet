@@ -59,6 +59,7 @@
 		E43DA9EE18A512C1005F6F52 /* PDSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */; };
 		E43DA9F218A5186D005F6F52 /* LogMoodWheelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */; };
 		E43DA9F418A51931005F6F52 /* LogCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */; };
+		E454FE0418E9CACC004619FA /* PDTrendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E454FE0318E9CACC004619FA /* PDTrendTableViewCell.m */; };
 		E46A0DC318A53CD60093CF05 /* PDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A0DC218A53CD60093CF05 /* PDSettingsViewController.m */; };
 		E46A0DC618A53E570093CF05 /* PDAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A0DC518A53E570093CF05 /* PDAddFriendsViewController.m */; };
 		E46A0DC818A546F30093CF05 /* LogCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E46A0DC718A546F30093CF05 /* LogCollectionView.xib */; };
@@ -219,6 +220,8 @@
 		E43DA9ED18A512C1005F6F52 /* PDSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSplashViewController.m; sourceTree = "<group>"; };
 		E43DA9F118A5186D005F6F52 /* LogMoodWheelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogMoodWheelView.xib; sourceTree = "<group>"; };
 		E43DA9F318A51931005F6F52 /* LogCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogCollectionViewCell.xib; sourceTree = "<group>"; };
+		E454FE0218E9CACC004619FA /* PDTrendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTrendTableViewCell.h; sourceTree = "<group>"; };
+		E454FE0318E9CACC004619FA /* PDTrendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTrendTableViewCell.m; sourceTree = "<group>"; };
 		E46909C918DF6527007BBB64 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		E46A0DC118A53CD60093CF05 /* PDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSettingsViewController.h; sourceTree = "<group>"; };
 		E46A0DC218A53CD60093CF05 /* PDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSettingsViewController.m; sourceTree = "<group>"; };
@@ -452,6 +455,8 @@
 				E48EF07018E719D700E9A170 /* PDFriendFeedCell.m */,
 				E41082E818E83E7D00182078 /* PDMessageCell.h */,
 				E41082E918E83E7D00182078 /* PDMessageCell.m */,
+				E454FE0218E9CACC004619FA /* PDTrendTableViewCell.h */,
+				E454FE0318E9CACC004619FA /* PDTrendTableViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -920,6 +925,7 @@
 				E48EF06618E6FD4000E9A170 /* PDUser.m in Sources */,
 				E43DA9EE18A512C1005F6F52 /* PDSplashViewController.m in Sources */,
 				E4767064180CE021002E261A /* main.m in Sources */,
+				E454FE0418E9CACC004619FA /* PDTrendTableViewCell.m in Sources */,
 				E48EF07818E7308E00E9A170 /* GHWalkThroughView.m in Sources */,
 				E48EF05B18E6EC7A00E9A170 /* PDBaseTableViewController.m in Sources */,
 				E43DA9D718A4C1DB005F6F52 /* PDPropertyListController.m in Sources */,

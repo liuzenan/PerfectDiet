@@ -18,9 +18,207 @@
     
     [PFCloud callFunctionInBackground:@"fetchTrendsForMonth"
                        withParameters:@{@"date":date}
-                                block:^(NSDictionary *object, NSError *error) {
+                          cachePolicy:kPFCachePolicyCacheThenNetwork
+                                block:^(PFObject *object, NSError *error) {
                                     if (!error) {
                                         NSLog(@"%@", object);
+                                        
+                                        PFObject *thisMonth = [object objectForKey:@"thisMonth"];
+                                        
+                                        id ns = [object objectForKey:@"ns"];
+                                        id ps = [object objectForKey:@"ps"];
+                                        
+                                        id ec = [object objectForKey:@"ec"];
+                                        id wc = [object objectForKey:@"wc"];
+                                        
+                                        id rc = [object objectForKey:@"rc"];
+                                        
+                                        id vc = [object objectForKey:@"vc"];
+                                        
+                                        id pc = [object objectForKey:@"pc"];
+                                        
+                                        NSLog(@"pc: %@", pc);
+                                        
+                                        NSMutableArray *array = [NSMutableArray array];
+                                        
+                                        
+                                        // exercise
+                                        
+                                        if (ec) {
+                                            @try {
+                                                CGFloat temp = [ec floatValue];
+                                                
+                                                if (temp > 0.1) {
+                                                    [array addObject:[NSString stringWithFormat:@"Your exercise time increased by {#ee0c58|%ld%%} compared to last month.", (NSInteger)[ns floatValue] * 100]];
+                                                } else if (temp < -0.1){
+                                                    [array addObject:[NSString stringWithFormat:@"Your exercise time decreased by {#ee0c58|%ld%%} compared to last month.", (NSInteger)[ns floatValue] * 100]];
+                                                } else {
+                                                    [array addObject:@"Your exercise time is about the same as last month."];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                        
+                                        // mood
+                                        
+                                        @try {
+                                            if (ns) {
+                                                [array addObject:[NSString stringWithFormat:@"You feel negative {#ee0c58|%ld%%} of the time.", (NSInteger)([ns floatValue] * 100)]];
+                                            }
+                                        }
+                                        @catch (NSException *exception) {
+                                            
+                                        }
+
+                                        @try {
+                                            if (ps) {
+                                                [array addObject:[NSString stringWithFormat:@"You feel positive {#ee0c58|%ld%%} of the time.", (NSInteger)([ps floatValue] * 100)]];
+                                            }
+                                        }
+                                        @catch (NSException *exception) {
+                                            
+                                        }
+
+                                        
+                                        // work
+
+                                        
+                                        if (wc) {
+                                            
+                                            @try {
+                                                CGFloat temp = [wc floatValue];
+                                                
+                                                if (temp > 0.1) {
+                                                    [array addObject:[NSString stringWithFormat:@"Your work {#ee0c58|%ld%%} more time compared to last month.", (NSInteger)[wc floatValue] * 100]];
+                                                } else if (temp < -0.1){
+                                                    [array addObject:[NSString stringWithFormat:@"Your work {#ee0c58|%ld%%} less time compared to last month.", (NSInteger)[wc floatValue] * 100]];
+                                                } else {
+                                                    [array addObject:@"Your work time is about the same as last month."];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+
+
+                                        }
+                                        
+                                        // rest
+                                        
+                                        if (rc) {
+                                            
+                                            @try {
+                                                CGFloat temp = [rc floatValue];
+                                                
+                                                if (temp > 0.1) {
+                                                    [array addObject:[NSString stringWithFormat:@"Your are resting more this month."]];
+                                                } else if (temp < -0.1){
+                                                    [array addObject:[NSString stringWithFormat:@"Your are resting less this month."]];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                        // vegetable
+                                        
+                                        if (vc) {
+                                            
+                                            @try {
+                                                CGFloat temp = [vc floatValue];
+                                                
+                                                if (temp > 0.1) {
+                                                    [array addObject:[NSString stringWithFormat:@"Now you eat more vegetable or fruit."]];
+                                                } else if (temp < -0.1){
+                                                    [array addObject:[NSString stringWithFormat:@"Now you eat less vegetable and fruit."]];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+
+                                            
+                                        }
+                                        
+                                        // productivity
+                                        
+                                        if (pc) {
+                                            
+                                            @try {
+                                                
+                                                CGFloat temp = [pc floatValue];
+                                                
+                                                if (temp > 1.0f) {
+                                                    [array addObject:[NSString stringWithFormat:@"You are more productive this month."]];
+                                                } else if (temp < 1.0f){
+                                                    [array addObject:[NSString stringWithFormat:@"You are less productive this month."]];
+                                                } else {
+                                                    [array addObject:[NSString stringWithFormat:@"Your productivity level is the same as last month."]];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+
+                                        }
+                                        
+                                        
+                                        
+                                        if (thisMonth) {
+                                            id activity = [thisMonth objectForKey:@"0"];
+                                            id mood = [thisMonth objectForKey:@"2"];
+                                            id productivity = [thisMonth objectForKey:@"3"];
+                                            id pDays = [object objectForKey:@"daysWithProductivity"];
+                                            
+                                            
+                                            // exercise
+                                            
+                                            id exercise = [activity objectForKey:@"0"];
+                                            id positive = [mood objectForKey:@"0"];
+                                            id workDone = [productivity objectForKey:@"work_done"];
+                                            
+                                            @try {
+                                                if (exercise) {
+                                                    [array addObject:[NSString stringWithFormat:@"You total exercised {#ee0c58|%ld} hours in the past 30 days.", [exercise integerValue] / 3600]];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+
+                                            
+                                            @try {
+                                                if (positive) {
+                                                    [array addObject:[NSString stringWithFormat:@"You felt positive {#ee0c58|%ld} times in the past 30 days.", [positive integerValue]]];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+
+                                            
+                                            
+                                            @try {
+                                                if (workDone && pDays) {
+                                                    [array addObject:[NSString stringWithFormat:@"You finished {#ee0c58|%ld%%} of your work on average.", [workDone integerValue] / [pDays integerValue]]];
+                                                }
+                                            }
+                                            @catch (NSException *exception) {
+                                                
+                                            }
+
+                                            
+
+                                        }
+                                        
+                                        
+                                        block(array, error);
 
                                     } else {
                                         NSLog(@"%@", error);
