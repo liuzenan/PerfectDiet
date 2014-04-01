@@ -51,6 +51,7 @@
     [self.scrollView addSubview:self.collectionView];
     
     self.logItems = [PDPropertyListController loadActivityList];
+    NSLog(@"%@", self.logItems);
     [self setAppearance];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"LogCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:COLLECTION_VIEW_CELL];
@@ -217,12 +218,11 @@
     PDLogScreenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:COLLECTION_VIEW_CELL forIndexPath:indexPath];
     cell.delegate = self;
     if (indexPath.row < LOG_BUTTON_NUM - 1) {
-        
-        [cell.logItemButton setImage:[UIImage imageNamed:self.logItems[indexPath.row][@"Icon"]] forState:UIControlStateNormal];
-        [cell.logItemLabel setText:self.logItems[indexPath.row][@"Name"]];
-        [cell setItemId:[self.logItems[indexPath.row][@"ID"] integerValue]];
-        [cell setItemCategory:[self.logItems[indexPath.row][@"Type"] integerValue]];
-        [cell setItemTypeId:self.logItems[indexPath.row][@"ObjectId"]];
+        [cell.logItemButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", self.logItems[indexPath.row][@"Icon"]]] forState:UIControlStateNormal];
+        [cell.logItemLabel setText:[NSString stringWithFormat:@"%@", self.logItems[indexPath.row][@"Name"]]];
+        [cell setItemId:(NSInteger)[self.logItems[indexPath.row][@"ID"] integerValue]];
+        [cell setItemCategory:(NSInteger)[self.logItems[indexPath.row][@"Type"] integerValue]];
+        [cell setItemTypeId:(NSString*)self.logItems[indexPath.row][@"ObjectId"]];
          
     } else {
         

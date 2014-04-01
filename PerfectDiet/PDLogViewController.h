@@ -11,7 +11,7 @@
 
 @interface PDLogViewController : PDBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, PDLogScreenCellDelegate>
 
-@property (weak, nonatomic) NSArray *logItems;
+@property (strong, nonatomic) NSArray *logItems;
 @property (weak, nonatomic) IBOutlet UIView *topTabContainer;
 @property (strong, nonatomic) UIImageView *tabIndicator;
 @property (assign, nonatomic) PDLogType currentType;

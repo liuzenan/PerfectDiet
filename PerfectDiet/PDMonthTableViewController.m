@@ -14,6 +14,7 @@
 
 @interface PDMonthTableViewController ()
 
+@property (nonatomic, strong) NSDate *currentDate;
 @property (nonatomic, strong) CKCalendarView *calendar;
 @property (nonatomic, strong) NSArray *formattedList;
 
@@ -40,6 +41,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    
     self.calendar = [[CKCalendarView alloc] init];
     
     self.calendar.delegate = self;
@@ -49,17 +51,35 @@
     
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 40.0f, 0, 0)];
     
-    [self reloadData:[NSDate date]];
+    self.currentDate = [NSDate date];
+    
+    [self reloadData:self.currentDate];
 
 }
 
 - (void) reloadData:(NSDate*) date
 {
-    [PDActivityDataController getMonthLoggedDates:date withBlock:^(NSDictionary *dates, NSError *error) {
+
+    if (![self.currentDate isEqualToDate:date]) {
+        return;
+    }
+    
+    [PDActivityDataController getMonthLoggedDates:date withBlock:^(NSDictionary *dates, NSDate *originalDate, NSError *error) {
+        
+        if (![self.currentDate isEqualToDate:originalDate]) {
+            return;
+        }
+        
         [self.calendar colorLoggedDateButtons:dates];
     }];
     
-    [PDActivityDataController getMonthTrendsForDate:date WithBlock:^(NSArray *trends, NSError *error) {
+    [PDActivityDataController getMonthTrendsForDate:date WithBlock:^(NSArray *trends, NSDate *originalDate, NSError *error) {
+        
+        
+        if (![self.currentDate isEqualToDate:originalDate]) {
+            return;
+        }
+        
         NSArray *trendList = trends;
         
         [self createFormattedString:trendList];
@@ -76,6 +96,11 @@
     }];
 }
 
+
+- (void) reloadDataWithDelay:(NSDate*) date
+{
+    [self performSelector:@selector(reloadData:) withObject:date afterDelay:0.5f];
+}
 
 - (void) createFormattedString:(NSArray*)texts
 {
@@ -132,6 +157,8 @@
 -(void)calendar:(CKCalendarView *)calendar didChangeToMonth:(NSDate *)date
 {
 
+    
+    
     NSDate *now = [NSDate date];
     
     NSCalendar *cal = [NSCalendar currentCalendar];
@@ -153,9 +180,11 @@
     @catch (NSException *exception) {
         
     }
+    
+    self.currentDate = newDate;
 
 
-    [self reloadData:newDate];
+    [self reloadDataWithDelay:self.currentDate];
 }
 
 

@@ -81,7 +81,7 @@
                     <navigationItem key="navigationItem" title="LifeLogger" id="Ylk-fc-Q4g">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="BLF-rV-wAq">
                             <connections>
-                                <segue destination="FHB-Tq-vBX" kind="modal" identifier="ShowSettings" id="k4a-8b-sVw"/>
+                                <segue destination="FHB-Tq-vBX" kind="modal" identifier="ShowSettings" customClass="BlurryModalSegue" id="k4a-8b-sVw"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9u2-vr-ptY"/>
@@ -686,7 +686,7 @@
         <!--More Item Table View Controller - Choose Activity-->
         <scene sceneID="zzs-wF-fdm">
             <objects>
-                <tableViewController storyboardIdentifier="ChooseItem" id="qyg-Sx-5x6" customClass="PDMoreItemTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ChooseItem" extendedLayoutIncludesOpaqueBars="YES" id="qyg-Sx-5x6" customClass="PDMoreItemTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FIt-14-ShM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1408,12 +1408,12 @@
                     <navigationItem key="navigationItem" title="Friends" id="LAy-S2-yUk">
                         <barButtonItem key="leftBarButtonItem" image="icon_message" id="GRh-Uc-wiz">
                             <connections>
-                                <segue destination="wGN-se-KiZ" kind="modal" identifier="ReadMessage" id="kTY-4T-aVs"/>
+                                <segue destination="wGN-se-KiZ" kind="modal" identifier="ReadMessage" customClass="BlurryModalSegue" id="kTY-4T-aVs"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="N7T-1h-xQn">
                             <connections>
-                                <segue destination="ZVF-W2-6c1" kind="modal" identifier="AddFriends" id="Fv3-jG-m67"/>
+                                <segue destination="ZVF-W2-6c1" kind="modal" identifier="AddFriends" customClass="BlurryModalSegue" id="Fv3-jG-m67"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

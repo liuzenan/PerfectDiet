@@ -16,12 +16,12 @@
 + (void) getItemTypeList:(PDLogType)type withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 + (void)getLoggedItemsForDate:(NSDate *)date withBlock:(void(^)(NSArray *objects, NSError *error)) block;
 + (NSArray*) getProductivityDescription:(NSInteger) todo withDone:(NSInteger)done;
-+ (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block;
++ (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSDate *date, NSError *error)) block;
 + (void) getAllActiveUsersWithBlock:(void(^)(NSArray *users, NSError *error)) block;
 + (void) getUserFollowFeedWithBlock:(void(^)(NSArray *feeds)) block;
 + (void) likePDActivityFeed:(NSString*) fId  WithBlock:(void(^)(NSError *error)) block;
 + (void) followUser:(NSString*) user WithBlock:(void(^)(NSError *error)) block;
 + (void) getMessagesWithBlock:(void(^)(NSArray* messages, NSError *error)) block;
-+ (void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSError *error)) block;
++ (void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSDate *date, NSError *error)) block;
 + (void) testFollow:(NSString*) user WithBlock:(void(^)(NSError *error)) block;
 @end

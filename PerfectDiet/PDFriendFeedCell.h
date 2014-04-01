@@ -30,5 +30,6 @@
 @property (strong, nonatomic) DALinedTextView *note;
 @property (strong, nonatomic) NSString *feedId;
 @property (assign, nonatomic) BOOL isLiked;
+@property (weak, nonatomic) IBOutlet UIImageView *likeImage;
 
 @end

@@ -39,12 +39,10 @@
 {
     _isLiked = isLiked;
     if (_isLiked) {
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_liked"] forState:UIControlStateNormal];
-        [self.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
+        [self.likeImage setImage:[UIImage imageNamed:@"icon_liked"]];
 
     } else {
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
-        [self.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
+        [self.likeImage setImage:[UIImage imageNamed:@"icon_like"]];
 
     }
 }
@@ -52,7 +50,7 @@
 - (IBAction)likeButtonPressed:(id)sender {
     
     if (self.feedId && !self.isLiked) {
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_liked"] forState:UIControlStateNormal];
+        [self.likeImage setImage:[UIImage imageNamed:@"icon_liked"]];
         [self.delegate didLikeFeed:self.feedId forCell:self];
     }
     
@@ -94,7 +92,6 @@
     self.avatar.layer.masksToBounds = YES;
     self.avatar.layer.cornerRadius = 20.0f;
     
-    [self.likeButton setTintColor:[UIColor colorWithHexString:@"#e74c3c"]];
     
 }
 @end

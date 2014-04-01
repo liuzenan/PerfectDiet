@@ -44,9 +44,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3I-Ak-Tzb">
-                        <rect key="frame" x="286" y="17" width="24" height="24"/>
+                        <rect key="frame" x="278" y="0.0" width="43" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="icon_like"/>
                         <connections>
                             <action selector="likeButtonPressed:" destination="ypy-gU-GBX" eventType="touchUpInside" id="qYB-Tz-4x3"/>
                         </connections>
@@ -67,6 +66,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_like" translatesAutoresizingMaskIntoConstraints="NO" id="Uus-Nv-uhr">
+                        <rect key="frame" x="286" y="16" width="24" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="W6y-J0-sMZ" firstAttribute="top" secondItem="zJm-Hn-BBa" secondAttribute="top" id="2ES-Rr-6Qz"/>
@@ -76,6 +79,7 @@
             <connections>
                 <outlet property="avatar" destination="dcT-nG-0yS" id="CV7-ei-8El"/>
                 <outlet property="likeButton" destination="e3I-Ak-Tzb" id="Tih-UT-I3W"/>
+                <outlet property="likeImage" destination="Uus-Nv-uhr" id="fSn-Tu-aXd"/>
                 <outlet property="noteWrapper" destination="h0a-ZA-8AN" id="iNL-wb-UY1"/>
                 <outlet property="photo" destination="66A-Yd-F0H" id="wbb-fA-gYz"/>
                 <outlet property="photoWrapper" destination="vHg-0B-m2m" id="8uI-ae-eUh"/>

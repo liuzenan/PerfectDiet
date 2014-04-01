@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location • 2h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4R-tz-TR5">
-                        <rect key="frame" x="55" y="42" width="255" height="16"/>
+                        <rect key="frame" x="55" y="42" width="223" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,13 +44,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnr-ib-lLS">
-                        <rect key="frame" x="286" y="17" width="24" height="24"/>
+                        <rect key="frame" x="277" y="0.0" width="43" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="icon_like"/>
                         <connections>
                             <action selector="likeButtonPressed:" destination="9e8-Fh-RKD" eventType="touchUpInside" id="JBg-yV-LGh"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_like" translatesAutoresizingMaskIntoConstraints="NO" id="LgW-7S-NGl">
+                        <rect key="frame" x="286" y="16" width="24" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="wVK-43-6cM" secondAttribute="bottom" id="WAM-50-f4E"/>
@@ -60,6 +63,7 @@
             <connections>
                 <outlet property="avatar" destination="Ecl-iH-6Yr" id="pmK-im-FOG"/>
                 <outlet property="likeButton" destination="hnr-ib-lLS" id="cQf-N1-FBP"/>
+                <outlet property="likeImage" destination="LgW-7S-NGl" id="NjI-tu-Rx1"/>
                 <outlet property="subtitle" destination="A4R-tz-TR5" id="tSQ-Ca-Rg4"/>
                 <outlet property="time" destination="J6L-9c-ZGj" id="HDU-aY-d3Q"/>
                 <outlet property="title" destination="tM7-sb-XIW" id="ust-uM-JBK"/>

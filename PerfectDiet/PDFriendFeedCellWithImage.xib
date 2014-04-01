@@ -44,9 +44,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWF-Cl-w5L">
-                        <rect key="frame" x="286" y="16" width="24" height="24"/>
+                        <rect key="frame" x="277" y="0.0" width="43" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="icon_like"/>
                         <connections>
                             <action selector="likeButtonPressed:" destination="ZeZ-5Y-N2M" eventType="touchUpInside" id="oBR-N6-0jv"/>
                         </connections>
@@ -62,6 +61,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_like" translatesAutoresizingMaskIntoConstraints="NO" id="cOy-f4-LLk">
+                        <rect key="frame" x="286" y="16" width="24" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Fil-mD-xt3" secondAttribute="bottom" id="TKf-n5-HBW"/>
@@ -71,6 +74,7 @@
             <connections>
                 <outlet property="avatar" destination="MCW-Mc-vfy" id="noa-Tg-eXn"/>
                 <outlet property="likeButton" destination="MWF-Cl-w5L" id="hXn-2X-hyg"/>
+                <outlet property="likeImage" destination="cOy-f4-LLk" id="f2i-CR-p7c"/>
                 <outlet property="photo" destination="oAL-u2-eOE" id="K3z-EN-tm0"/>
                 <outlet property="photoWrapper" destination="aaw-k6-3U3" id="s4a-dj-PMo"/>
                 <outlet property="subtitle" destination="dIh-uD-TUD" id="aA6-Ya-k8M"/>

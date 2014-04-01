@@ -102,6 +102,7 @@
 
 +(NSArray *)loadActivityList
 {
+    NSLog(@"%@", [PDPropertyListController loadListForResource:ACTIVITY_LIST]);
     return [PDPropertyListController loadListForResource:ACTIVITY_LIST];
 }
 

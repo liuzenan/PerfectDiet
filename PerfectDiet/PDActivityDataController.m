@@ -13,7 +13,7 @@
 @implementation PDActivityDataController
 
 
-+(void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSError *error)) block
++(void) getMonthTrendsForDate:(NSDate*) date WithBlock:(void(^)(NSArray* trends, NSDate *originalDate, NSError *error)) block
 {
     
     [PFCloud callFunctionInBackground:@"fetchTrendsForMonth"
@@ -217,7 +217,7 @@
                                         }
                                         
                                         
-                                        block(array, error);
+                                        block(array, date, error);
 
                                     } else {
                                         NSLog(@"%@", error);
@@ -295,7 +295,7 @@
     
 }
 
-+ (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSError *error)) block
++ (void) getMonthLoggedDates:(NSDate*)date withBlock:(void(^)(NSDictionary *dates, NSDate *originalDate, NSError *error)) block
 {
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -339,7 +339,7 @@
                                   
                               }
                               
-                              block(dict, error);
+                              block(dict, date, error);
     }];
     
 }
